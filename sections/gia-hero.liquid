@@ -1,0 +1,98 @@
+{{ 'section-gia-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="gia-hero color-{{ section.settings.color_scheme }}">
+  <div class="gia-hero__text">
+    {%- if section.settings.heading != blank -%}
+      <h1 class="gia-hero__heading">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.body != blank -%}
+      <p class="gia-hero__body">{{ section.settings.body }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.kicker != blank -%}
+      <p class="gia-hero__kicker">{{ section.settings.kicker }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank -%}
+      <div class="gia-hero__actions">
+        <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}"
+           class="gia-hero__cta">
+          {{ section.settings.cta_label }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="gia-hero__media">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 1600
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          sizes: '(min-width: 750px) 50vw, 100vw',
+          widths: '540, 720, 900, 1080, 1440, 1600',
+          class: 'gia-hero__image',
+          alt: section.settings.image.alt | default: shop.name
+      }}
+    {%- else -%}
+      {{ 'hero-apparel-1' | placeholder_svg_tag: 'gia-hero__image gia-hero__image--placeholder' }}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gia · Hero",
+  "tag": "section",
+  "class": "gia-hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "default": "Nutrición que evoluciona con tu cuerpo"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Descripción",
+      "default": "Suplementación de grado clínico con dosis reales y etiqueta completa, formulada junto con nutriólogos y bioquímicos."
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Remate",
+      "info": "Frase corta en negrita bajo la descripción.",
+      "default": "Sin relleno, sin promesas vacías."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto del botón",
+      "default": "Ver catálogo"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Enlace del botón",
+      "info": "Si se deja vacío, apunta a todos los productos."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "info": "El diseño usa turquesa-100 en el panel de texto.",
+      "default": "scheme-2"
+    }
+  ],
+  "presets": [{ "name": "Gia · Hero" }]
+}
+{% endschema %}

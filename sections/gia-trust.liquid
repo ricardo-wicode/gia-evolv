@@ -1,0 +1,198 @@
+{{ 'section-gia-trust.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign pillars = section.blocks | where: 'type', 'pillar'
+  assign stats = section.blocks | where: 'type', 'stat'
+-%}
+
+<section class="gia-trust color-{{ section.settings.color_scheme }}">
+  <div class="gia-trust__inner">
+    <header class="gia-trust__header">
+      <div class="gia-trust__header-main">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="gia-trust__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="gia-trust__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.intro != blank -%}
+        <p class="gia-trust__intro">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="gia-trust__body">
+      {%- if section.settings.image != blank -%}
+        <figure class="gia-trust__figure">
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 40vw, 100vw',
+              widths: '400, 600, 800, 1000, 1200',
+              class: 'gia-trust__image',
+              alt: section.settings.image.alt | default: section.settings.figure_title
+          }}
+          <div class="gia-trust__scrim"></div>
+          <figcaption class="gia-trust__caption">
+            <div class="gia-trust__caption-text">
+              {%- if section.settings.figure_eyebrow != blank -%}
+                <span class="gia-trust__figure-eyebrow">{{ section.settings.figure_eyebrow }}</span>
+              {%- endif -%}
+              {%- if section.settings.figure_title != blank -%}
+                <span class="gia-trust__figure-title">{{ section.settings.figure_title }}</span>
+              {%- endif -%}
+            </div>
+            {%- if section.settings.figure_stat != blank -%}
+              <div class="gia-trust__chip">
+                <span class="gia-trust__chip-value">{{ section.settings.figure_stat }}</span>
+                <span class="gia-trust__chip-label">{{ section.settings.figure_stat_label }}</span>
+              </div>
+            {%- endif -%}
+          </figcaption>
+        </figure>
+      {%- endif -%}
+
+      {%- if pillars.size > 0 -%}
+        <div class="gia-trust__pillars">
+          {%- for block in pillars -%}
+            <article class="gia-trust__pillar" {{ block.shopify_attributes }}>
+              <div class="gia-trust__pillar-top">
+                <span class="gia-trust__pillar-icon">
+                  {% render 'gia-icon', icon: block.settings.icon, size: 23 %}
+                </span>
+                <span class="gia-trust__pillar-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              </div>
+              {%- if block.settings.title != blank -%}
+                <h3 class="gia-trust__pillar-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="gia-trust__pillar-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </article>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if stats.size > 0 -%}
+      <dl class="gia-trust__stats">
+        {%- for block in stats -%}
+          <div class="gia-trust__stat" {{ block.shopify_attributes }}>
+            <dt class="gia-trust__stat-value">{{ block.settings.value }}</dt>
+            <dd class="gia-trust__stat-label">{{ block.settings.label }}</dd>
+          </div>
+        {%- endfor -%}
+      </dl>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gia · Confianza",
+  "tag": "section",
+  "class": "gia-trust-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Por qué Gia Evolv" },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "default": "Detrás de cada fórmula hay una decisión que puedes verificar"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Entradilla",
+      "default": "No pedimos que nos creas: todo lo de abajo se comprueba en la etiqueta y en el certificado del lote que recibes."
+    },
+    { "type": "header", "content": "Imagen" },
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "text", "id": "figure_eyebrow", "label": "Antetítulo sobre la imagen", "default": "Control de calidad" },
+    { "type": "text", "id": "figure_title", "label": "Pie sobre la imagen", "default": "Cada lote se analiza antes de salir a venta" },
+    { "type": "text", "id": "figure_stat", "label": "Cifra destacada", "default": "100%" },
+    { "type": "text", "id": "figure_stat_label", "label": "Etiqueta de la cifra", "default": "lotes con certificado" },
+    { "type": "header", "content": "Apariencia" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pilar",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "options": [
+            { "value": "flask", "label": "Matraz" },
+            { "value": "microscope", "label": "Microscopio" },
+            { "value": "document", "label": "Documento" },
+            { "value": "chat", "label": "Conversación" },
+            { "value": "leaf", "label": "Hoja" },
+            { "value": "shield", "label": "Escudo" },
+            { "value": "truck", "label": "Envío" }
+          ],
+          "default": "flask"
+        },
+        { "type": "text", "id": "title", "label": "Título" },
+        { "type": "textarea", "id": "text", "label": "Texto" }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Cifra",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Cifra", "default": "30" },
+        { "type": "text", "id": "label", "label": "Etiqueta" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Confianza",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "flask",
+            "title": "Dosis que sí aparecen en los estudios",
+            "text": "Si un estudio usa 400 mg de magnesio elemental, la cápsula trae 400 mg. No repartimos la dosis en tres tabletas para abaratar."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "microscope",
+            "title": "Materia prima con certificado por lote",
+            "text": "Cada lote llega con su certificado de análisis: identidad, potencia, metales pesados y microbiología."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "document",
+            "title": "Etiqueta completa, sin mezclas ocultas",
+            "text": "Publicamos cada miligramo. Nada de «blends propietarios» que esconden las proporciones reales."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "icon": "chat",
+            "title": "Nutriólogos que te contestan",
+            "text": "Ajustamos dosis y horarios por WhatsApp, antes y después de la compra, sin costo extra."
+          }
+        },
+        { "type": "stat", "settings": { "value": "30", "label": "fórmulas en catálogo, ninguna de relleno" } },
+        { "type": "stat", "settings": { "value": "0", "label": "mezclas propietarias u ocultas" } },
+        { "type": "stat", "settings": { "value": "2021", "label": "formulando con nutriólogos y bioquímicos" } },
+        { "type": "stat", "settings": { "value": "24 h", "label": "para responderte, compres o no" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

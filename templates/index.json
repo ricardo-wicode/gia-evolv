@@ -1,48 +1,72 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "gia_hero": {
+      "type": "gia-hero",
+      "settings": {
+        "heading": "Nutrición que evoluciona con tu cuerpo",
+        "body": "Suplementación de grado clínico con dosis reales y etiqueta completa, formulada junto con nutriólogos y bioquímicos.",
+        "kicker": "Sin relleno, sin promesas vacías.",
+        "cta_label": "Ver catálogo",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "gia_marquee": {
+      "type": "gia-marquee",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "item-1": {
+          "type": "item",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "text": "ingredientes patentados"
           }
         },
-        "button": {
-          "type": "buttons",
+        "item-2": {
+          "type": "item",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "text": "avalado por profesionales"
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "text": "dosis clínicas reales"
+          }
+        },
+        "item-4": {
+          "type": "item",
+          "settings": {
+            "text": "fórmulas avanzadas"
+          }
+        },
+        "item-5": {
+          "type": "item",
+          "settings": {
+            "text": "etiqueta 100% transparente"
+          }
+        },
+        "item-6": {
+          "type": "item",
+          "settings": {
+            "text": "envío a todo México"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "item-1",
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-5",
+        "item-6"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "speed": 34,
+        "color_scheme": "scheme-6"
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
+        "title": "Productos estrella",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -50,7 +74,7 @@
         "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-5",
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
@@ -66,10 +90,168 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "gia_trust": {
+      "type": "gia-trust",
+      "blocks": {
+        "pillar-1": {
+          "type": "pillar",
+          "settings": {
+            "icon": "flask",
+            "title": "Dosis que sí aparecen en los estudios",
+            "text": "Si un estudio usa 400 mg de magnesio elemental, la cápsula trae 400 mg. No repartimos la dosis en tres tabletas para abaratar."
+          }
+        },
+        "pillar-2": {
+          "type": "pillar",
+          "settings": {
+            "icon": "microscope",
+            "title": "Materia prima con certificado por lote",
+            "text": "Cada lote llega con su certificado de análisis: identidad, potencia, metales pesados y microbiología."
+          }
+        },
+        "pillar-3": {
+          "type": "pillar",
+          "settings": {
+            "icon": "document",
+            "title": "Etiqueta completa, sin mezclas ocultas",
+            "text": "Publicamos cada miligramo. Nada de «blends propietarios» que esconden las proporciones reales."
+          }
+        },
+        "pillar-4": {
+          "type": "pillar",
+          "settings": {
+            "icon": "chat",
+            "title": "Nutriólogos que te contestan",
+            "text": "Ajustamos dosis y horarios por WhatsApp, antes y después de la compra, sin costo extra."
+          }
+        },
+        "stat-5": {
+          "type": "stat",
+          "settings": {
+            "value": "30",
+            "label": "fórmulas en catálogo, ninguna de relleno"
+          }
+        },
+        "stat-6": {
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "label": "mezclas propietarias u ocultas"
+          }
+        },
+        "stat-7": {
+          "type": "stat",
+          "settings": {
+            "value": "2021",
+            "label": "formulando con nutriólogos y bioquímicos"
+          }
+        },
+        "stat-8": {
+          "type": "stat",
+          "settings": {
+            "value": "24 h",
+            "label": "para responderte, compres o no"
+          }
+        }
+      },
+      "block_order": [
+        "pillar-1",
+        "pillar-2",
+        "pillar-3",
+        "pillar-4",
+        "stat-5",
+        "stat-6",
+        "stat-7",
+        "stat-8"
+      ],
+      "settings": {
+        "eyebrow": "Por qué Gia Evolv",
+        "heading": "Detrás de cada fórmula hay una decisión que puedes verificar",
+        "intro": "No pedimos que nos creas: todo lo de abajo se comprueba en la etiqueta y en el certificado del lote que recibes.",
+        "figure_eyebrow": "Control de calidad",
+        "figure_title": "Cada lote se analiza antes de salir a venta",
+        "figure_stat": "100%",
+        "figure_stat_label": "lotes con certificado",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "gia_comparison": {
+      "type": "gia-comparison",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "criterion": "Dosis por porción",
+            "us": "Dosis completa del estudio",
+            "them": "Fracción repartida"
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "criterion": "Transparencia de etiqueta",
+            "us": "Cada miligramo publicado",
+            "them": "Mezclas propietarias"
+          }
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {
+            "criterion": "Forma del ingrediente",
+            "us": "Alta biodisponibilidad",
+            "them": "La más económica"
+          }
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {
+            "criterion": "Certificado por lote",
+            "us": "Sí, en cada lote",
+            "them": "Rara vez disponible"
+          }
+        },
+        "row-5": {
+          "type": "row",
+          "settings": {
+            "criterion": "Asesoría profesional",
+            "us": "Nutriólogos sin costo",
+            "them": "Sin acompañamiento"
+          }
+        },
+        "row-6": {
+          "type": "row",
+          "settings": {
+            "criterion": "Aditivos y rellenos",
+            "us": "Los mínimos necesarios",
+            "them": "Colorantes y saborizantes"
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-6"
+      ],
+      "settings": {
+        "eyebrow": "Comparativa",
+        "heading": "Gia Evolv vs. otras marcas",
+        "col_criterion": "Criterio",
+        "col_us": "Gia Evolv",
+        "col_them": "Otras marcas",
+        "disclaimer": "Comparativa general frente a suplementos de venta masiva. No hace referencia a una marca específica.",
+        "color_scheme": "scheme-6"
+      }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "gia_hero",
+    "gia_marquee",
+    "featured_collection",
+    "gia_trust",
+    "gia_comparison"
   ]
 }

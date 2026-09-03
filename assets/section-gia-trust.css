@@ -1,0 +1,247 @@
+/* Gia · Confianza — imagen fija al hacer scroll + pilares numerados + cifras. */
+
+.gia-trust {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+.gia-trust__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(52px, 7vw, 92px) var(--gutter);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Cabecera --- */
+
+.gia-trust__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.gia-trust__header-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 600px;
+}
+
+.gia-trust__eyebrow {
+  align-self: flex-start;
+  font: 700 11px / 1 var(--font-secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-600);
+  background: var(--gia-white);
+  border: 1px solid var(--gia-turquoise-200);
+  border-radius: var(--radius-pill);
+  padding: 9px 14px;
+}
+
+.gia-trust__heading {
+  margin: 0;
+  font: 700 clamp(28px, 3.8vw, 42px) / var(--leading-tight) var(--font-primary);
+  letter-spacing: -0.025em;
+  text-wrap: pretty;
+}
+
+.gia-trust__intro {
+  margin: 0;
+  font: 400 15px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+  max-width: 40ch;
+  text-wrap: pretty;
+}
+
+/* --- Cuerpo --- */
+
+.gia-trust__body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+}
+
+.gia-trust__figure {
+  position: sticky;
+  top: 96px;
+  margin: 0;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  background: var(--gia-turquoise-100);
+  aspect-ratio: 4 / 5;
+  min-height: 400px;
+}
+
+.gia-trust__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gia-trust__scrim {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 52%;
+  background: linear-gradient(to top, rgba(0, 61, 57, 0.9), rgba(0, 61, 57, 0));
+}
+
+.gia-trust__caption {
+  position: absolute;
+  inset: auto 22px 22px 22px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.gia-trust__caption-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 60%;
+}
+
+.gia-trust__figure-eyebrow {
+  font: 700 11px / 1 var(--font-secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-200);
+}
+
+.gia-trust__figure-title {
+  font: 700 16px / var(--leading-snug) var(--font-primary);
+  color: var(--gia-white);
+}
+
+.gia-trust__chip {
+  flex: none;
+  background: var(--gia-white);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+}
+
+.gia-trust__chip-value {
+  font: 700 26px / 1 var(--font-primary);
+  color: var(--gia-turquoise-600);
+  letter-spacing: -0.02em;
+}
+
+.gia-trust__chip-label {
+  font: 600 10.5px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-grey-700);
+  max-width: 11ch;
+}
+
+/* --- Pilares --- */
+
+.gia-trust__pillars {
+  display: grid;
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.gia-trust__pillar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--gia-white);
+  border: 1px solid var(--gia-grey-200);
+  border-radius: var(--radius-xl);
+  padding: 28px 26px;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.gia-trust__pillar:hover {
+  border-color: var(--gia-turquoise);
+}
+
+.gia-trust__pillar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.gia-trust__pillar-icon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: var(--gia-turquoise-50);
+  color: var(--gia-turquoise-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gia-trust__pillar-num {
+  font: 700 12px / 1 var(--font-secondary);
+  letter-spacing: 0.14em;
+  color: var(--gia-grey-300);
+}
+
+.gia-trust__pillar-title {
+  margin: 0;
+  font: 700 17.5px / var(--leading-snug) var(--font-primary);
+  color: var(--gia-ink);
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.gia-trust__pillar-text {
+  margin: 0;
+  font: 400 14px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+  text-wrap: pretty;
+}
+
+/* --- Cifras --- */
+
+.gia-trust__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--space-6);
+  margin: clamp(36px, 4vw, 52px) 0 0;
+  padding-top: clamp(26px, 3vw, 36px);
+  border-top: 1px solid var(--gia-turquoise-200);
+}
+
+.gia-trust__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gia-trust__stat-value {
+  font: 700 clamp(26px, 3vw, 34px) / 1 var(--font-primary);
+  color: var(--gia-turquoise-900);
+  letter-spacing: -0.02em;
+}
+
+.gia-trust__stat-label {
+  margin: 0;
+  font: 500 12.5px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-grey-700);
+  max-width: 20ch;
+}
+
+/* La imagen deja de ser fija cuando ya no hay una segunda columna
+   junto a ella: si no, se queda pegada sobre los pilares. */
+@media screen and (max-width: 700px) {
+  .gia-trust__figure {
+    position: static;
+    min-height: 0;
+  }
+}

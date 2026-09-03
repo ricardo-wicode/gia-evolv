@@ -1,0 +1,110 @@
+/* Gia · Comparativa — tabla de tres columnas sobre fondo oscuro. */
+
+.gia-comparison {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+.gia-comparison__inner {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 80px) var(--gutter);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gia-comparison__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: 28px;
+}
+
+.gia-comparison__eyebrow {
+  font: 700 12px / 1 var(--font-secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-300);
+}
+
+.gia-comparison__heading {
+  margin: 0;
+  font: 700 clamp(24px, 3.2vw, 34px) / var(--leading-heading) var(--font-primary);
+  letter-spacing: -0.02em;
+}
+
+/* El desbordamiento se queda aquí dentro: la página nunca scrollea en
+   horizontal. tabindex="0" hace la región alcanzable por teclado, que si
+   no el contenido recortado queda inaccesible sin ratón. */
+.gia-comparison__scroll {
+  overflow-x: auto;
+  border: 1px solid var(--gia-grey-900);
+  border-radius: var(--radius-lg);
+}
+
+.gia-comparison__scroll:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.gia-comparison__table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.gia-comparison__th {
+  padding: 16px 20px;
+  font: 700 12px / 1.2 var(--font-secondary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  background: #1c1c1c;
+  color: var(--gia-grey-400);
+}
+
+.gia-comparison__th--criterion {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+}
+
+.gia-comparison__th--us {
+  background: var(--gia-turquoise);
+  color: var(--gia-white);
+}
+
+.gia-comparison__criterion,
+.gia-comparison__us,
+.gia-comparison__them {
+  padding: 18px 20px;
+  border-top: 1px solid var(--gia-grey-900);
+  vertical-align: top;
+}
+
+.gia-comparison__criterion {
+  font: 600 14px / 1.4 var(--font-secondary);
+  color: var(--gia-white);
+  text-align: left;
+}
+
+.gia-comparison__us {
+  background: rgba(0, 147, 137, 0.14);
+  font: 400 13.5px / var(--leading-snug) var(--font-secondary);
+  color: #dff3f1;
+  text-align: center;
+}
+
+.gia-comparison__them {
+  font: 400 13.5px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-grey-400);
+  text-align: center;
+}
+
+.gia-comparison__disclaimer {
+  margin: 20px 0 0;
+  font: 400 12.5px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-500);
+  max-width: 60ch;
+}

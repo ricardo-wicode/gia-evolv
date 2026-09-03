@@ -1,0 +1,111 @@
+{{ 'section-gia-comparison.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign rows = section.blocks | where: 'type', 'row'
+-%}
+
+<section class="gia-comparison color-{{ section.settings.color_scheme }}">
+  <div class="gia-comparison__inner">
+    <div class="gia-comparison__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="gia-comparison__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="gia-comparison__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- if rows.size > 0 -%}
+      {%- comment -%}
+        Tabla de datos real, no un grid de divs: la relación entre el
+        criterio y cada columna tiene que sobrevivir a un lector de
+        pantalla. El scroll horizontal vive en el contenedor para que la
+        página nunca se desborde.
+      {%- endcomment -%}
+      <div class="gia-comparison__scroll" tabindex="0" role="region" aria-labelledby="gia-comparison-caption-{{ section.id }}">
+        <table class="gia-comparison__table">
+          <caption id="gia-comparison-caption-{{ section.id }}" class="visually-hidden">
+            {{ section.settings.heading | default: 'Comparativa' }}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" class="gia-comparison__th gia-comparison__th--criterion">
+                {{ section.settings.col_criterion }}
+              </th>
+              <th scope="col" class="gia-comparison__th gia-comparison__th--us">
+                {{ section.settings.col_us | default: shop.name }}
+              </th>
+              <th scope="col" class="gia-comparison__th gia-comparison__th--them">
+                {{ section.settings.col_them }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for block in rows -%}
+              <tr {{ block.shopify_attributes }}>
+                <th scope="row" class="gia-comparison__criterion">{{ block.settings.criterion }}</th>
+                <td class="gia-comparison__us">{{ block.settings.us }}</td>
+                <td class="gia-comparison__them">{{ block.settings.them }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="gia-comparison__disclaimer">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gia · Comparativa",
+  "tag": "section",
+  "class": "gia-comparison-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Comparativa" },
+    { "type": "text", "id": "heading", "label": "Titular", "default": "Gia Evolv vs. otras marcas" },
+    { "type": "header", "content": "Columnas" },
+    { "type": "text", "id": "col_criterion", "label": "Columna 1", "default": "Criterio" },
+    { "type": "text", "id": "col_us", "label": "Columna 2", "default": "Gia Evolv" },
+    { "type": "text", "id": "col_them", "label": "Columna 3", "default": "Otras marcas" },
+    { "type": "header", "content": "Pie" },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Aviso legal",
+      "info": "Una comparativa que señale a una marca concreta puede ser publicidad comparativa desleal. Conviene mantenerla genérica.",
+      "default": "Comparativa general frente a suplementos de venta masiva. No hace referencia a una marca específica."
+    },
+    { "type": "header", "content": "Apariencia" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-6" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Fila",
+      "settings": [
+        { "type": "text", "id": "criterion", "label": "Criterio" },
+        { "type": "text", "id": "us", "label": "Nuestra columna" },
+        { "type": "text", "id": "them", "label": "Columna de comparación" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Comparativa",
+      "blocks": [
+        { "type": "row", "settings": { "criterion": "Dosis por porción", "us": "Dosis completa del estudio", "them": "Fracción repartida" } },
+        { "type": "row", "settings": { "criterion": "Transparencia de etiqueta", "us": "Cada miligramo publicado", "them": "Mezclas propietarias" } },
+        { "type": "row", "settings": { "criterion": "Forma del ingrediente", "us": "Alta biodisponibilidad", "them": "La más económica" } },
+        { "type": "row", "settings": { "criterion": "Certificado por lote", "us": "Sí, en cada lote", "them": "Rara vez disponible" } },
+        { "type": "row", "settings": { "criterion": "Asesoría profesional", "us": "Nutriólogos sin costo", "them": "Sin acompañamiento" } },
+        { "type": "row", "settings": { "criterion": "Aditivos y rellenos", "us": "Los mínimos necesarios", "them": "Colorantes y saborizantes" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

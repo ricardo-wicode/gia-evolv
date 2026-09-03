@@ -1,0 +1,80 @@
+{{ 'section-gia-marquee.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign items = section.blocks | where: 'type', 'item'
+  assign speed = section.settings.speed | default: 34
+-%}
+
+{%- if items.size > 0 -%}
+  <div class="gia-marquee color-{{ section.settings.color_scheme }}">
+    <div class="gia-marquee__track" style="--gia-marquee-duration: {{ speed }}s;">
+      {%- comment -%}
+        La cinta se duplica para que el bucle no muestre huecos. La copia
+        va aria-hidden y sin ids para no repetir contenido a lectores de
+        pantalla.
+      {%- endcomment -%}
+      {%- for pass in (1..2) -%}
+        <div
+          class="gia-marquee__run"
+          {% if pass == 2 %}aria-hidden="true"{% endif %}
+        >
+          {%- for block in items -%}
+            <span class="gia-marquee__item" {{ block.shopify_attributes }}>
+              {{- block.settings.text -}}
+            </span>
+            <span class="gia-marquee__dot gia-marquee__dot--{% cycle 'cap', 'round' %}"></span>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gia · Marquesina",
+  "tag": "section",
+  "class": "gia-marquee-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Duración del ciclo",
+      "unit": "s",
+      "min": 15,
+      "max": 60,
+      "step": 1,
+      "default": 34,
+      "info": "Más segundos = más lento."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "scheme-6"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Frase",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "dosis clínicas reales" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Marquesina",
+      "blocks": [
+        { "type": "item", "settings": { "text": "ingredientes patentados" } },
+        { "type": "item", "settings": { "text": "avalado por profesionales" } },
+        { "type": "item", "settings": { "text": "dosis clínicas reales" } },
+        { "type": "item", "settings": { "text": "fórmulas avanzadas" } },
+        { "type": "item", "settings": { "text": "etiqueta 100% transparente" } },
+        { "type": "item", "settings": { "text": "envío a todo México" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
