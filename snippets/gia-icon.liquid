@@ -36,6 +36,9 @@
       <path d="M15 18H9"/>
       <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
       <circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>
+    {%- when 'instagram' -%}
+      <rect x="2" y="2" width="20" height="20" rx="5"/>
+      <circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>
     {%- else -%}
       <circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/>
   {%- endcase -%}

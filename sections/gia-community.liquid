@@ -1,0 +1,127 @@
+{{ 'section-gia-community.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign tiles = section.blocks | where: 'type', 'tile'
+-%}
+
+{%- if tiles.size > 0 -%}
+  <section class="gia-community color-{{ section.settings.color_scheme }}">
+    <div class="gia-community__inner">
+      <header class="gia-community__header">
+        <div class="gia-community__titles">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="gia-community__eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="gia-community__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+          <a href="{{ section.settings.link }}" class="gia-community__link"
+             {% if section.settings.link_new_tab %}target="_blank" rel="noopener"{% endif %}>
+            {{ section.settings.link_label }} &rarr;
+          </a>
+        {%- endif -%}
+      </header>
+
+      <ul class="gia-community__grid" style="--gia-community-cols: {{ section.settings.columns }};" role="list">
+        {%- for block in tiles -%}
+          {%- liquid
+            assign has_link = false
+            if block.settings.link != blank
+              assign has_link = true
+            endif
+            assign fallback = 'gia-community-' | append: forloop.index | append: '.jpg'
+          -%}
+          <li class="gia-community__cell" {{ block.shopify_attributes }}>
+            {%- comment -%}
+              Sin enlace la celda es una imagen a secas, no un <a> vacío que
+              el teclado pueda enfocar sin llevar a ningún sitio.
+            {%- endcomment -%}
+            {%- if has_link -%}
+              <a href="{{ block.settings.link }}" class="gia-community__tile" target="_blank" rel="noopener">
+            {%- else -%}
+              <div class="gia-community__tile">
+            {%- endif -%}
+
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 640
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: '(min-width: 990px) 25vw, 50vw',
+                  widths: '200, 320, 480, 640',
+                  class: 'gia-community__image',
+                  alt: block.settings.image.alt | default: block.settings.alt
+              }}
+            {%- elsif forloop.index <= 8 -%}
+              {%- comment -%} Respaldo del tema; ver nota en gia-hero.liquid. {%- endcomment -%}
+              <img src="{{ fallback | asset_url }}" alt="{{ block.settings.alt | escape }}"
+                   width="640" height="640" loading="lazy" class="gia-community__image">
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'gia-community__image' }}
+            {%- endif -%}
+
+            {%- if has_link -%}
+              <span class="gia-community__overlay">
+                {% render 'gia-icon', icon: 'instagram', size: 30 %}
+              </span>
+            {%- endif -%}
+
+            {%- if has_link -%}</a>{%- else -%}</div>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gia · Comunidad",
+  "tag": "section",
+  "class": "gia-community-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Comunidad" },
+    { "type": "text", "id": "heading", "label": "Titular", "default": "@giaevolv en Instagram" },
+    { "type": "text", "id": "link_label", "label": "Texto del enlace", "default": "Seguir la cuenta" },
+    { "type": "url", "id": "link", "label": "Enlace" },
+    { "type": "checkbox", "id": "link_new_tab", "label": "Abrir en pestaña nueva", "default": true },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columnas en escritorio",
+      "min": 2, "max": 6, "step": 1, "default": 4
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Publicación",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen", "info": "Las 8 primeras tienen imagen de respaldo en el tema." },
+        { "type": "text", "id": "alt", "label": "Texto alternativo", "info": "Describe la foto. Si la imagen elegida ya trae texto alternativo, ese gana." },
+        { "type": "url", "id": "link", "label": "Enlace a la publicación", "info": "Sin enlace, la celda es sólo una imagen." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Comunidad",
+      "blocks": [
+        { "type": "tile", "settings": { "alt": "Comunidad Gia Evolv 1" } },
+        { "type": "tile", "settings": { "alt": "Comunidad Gia Evolv 2" } },
+        { "type": "tile", "settings": { "alt": "Comunidad Gia Evolv 3" } },
+        { "type": "tile", "settings": { "alt": "Comunidad Gia Evolv 4" } },
+        { "type": "tile", "settings": { "alt": "Comunidad Gia Evolv 5" } },
+        { "type": "tile", "settings": { "alt": "Comunidad Gia Evolv 6" } },
+        { "type": "tile", "settings": { "alt": "Comunidad Gia Evolv 7" } },
+        { "type": "tile", "settings": { "alt": "Comunidad Gia Evolv 8" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -248,6 +248,123 @@
         "disclaimer": "Comparativa general frente a suplementos de venta masiva. No hace referencia a una marca específica.",
         "color_scheme": "scheme-6"
       }
+    },
+    "gia_blog": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "news",
+        "post_limit": 3,
+        "heading": "Nuestro blog",
+        "heading_size": "h1",
+        "columns_desktop": 3,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": false,
+        "show_author": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "gia_community": {
+      "type": "gia-community",
+      "blocks": {
+        "tile-1": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 1"
+          }
+        },
+        "tile-2": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 2"
+          }
+        },
+        "tile-3": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 3"
+          }
+        },
+        "tile-4": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 4"
+          }
+        },
+        "tile-5": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 5"
+          }
+        },
+        "tile-6": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 6"
+          }
+        },
+        "tile-7": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 7"
+          }
+        },
+        "tile-8": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 8"
+          }
+        }
+      },
+      "block_order": [
+        "tile-1",
+        "tile-2",
+        "tile-3",
+        "tile-4",
+        "tile-5",
+        "tile-6",
+        "tile-7",
+        "tile-8"
+      ],
+      "settings": {
+        "eyebrow": "Comunidad",
+        "heading": "@giaevolv en Instagram",
+        "link_label": "Seguir la cuenta",
+        "link_new_tab": true,
+        "columns": 4,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "gia_newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Únete al boletín",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph-1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Recibe tips de bienestar y acceso anticipado a cada lanzamiento.</p>"
+          }
+        },
+        "email_form-1": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading-1",
+        "paragraph-1",
+        "email_form-1"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true
+      }
     }
   },
   "order": [
@@ -255,6 +372,9 @@
     "gia_marquee",
     "featured_collection",
     "gia_trust",
-    "gia_comparison"
+    "gia_comparison",
+    "gia_blog",
+    "gia_community",
+    "gia_newsletter"
   ]
 }
