@@ -22,18 +22,29 @@
     </header>
 
     <div class="gia-trust__body">
-      {%- if section.settings.image != blank -%}
+      {%- if section.settings.show_figure -%}
         <figure class="gia-trust__figure">
-          {{
-            section.settings.image
-            | image_url: width: 1200
-            | image_tag:
-              loading: 'lazy',
-              sizes: '(min-width: 990px) 40vw, 100vw',
-              widths: '400, 600, 800, 1000, 1200',
-              class: 'gia-trust__image',
-              alt: section.settings.image.alt | default: section.settings.figure_title
-          }}
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 990px) 40vw, 100vw',
+                widths: '400, 600, 800, 1000, 1200',
+                class: 'gia-trust__image',
+                alt: section.settings.image.alt | default: section.settings.figure_title
+            }}
+          {%- else -%}
+            {%- comment -%} Respaldo del tema; ver nota en gia-hero.liquid. {%- endcomment -%}
+            <img
+              src="{{ 'gia-trust.jpg' | asset_url }}"
+              alt="{{ section.settings.image_fallback_alt | escape }}"
+              width="934" height="1400"
+              loading="lazy"
+              class="gia-trust__image"
+            >
+          {%- endif -%}
           <div class="gia-trust__scrim"></div>
           <figcaption class="gia-trust__caption">
             <div class="gia-trust__caption-text">
@@ -110,7 +121,14 @@
       "default": "No pedimos que nos creas: todo lo de abajo se comprueba en la etiqueta y en el certificado del lote que recibes."
     },
     { "type": "header", "content": "Imagen" },
-    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "checkbox", "id": "show_figure", "label": "Mostrar imagen", "default": true },
+    { "type": "image_picker", "id": "image", "label": "Imagen", "info": "Si se deja vacía se usa la imagen de respaldo del tema." },
+    {
+      "type": "text",
+      "id": "image_fallback_alt",
+      "label": "Texto alternativo de la imagen de respaldo",
+      "default": "Personal de laboratorio pipeteando una muestra"
+    },
     { "type": "text", "id": "figure_eyebrow", "label": "Antetítulo sobre la imagen", "default": "Control de calidad" },
     { "type": "text", "id": "figure_title", "label": "Pie sobre la imagen", "default": "Cada lote se analiza antes de salir a venta" },
     { "type": "text", "id": "figure_stat", "label": "Cifra destacada", "default": "100%" },

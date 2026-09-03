@@ -38,7 +38,19 @@
           alt: section.settings.image.alt | default: shop.name
       }}
     {%- else -%}
-      {{ 'hero-apparel-1' | placeholder_svg_tag: 'gia-hero__image gia-hero__image--placeholder' }}
+      {%- comment -%}
+        Respaldo del tema, para que la portada nunca salga con placeholder.
+        Los assets se sirven tal cual: sin CDN de imágenes de Shopify y sin
+        srcset, así que este archivo ya viene redimensionado y comprimido.
+        En cuanto se elija una imagen arriba, ésta deja de usarse.
+      {%- endcomment -%}
+      <img
+        src="{{ 'gia-hero.jpg' | asset_url }}"
+        alt="{{ section.settings.image_fallback_alt | escape }}"
+        width="1600" height="1252"
+        loading="eager" fetchpriority="high"
+        class="gia-hero__image"
+      >
     {%- endif -%}
   </div>
 </section>
@@ -83,7 +95,14 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Imagen"
+      "label": "Imagen",
+      "info": "Si se deja vacía se usa la imagen de respaldo del tema."
+    },
+    {
+      "type": "text",
+      "id": "image_fallback_alt",
+      "label": "Texto alternativo de la imagen de respaldo",
+      "default": "Bote de suplemento Gia Evolv sobre una barra de cocina"
     },
     {
       "type": "color_scheme",

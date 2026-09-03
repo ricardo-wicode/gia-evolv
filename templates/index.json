@@ -7,7 +7,8 @@
         "body": "Suplementación de grado clínico con dosis reales y etiqueta completa, formulada junto con nutriólogos y bioquímicos.",
         "kicker": "Sin relleno, sin promesas vacías.",
         "cta_label": "Ver catálogo",
-        "color_scheme": "scheme-2"
+        "color_scheme": "scheme-2",
+        "image_fallback_alt": "Bote de suplemento Gia Evolv sobre una barra de cocina"
       }
     },
     "gia_marquee": {
@@ -173,7 +174,9 @@
         "figure_title": "Cada lote se analiza antes de salir a venta",
         "figure_stat": "100%",
         "figure_stat_label": "lotes con certificado",
-        "color_scheme": "scheme-2"
+        "color_scheme": "scheme-2",
+        "show_figure": true,
+        "image_fallback_alt": "Personal de laboratorio pipeteando una muestra"
       }
     },
     "gia_comparison": {
