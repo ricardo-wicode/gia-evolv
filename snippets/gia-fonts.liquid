@@ -1,0 +1,41 @@
+{%- comment -%}
+  Tipografías — Manual de Identidad Corporativa Gia Evolv, p.10
+  Principal: Nexa (SemiBold para titulares) · Complementaria: Montserrat
+
+  ⚠️ LICENCIA PENDIENTE. Los archivos Nexa incluidos son versiones Trial:
+
+  1. Ningún corte trae juego latino (Á É Í Ó Ú Ñ ¿ ¡ y minúsculas acentuadas
+     dibujan .notdef).
+  2. Las Trial sustituyen 25 caracteres ASCII por un sello vertical
+     "TRIAL FONT":  " # $ % & ' ( ) * + / < = > @ [ \ ] ^ _ ` { | } ~
+     Eso incluye el signo de peso, crítico en una tienda.
+
+  Por eso el unicode-range sólo declara lo que Nexa Trial sí rinde bien:
+  espacio, !, coma, guion, punto, dígitos, dos puntos, punto y coma, A-Z, a-z.
+  Todo lo demás cae a Montserrat, que coincide en ancho y proporción.
+
+  Al comprar la licencia con latín extendido: borrar los unicode-range,
+  reemplazar los .otf de assets/ y listo.
+{%- endcomment -%}
+
+{%- assign montserrat = settings.type_body_font -%}
+{{ montserrat | font_face: font_display: 'swap' }}
+{{ montserrat | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+{{ montserrat | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+{{ montserrat | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+
+<style>
+  {%- assign nexa_range = 'U+0020-0021,U+002C-002E,U+0030-003B,U+0041-005A,U+0061-007A' -%}
+
+  @font-face{font-family:"Nexa";src:url({{ 'nexa-light.otf' | asset_url }}) format("opentype");font-weight:300;font-style:normal;font-display:swap;unicode-range:{{ nexa_range }}}
+  @font-face{font-family:"Nexa";src:url({{ 'nexa-book.otf' | asset_url }}) format("opentype");font-weight:350;font-style:normal;font-display:swap;unicode-range:{{ nexa_range }}}
+  @font-face{font-family:"Nexa";src:url({{ 'nexa-regular.otf' | asset_url }}) format("opentype");font-weight:400;font-style:normal;font-display:swap;unicode-range:{{ nexa_range }}}
+  @font-face{font-family:"Nexa";src:url({{ 'nexa-bold.otf' | asset_url }}) format("opentype");font-weight:600;font-style:normal;font-display:swap;unicode-range:{{ nexa_range }}}
+  @font-face{font-family:"Nexa";src:url({{ 'nexa-bold.otf' | asset_url }}) format("opentype");font-weight:700;font-style:normal;font-display:swap;unicode-range:{{ nexa_range }}}
+  @font-face{font-family:"Nexa";src:url({{ 'nexa-extrabold.otf' | asset_url }}) format("opentype");font-weight:800;font-style:normal;font-display:swap;unicode-range:{{ nexa_range }}}
+  @font-face{font-family:"Nexa";src:url({{ 'nexa-black.otf' | asset_url }}) format("opentype");font-weight:900;font-style:normal;font-display:swap;unicode-range:{{ nexa_range }}}
+
+  {%- comment -%} Nexa Text — corte de texto, para tablas y documentos largos {%- endcomment -%}
+  @font-face{font-family:"Nexa Text";src:url({{ 'nexa-text-regular.otf' | asset_url }}) format("opentype");font-weight:400;font-style:normal;font-display:swap;unicode-range:{{ nexa_range }}}
+  @font-face{font-family:"Nexa Text";src:url({{ 'nexa-text-bold.otf' | asset_url }}) format("opentype");font-weight:700;font-style:normal;font-display:swap;unicode-range:{{ nexa_range }}}
+</style>

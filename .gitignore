@@ -1,0 +1,16 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.shopify
+node_modules
+*.zip
+# Fuentes Nexa — versiones Trial, sin licencia de redistribución.
+# Se quedan en disco para `shopify theme push`, pero fuera de este repo
+# porque es público. Al comprar la licencia, quitar estas líneas.
+assets/nexa-*.otf
