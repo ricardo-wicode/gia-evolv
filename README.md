@@ -15,7 +15,7 @@ Dawn siga siendo posible:
 
 | Archivo | Qué contiene |
 |---|---|
-| `assets/gia-tokens.css` | 270 tokens de diseño (color, tipografía, espaciado, radios, sombras, movimiento) más el puente hacia las variables de Dawn |
+| `assets/gia-tokens.css` | 137 tokens de diseño (color, tipografía, espaciado, radios, sombras, movimiento) más el puente hacia las variables de Dawn |
 | `snippets/gia-fonts.liquid` | `@font-face` de Nexa y Nexa Text, y carga de Montserrat |
 | `config/settings_data.json` | Preset `Gia Evolv`: los 5 esquemas de color y las formas (radios, ancho de página) |
 
