@@ -1,0 +1,160 @@
+{{ 'section-gia-contact.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign infos = section.blocks | where: 'type', 'info'
+-%}
+
+<section class="gia-contact color-{{ section.settings.color_scheme }}">
+  <div class="gia-contact__inner">
+    <div class="gia-contact__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="gia-contact__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="gia-contact__heading">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="gia-contact__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="gia-contact__body">
+      <div class="gia-contact__form-col">
+        {%- comment -%}
+          Formulario 'contact' de Shopify: el envío llega al correo de la
+          tienda sin depender de un servicio externo. El prototipo alterna
+          entre formulario y acuse; aquí el acuse aparece tras el POST y
+          el formulario sigue disponible debajo, para poder escribir otra
+          vez sin recargar a mano.
+        {%- endcomment -%}
+        {%- form 'contact', id: 'gia-contact-form', class: 'gia-contact__form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="gia-contact__sent" role="status">
+              <h2 class="gia-contact__sent-title">{{ section.settings.sent_title }}</h2>
+              <p class="gia-contact__sent-text">{{ section.settings.sent_text }}</p>
+            </div>
+          {%- elsif form.errors -%}
+            <div class="gia-contact__errors" role="alert">
+              <h2 class="gia-contact__errors-title">{{ section.settings.error_title }}</h2>
+              <ul role="list">
+                {%- for field in form.errors -%}
+                  <li>
+                    {%- if field == 'form' -%}
+                      {{ form.errors.messages[field] }}
+                    {%- else -%}
+                      {{ form.errors.translated_fields[field] | capitalize }}
+                      {{ form.errors.messages[field] }}
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="gia-contact__field">
+            <label for="gia-contact-name">{{ section.settings.label_name }}</label>
+            <input type="text" id="gia-contact-name" name="contact[{{ section.settings.label_name }}]"
+                   autocomplete="name" placeholder="{{ section.settings.ph_name | escape }}"
+                   value="{{ form.name }}">
+          </div>
+
+          <div class="gia-contact__field">
+            <label for="gia-contact-email">{{ section.settings.label_email }}</label>
+            <input type="email" id="gia-contact-email" name="contact[email]"
+                   autocomplete="email" placeholder="{{ section.settings.ph_email | escape }}"
+                   value="{{ form.email }}" required
+                   {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}>
+          </div>
+
+          <div class="gia-contact__field">
+            <label for="gia-contact-body">{{ section.settings.label_message }}</label>
+            <textarea id="gia-contact-body" name="contact[body]" rows="5"
+                      placeholder="{{ section.settings.ph_message | escape }}">{{ form.body }}</textarea>
+          </div>
+
+          <div>
+            <button type="submit" class="gia-contact__submit">{{ section.settings.submit_label }}</button>
+          </div>
+        {%- endform -%}
+      </div>
+
+      {%- if infos.size > 0 -%}
+        <aside class="gia-contact__panel">
+          {%- for block in infos -%}
+            <div class="gia-contact__info" {{ block.shopify_attributes }}>
+              {%- if block.settings.label != blank -%}
+                <span class="gia-contact__info-label">{{ block.settings.label }}</span>
+              {%- endif -%}
+              {%- if block.settings.value != blank -%}
+                {%- if block.settings.link != blank -%}
+                  <a class="gia-contact__info-value" href="{{ block.settings.link }}">{{ block.settings.value }}</a>
+                {%- else -%}
+                  <span class="gia-contact__info-value">{{ block.settings.value }}</span>
+                {%- endif -%}
+              {%- endif -%}
+              {%- if block.settings.note != blank -%}
+                <span class="gia-contact__info-note">{{ block.settings.note }}</span>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </aside>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gia · Contacto",
+  "tag": "section",
+  "class": "gia-contact-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Contacto" },
+    { "type": "text", "id": "heading", "label": "Titular", "default": "Hablemos" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto",
+      "default": "Escríbenos y te contestamos en menos de 24 horas hábiles. Si tu duda es sobre dosis, la responde alguien del equipo de nutrición."
+    },
+    { "type": "header", "content": "Campos" },
+    { "type": "text", "id": "label_name", "label": "Etiqueta de nombre", "default": "Nombre" },
+    { "type": "text", "id": "ph_name", "label": "Marcador de nombre", "default": "Tu nombre" },
+    { "type": "text", "id": "label_email", "label": "Etiqueta de correo", "default": "Correo" },
+    { "type": "text", "id": "ph_email", "label": "Marcador de correo", "default": "tu@correo.com" },
+    { "type": "text", "id": "label_message", "label": "Etiqueta de mensaje", "default": "Mensaje" },
+    { "type": "text", "id": "ph_message", "label": "Marcador de mensaje", "default": "¿En qué te ayudamos?" },
+    { "type": "text", "id": "submit_label", "label": "Texto del botón", "default": "Enviar mensaje" },
+    { "type": "header", "content": "Respuestas" },
+    { "type": "text", "id": "sent_title", "label": "Título de acuse", "default": "Mensaje enviado" },
+    { "type": "textarea", "id": "sent_text", "label": "Texto de acuse", "default": "Recibimos tu mensaje y te responderemos en menos de 24 horas." },
+    { "type": "text", "id": "error_title", "label": "Título de error", "default": "Revisa estos datos" },
+    { "type": "header", "content": "Apariencia" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "info",
+      "name": "Dato de contacto",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Etiqueta", "default": "Correo" },
+        { "type": "text", "id": "value", "label": "Valor" },
+        { "type": "url", "id": "link", "label": "Enlace" },
+        { "type": "text", "id": "note", "label": "Nota" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Contacto",
+      "blocks": [
+        { "type": "info", "settings": { "label": "Correo", "note": "Respondemos en menos de 24 h hábiles" } },
+        { "type": "info", "settings": { "label": "WhatsApp", "note": "Asesoría de nutriólogos sin costo" } },
+        { "type": "info", "settings": { "label": "Horario", "note": "Lunes a viernes" } },
+        { "type": "info", "settings": { "label": "Envíos", "note": "A todo México" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

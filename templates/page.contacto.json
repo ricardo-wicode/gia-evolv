@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "gia_contact": {
+      "type": "gia-contact",
+      "blocks": {
+        "info-1": {
+          "type": "info",
+          "settings": {
+            "label": "Correo",
+            "note": "Respondemos en menos de 24 h hábiles"
+          }
+        },
+        "info-2": {
+          "type": "info",
+          "settings": {
+            "label": "WhatsApp",
+            "note": "Asesoría de nutriólogos sin costo"
+          }
+        },
+        "info-3": {
+          "type": "info",
+          "settings": {
+            "label": "Horario",
+            "value": "Lunes a viernes, 9:00 a 18:00",
+            "note": "Hora del centro de México"
+          }
+        },
+        "info-4": {
+          "type": "info",
+          "settings": {
+            "label": "Envíos",
+            "value": "A todo México",
+            "note": "Gratis a partir de $6,000"
+          }
+        }
+      },
+      "block_order": [
+        "info-1",
+        "info-2",
+        "info-3",
+        "info-4"
+      ],
+      "settings": {
+        "eyebrow": "Contacto",
+        "heading": "Hablemos",
+        "text": "Escríbenos y te contestamos en menos de 24 horas hábiles. Si tu duda es sobre dosis, la responde alguien del equipo de nutrición.",
+        "label_name": "Nombre",
+        "ph_name": "Tu nombre",
+        "label_email": "Correo",
+        "ph_email": "tu@correo.com",
+        "label_message": "Mensaje",
+        "ph_message": "¿En qué te ayudamos?",
+        "submit_label": "Enviar mensaje",
+        "sent_title": "Mensaje enviado",
+        "sent_text": "Recibimos tu mensaje y te responderemos en menos de 24 horas.",
+        "error_title": "Revisa estos datos",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "gia_contact"
+  ]
+}

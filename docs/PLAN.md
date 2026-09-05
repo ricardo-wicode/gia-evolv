@@ -32,8 +32,8 @@ frente a lo que falta:
 | Productos relacionados | producto | ✅ |
 | FAQ (acordeón) | producto | ✅ |
 | Catálogo con filtros | catálogo | ✅ |
-| Nosotros | nosotros | ❌ |
-| Contacto | contacto | ❌ |
+| Nosotros | nosotros | ✅ |
+| Contacto | contacto | ✅ |
 | Carrito lateral | siempre | ❌ (Dawn lo trae, sin homologar) |
 | Favoritos | siempre | ❌ |
 
@@ -131,11 +131,14 @@ parezca" pese a tener la portada hecha.
 
 ---
 
-## Fase 5 — Nosotros y Contacto
+## Fase 5 — Nosotros y Contacto ✅
 
-- [ ] **5.1 Nosotros**: cabecera editorial con la foto del equipo, tres
-      pilares, línea de tiempo.
-- [ ] **5.2 Contacto**: formulario ("Hablemos") con estado de enviado.
+- [x] **5.1 Nosotros**: `page.nosotros.json` — editorial + diferenciadores
+      + llamada a la acción. Requiere crear la página con handle
+      `nosotros` en el admin y asignarle la plantilla.
+- [x] **5.2 Contacto**: `page.contacto.json` — formulario `contact` de
+      Shopify con acuse y errores, más panel de datos. Requiere crear la
+      página con handle `contacto` y asignarle la plantilla.
 
 ---
 

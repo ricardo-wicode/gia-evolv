@@ -245,3 +245,13 @@
     min-height: 0;
   }
 }
+
+/* Sin imagen, los pilares no deben quedarse en una sola columna estrecha:
+   ocupan el ancho completo en rejilla. */
+.gia-trust--no-figure .gia-trust__body {
+  grid-template-columns: 1fr;
+}
+
+.gia-trust--no-figure .gia-trust__pillars {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}

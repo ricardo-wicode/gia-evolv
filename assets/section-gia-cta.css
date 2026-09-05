@@ -1,0 +1,86 @@
+/* Gia · Llamada a la acción — bloque centrado sobre fondo oscuro. */
+
+.gia-cta {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+.gia-cta__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-y) var(--gutter);
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+}
+
+.gia-cta__eyebrow {
+  font: 700 12px / 1 var(--font-secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-300);
+}
+
+.gia-cta__heading {
+  margin: 0;
+  font: 700 clamp(26px, 3.6vw, 40px) / 1.14 var(--font-primary);
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+  text-wrap: pretty;
+}
+
+.gia-cta__text {
+  margin: 0;
+  font: 400 15px / var(--leading-body) var(--font-secondary);
+  opacity: 0.7;
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+.gia-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.gia-cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 32px;
+  border-radius: var(--radius-pill);
+  font: 700 13px / 1 var(--font-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
+}
+
+.gia-cta__button--primary {
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  border: 1px solid transparent;
+}
+
+.gia-cta__button--ghost {
+  background: none;
+  color: currentcolor;
+  border: 1px solid var(--border-on-dark);
+}
+
+.gia-cta__button--ghost:hover {
+  border-color: currentcolor;
+}
+
+.gia-cta__button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}

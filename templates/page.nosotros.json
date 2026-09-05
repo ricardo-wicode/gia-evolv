@@ -1,0 +1,99 @@
+{
+  "sections": {
+    "gia_editorial": {
+      "type": "gia-editorial",
+      "blocks": {
+        "paragraph-1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Nacimos en México en 2021, después de comparar decenas de etiquetas y encontrar dosis por debajo de lo que dicen los estudios."
+          }
+        },
+        "paragraph-2": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Hoy somos un catálogo corto y revisado: si una fórmula no tiene respaldo suficiente, no la lanzamos."
+          }
+        }
+      },
+      "block_order": [
+        "paragraph-1",
+        "paragraph-2"
+      ],
+      "settings": {
+        "eyebrow": "Nosotros",
+        "heading": "Empezamos porque no confiábamos en las etiquetas que ya existían",
+        "heading_tag": "h1",
+        "media_position": "right",
+        "ratio": "4 / 3",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "gia_differentiators": {
+      "type": "gia-trust",
+      "blocks": {
+        "pillar-1": {
+          "type": "pillar",
+          "settings": {
+            "icon": "flask",
+            "title": "Formulamos con evidencia",
+            "text": "Cada fórmula parte de estudios publicados y de la dosis que usaron, no de lo que abarata el costo."
+          }
+        },
+        "pillar-2": {
+          "type": "pillar",
+          "settings": {
+            "icon": "microscope",
+            "title": "Verificamos cada lote",
+            "text": "Certificado de análisis por lote: identidad, potencia, metales pesados y microbiología."
+          }
+        },
+        "pillar-3": {
+          "type": "pillar",
+          "settings": {
+            "icon": "chat",
+            "title": "Acompañamos después de la venta",
+            "text": "Nutriólogos que ajustan dosis y horarios por WhatsApp, sin costo extra."
+          }
+        },
+        "pillar-4": {
+          "type": "pillar",
+          "settings": {
+            "icon": "document",
+            "title": "Publicamos todo",
+            "text": "Etiqueta completa, sin mezclas propietarias que escondan proporciones."
+          }
+        }
+      },
+      "block_order": [
+        "pillar-1",
+        "pillar-2",
+        "pillar-3",
+        "pillar-4"
+      ],
+      "settings": {
+        "eyebrow": "Diferenciadores",
+        "heading": "Lo que nos distingue",
+        "intro": "",
+        "show_figure": false,
+        "color_scheme": "scheme-5"
+      }
+    },
+    "gia_cta": {
+      "type": "gia-cta",
+      "settings": {
+        "eyebrow": "Siguiente paso",
+        "heading": "¿Listo para evolucionar tu bienestar?",
+        "text": "Te ayudamos a elegir la fórmula según tu objetivo, sin costo y sin compromiso.",
+        "primary_label": "Explorar productos",
+        "secondary_label": "Hablemos",
+        "color_scheme": "scheme-4"
+      }
+    }
+  },
+  "order": [
+    "gia_editorial",
+    "gia_differentiators",
+    "gia_cta"
+  ]
+}

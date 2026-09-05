@@ -5,7 +5,7 @@
   assign stats = section.blocks | where: 'type', 'stat'
 -%}
 
-<section class="gia-trust color-{{ section.settings.color_scheme }}">
+<section class="gia-trust{% unless section.settings.show_figure %} gia-trust--no-figure{% endunless %} color-{{ section.settings.color_scheme }}">
   <div class="gia-trust__inner">
     <header class="gia-trust__header">
       <div class="gia-trust__header-main">
