@@ -304,3 +304,71 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   max-width: 60ch;
   text-wrap: pretty;
 }
+
+/* --- Ficha de producto -----------------------------------------------
+   Ajustes sobre el marcado de Dawn para acercarlo al prototipo. Se
+   restiliza en vez de reescribir main-product: ahí viven las variantes,
+   el inventario y el carrito, que no conviene reimplementar.
+   -------------------------------------------------------------------- */
+
+.product__title > h1,
+.product__title > h2 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+}
+
+.product .price,
+.product .price__regular .price-item {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--gia-turquoise-600);
+}
+
+.product .price--on-sale .price-item--regular {
+  color: var(--gia-grey-500);
+  font-size: 18px;
+}
+
+.product__media-wrapper .product__media,
+.product__media-item .product__media {
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  background: var(--gia-turquoise-50);
+}
+
+.product__media-list .thumbnail,
+.thumbnail-list .thumbnail {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.product-form__buttons .button,
+.product-form__submit {
+  border-radius: var(--radius-pill);
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Filas de confianza (bloques icon-with-text): el prototipo las agrupa
+   en una caja con separadores, no sueltas. */
+.product .icon-with-text {
+  border: 1px solid var(--gia-grey-200);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.product .icon-with-text__item {
+  padding: 16px 18px;
+  margin: 0;
+}
+
+.product .icon-with-text__item + .icon-with-text__item {
+  border-top: 1px solid var(--gia-grey-200);
+}

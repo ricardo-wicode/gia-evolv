@@ -3,70 +3,135 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
+        "rating": {
+          "type": "rating",
+          "settings": {}
         },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
-          }
+          "settings": {}
         },
         "quantity_selector": {
-          "type": "quantity_selector"
+          "type": "quantity_selector",
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
+          "settings": {}
         },
-        "description": {
-          "type": "description"
+        "trust_pay": {
+          "type": "icon-with-text",
+          "settings": {}
         },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
+        "collapsible_1": {
+          "type": "collapsible_tab",
+          "settings": {}
         }
       },
       "block_order": [
-        "vendor",
+        "rating",
         "title",
         "price",
+        "description",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description",
-        "share"
+        "trust_pay",
+        "collapsible_1"
       ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
         "media_position": "left",
-        "gallery_layout": "stacked",
+        "gallery_layout": "thumbnail",
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
         "image_zoom": "lightbox",
-        "mobile_thumbnails": "hide",
+        "mobile_thumbnails": "show",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 12
+      }
+    },
+    "gia_benefits": {
+      "type": "gia-benefits",
+      "blocks": {
+        "benefit-1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "flask",
+            "title": "Dosis del estudio, no una fracción",
+            "detail": "Cada porción entrega la cantidad que usan los ensayos clínicos, no una fracción repartida en varias tomas."
+          }
+        },
+        "benefit-2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "Forma de alta biodisponibilidad",
+            "detail": "Elegimos la sal o el quelato que el cuerpo absorbe mejor, aunque encarezca la fórmula."
+          }
+        },
+        "benefit-3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "document",
+            "title": "Etiqueta completa, sin blends",
+            "detail": "Publicamos cada miligramo. Sin mezclas propietarias que escondan proporciones."
+          }
+        },
+        "benefit-4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "microscope",
+            "title": "Certificado de análisis por lote",
+            "detail": "Identidad, potencia, metales pesados y microbiología, lote por lote."
+          }
+        },
+        "benefit-5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Sin colorantes ni saborizantes",
+            "detail": "Sólo los excipientes necesarios para encapsular y conservar."
+          }
+        },
+        "benefit-6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "chat",
+            "title": "Acompañamiento de nutriólogos",
+            "detail": "Ajustamos dosis y horarios por WhatsApp, antes y después de comprar, sin costo."
+          }
+        }
+      },
+      "block_order": [
+        "benefit-1",
+        "benefit-2",
+        "benefit-3",
+        "benefit-4",
+        "benefit-5",
+        "benefit-6"
+      ],
+      "settings": {
+        "eyebrow": "Beneficios del producto",
+        "heading": "Qué hace distinto a este suplemento",
+        "description": "Abre cualquier beneficio para ver el detalle.",
+        "color_scheme": "scheme-5"
       }
     },
     "disclosures": {
@@ -146,6 +211,58 @@
         "color_scheme": "scheme-6"
       }
     },
+    "gia_faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Cuánto tarda en notarse?",
+            "row_content": "<p>Depende de la fórmula. Las de energía y digestión suelen sentirse en los primeros días; colágeno y articulaciones piden entre 60 y 90 días de uso continuo.</p>",
+            "icon": "question_mark"
+          }
+        },
+        "row-2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Puedo combinarlo con otros suplementos?",
+            "row_content": "<p>En la mayoría de los casos sí, pero el orden y el horario importan. Escríbenos y un nutriólogo te arma la pauta sin costo.</p>",
+            "icon": "question_mark"
+          }
+        },
+        "row-3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Tienen certificado de análisis?",
+            "row_content": "<p>Sí, uno por lote. Incluye identidad, potencia, metales pesados y microbiología. Puedes pedirlo indicando el lote de tu envase.</p>",
+            "icon": "question_mark"
+          }
+        },
+        "row-4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Cómo son los envíos?",
+            "row_content": "<p>Enviamos a todo México. Los pedidos llegan en menos de 3 días hábiles y el envío es gratis a partir de $6,000.</p>",
+            "icon": "question_mark"
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4"
+      ],
+      "settings": {
+        "caption": "Dudas comunes",
+        "heading": "Preguntas frecuentes",
+        "heading_alignment": "center",
+        "layout": "section",
+        "color_scheme": "scheme-5",
+        "container_color_scheme": "scheme-1",
+        "open_first_collapsible_row": false
+      }
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -167,8 +284,10 @@
   },
   "order": [
     "main",
+    "gia_benefits",
     "disclosures",
     "gia_comparison",
+    "gia_faq",
     "related-products"
   ]
 }

@@ -1,0 +1,140 @@
+{{ 'section-gia-benefits.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign items = section.blocks | where: 'type', 'benefit'
+  assign half = items.size | plus: 1 | divided_by: 2
+-%}
+
+{%- if items.size > 0 -%}
+  <section class="gia-benefits color-{{ section.settings.color_scheme }}">
+    <div class="gia-benefits__inner">
+      {% render 'gia-section-heading',
+        eyebrow: section.settings.eyebrow,
+        title: section.settings.heading,
+        description: section.settings.description %}
+
+      <div class="gia-benefits__layout">
+        {%- comment -%}
+          Dos columnas de beneficios flanqueando la imagen, como el
+          prototipo. Cada uno es <details>: se abre con teclado y sin JS,
+          y varios pueden estar abiertos a la vez.
+        {%- endcomment -%}
+        {%- for col in (1..2) -%}
+          <div class="gia-benefits__col">
+            {%- for block in items -%}
+              {%- liquid
+                assign in_first = false
+                if forloop.index <= half
+                  assign in_first = true
+                endif
+                assign show = false
+                if col == 1 and in_first
+                  assign show = true
+                elsif col == 2 and in_first == false
+                  assign show = true
+                endif
+              -%}
+              {%- if show -%}
+                <details class="gia-benefits__item" {{ block.shopify_attributes }}>
+                  <summary class="gia-benefits__trigger">
+                    <span class="gia-benefits__icon">
+                      {% render 'gia-icon', icon: block.settings.icon, size: 21 %}
+                    </span>
+                    <span class="gia-benefits__title">{{ block.settings.title }}</span>
+                    <span class="gia-benefits__toggle" aria-hidden="true"></span>
+                  </summary>
+                  {%- if block.settings.detail != blank -%}
+                    <div class="gia-benefits__detail">{{ block.settings.detail }}</div>
+                  {%- endif -%}
+                </details>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if col == 1 -%}
+            <div class="gia-benefits__media">
+              {%- if section.settings.image != blank -%}
+                {{
+                  section.settings.image
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 450, 600, 800',
+                    sizes: '(min-width: 990px) 33vw, 80vw',
+                    alt: section.settings.image.alt | default: section.settings.heading
+                }}
+              {%- elsif product.featured_image != blank -%}
+                {%- comment -%} En una ficha de producto, por defecto el propio producto. {%- endcomment -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 450, 600, 800',
+                    sizes: '(min-width: 990px) 33vw, 80vw',
+                    alt: product.featured_image.alt | default: product.title
+                }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gia · Beneficios",
+  "tag": "section",
+  "class": "gia-benefits-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Beneficios del producto" },
+    { "type": "text", "id": "heading", "label": "Titular", "default": "Qué hace distinto a este suplemento" },
+    { "type": "textarea", "id": "description", "label": "Descripción", "default": "Toca cualquier beneficio para ver el detalle." },
+    { "type": "image_picker", "id": "image", "label": "Imagen central", "info": "Vacía en una ficha de producto: usa la imagen del propio producto." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-5" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "options": [
+            { "value": "flask", "label": "Matraz" },
+            { "value": "microscope", "label": "Microscopio" },
+            { "value": "document", "label": "Documento" },
+            { "value": "chat", "label": "Conversación" },
+            { "value": "leaf", "label": "Hoja" },
+            { "value": "shield", "label": "Escudo" },
+            { "value": "truck", "label": "Envío" }
+          ],
+          "default": "leaf"
+        },
+        { "type": "text", "id": "title", "label": "Título" },
+        { "type": "textarea", "id": "detail", "label": "Detalle" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Beneficios",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "flask", "title": "Dosis del estudio, no una fracción" } },
+        { "type": "benefit", "settings": { "icon": "leaf", "title": "Forma de alta biodisponibilidad" } },
+        { "type": "benefit", "settings": { "icon": "document", "title": "Etiqueta completa, sin blends" } },
+        { "type": "benefit", "settings": { "icon": "microscope", "title": "Certificado de análisis por lote" } },
+        { "type": "benefit", "settings": { "icon": "shield", "title": "Sin colorantes ni saborizantes" } },
+        { "type": "benefit", "settings": { "icon": "chat", "title": "Acompañamiento de nutriólogos" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

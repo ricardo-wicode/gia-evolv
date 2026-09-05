@@ -1,0 +1,153 @@
+/* Gia · Beneficios — dos columnas desplegables flanqueando una imagen. */
+
+.gia-benefits {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+.gia-benefits__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--section-y);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gia-benefits__layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: clamp(16px, 3vw, 32px);
+  align-items: center;
+  margin-top: 36px;
+}
+
+.gia-benefits__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.gia-benefits__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gia-white);
+  border-radius: 20px;
+  min-height: clamp(240px, 28vw, 360px);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.gia-benefits__media img,
+.gia-benefits__media svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Cada beneficio --- */
+
+.gia-benefits__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.gia-benefits__trigger {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  width: 100%;
+  background: var(--gia-white);
+  border: 1px solid var(--gia-grey-200);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  cursor: pointer;
+  font: 600 14.5px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-ink);
+  box-sizing: border-box;
+  list-style: none;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.gia-benefits__trigger::-webkit-details-marker {
+  display: none;
+}
+
+.gia-benefits__trigger:hover {
+  border-color: var(--gia-turquoise);
+}
+
+.gia-benefits__trigger:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.gia-benefits__icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--gia-turquoise-50);
+  color: var(--gia-turquoise-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gia-benefits__title {
+  flex: 1;
+}
+
+/* El "+" que se vuelve "−" al abrir. Es decorativo: el estado real lo
+   comunica <details> a la tecnología asistiva, no este glifo. */
+.gia-benefits__toggle {
+  flex: none;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-circle);
+  border: 1px solid var(--gia-turquoise-200);
+  color: var(--gia-turquoise-600);
+}
+
+.gia-benefits__toggle::before,
+.gia-benefits__toggle::after {
+  content: '';
+  position: absolute;
+  inset: 50% 6px auto 6px;
+  height: 1.5px;
+  background: currentcolor;
+  transform: translateY(-50%);
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.gia-benefits__toggle::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.gia-benefits__item[open] .gia-benefits__toggle::after {
+  opacity: 0;
+}
+
+.gia-benefits__item[open] .gia-benefits__trigger {
+  border-color: var(--gia-turquoise);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.gia-benefits__detail {
+  background: var(--gia-turquoise-900);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  margin: 0 6px;
+  padding: 18px 18px 16px;
+  font: 400 13.5px / var(--leading-body) var(--font-secondary);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* En una sola columna la imagen estorba entre los dos grupos: va al final. */
+@media screen and (max-width: 799px) {
+  .gia-benefits__media {
+    order: 3;
+  }
+}

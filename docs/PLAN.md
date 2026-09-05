@@ -29,8 +29,8 @@ frente a lo que falta:
 | Boletín inline | portada | ✅ (sección de Dawn) |
 | Blog | portada | ✅ (sección de Dawn) |
 | Comparativa | producto | ✅ |
-| Productos relacionados | producto | ❌ |
-| FAQ (acordeón) | producto | ❌ |
+| Productos relacionados | producto | ✅ |
+| FAQ (acordeón) | producto | ✅ |
 | Catálogo con filtros | catálogo | ❌ |
 | Nosotros | nosotros | ❌ |
 | Contacto | contacto | ❌ |
@@ -106,13 +106,17 @@ parezca" pese a tener la portada hecha.
 
 ---
 
-## Fase 3 — Página de producto
+## Fase 3 — Página de producto ✅
 
-- [ ] **3.1 Ficha de producto** homologada (galería, precio, selector de
-      variantes, stepper de cantidad, estrellas).
-- [ ] **3.2 Comparativa** (movida en la fase 2.1).
-- [ ] **3.3 Acordeón de FAQ.**
-- [ ] **3.4 Productos relacionados.**
+- [x] **3.1 Ficha de producto** homologada (galería, precio, selector de
+      variantes, stepper de cantidad, estrellas). Restilizada sobre
+      `main-product` de Dawn, no reescrita.
+- [x] **3.5 Sección de beneficios** (`gia-benefits`), que no estaba en la
+      auditoría inicial: dos columnas desplegables flanqueando una
+      imagen.
+- [x] **3.2 Comparativa** (movida en la fase 2.1).
+- [x] **3.3 Acordeón de FAQ.** Sección `collapsible-content` de Dawn.
+- [x] **3.4 Productos relacionados.** Sección de Dawn, restilizada.
 
 ---
 
