@@ -259,3 +259,48 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   outline: none;
   box-shadow: var(--focus-ring);
 }
+
+/* --- Cabecera de sección (snippet gia-section-heading) -------------- */
+
+.gia-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.gia-heading__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gia-heading--center .gia-heading__group {
+  text-align: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 680px;
+}
+
+.gia-heading__eyebrow {
+  font: 700 var(--text-xs) / 1 var(--font-eyebrow);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-600);
+}
+
+.gia-heading__title {
+  margin: 0;
+  font: 700 var(--text-2xl) / var(--leading-heading) var(--font-primary);
+  letter-spacing: -0.02em;
+}
+
+.gia-heading__description {
+  margin: 0;
+  font: 400 var(--text-base) / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+  max-width: 60ch;
+  text-wrap: pretty;
+}

@@ -19,15 +19,16 @@ frente a lo que falta:
 | Header + nav + mega menú | siempre | ✅ |
 | Logo | siempre | ✅ |
 | Footer | siempre | ✅ |
-| Marquesina | siempre | ⚠️ hecha, pero sólo en la portada |
-| Comunidad Instagram | siempre | ⚠️ hecha, pero sólo en la portada |
+| Marquesina compacta | portada | ✅ |
+| Marquesina display | siempre | ✅ |
+| Comunidad Instagram | siempre | ✅ |
 | Hero | portada | ✅ |
-| Explora por objetivo | portada | ❌ |
+| Explora por objetivo | portada | ✅ |
 | Productos estrella | portada | ✅ (sección de Dawn) |
 | Confianza | portada | ✅ |
 | Boletín inline | portada | ✅ (sección de Dawn) |
 | Blog | portada | ✅ (sección de Dawn) |
-| **Comparativa** | **producto** | ❌ **mal ubicada: la puse en la portada** |
+| Comparativa | producto | ✅ |
 | Productos relacionados | producto | ❌ |
 | FAQ (acordeón) | producto | ❌ |
 | Catálogo con filtros | catálogo | ❌ |
@@ -89,15 +90,19 @@ parezca" pese a tener la portada hecha.
 
 ---
 
-## Fase 2 — Corregir la portada
+## Fase 2 — Corregir la portada ✅
 
-- [ ] **2.1 Mover la comparativa a la página de producto.** En el
+- [x] **2.1 Mover la comparativa a la página de producto.** En el
       prototipo vive en `isProduct`, no en la portada. Error mío.
-- [ ] **2.2 Explora por objetivo.** Carrusel horizontal de tarjetas
+- [x] **2.2 Explora por objetivo.** Carrusel horizontal de tarjetas
       (imagen + etiqueta + pie), con flechas y scroll-snap. Enlaza a
       colecciones. Falta por completo.
-- [ ] **2.3 Marquesina y comunidad disponibles fuera de la portada.**
-      En el prototipo salen en todas las vistas.
+- [x] **2.3 Comunidad y marquesina display en todas las vistas.**
+      Corrección de la auditoría: la marquesina compacta **sí** es sólo
+      de portada — el "siempre" salió de matchear el `@keyframes`, no la
+      sección. Lo que va en todas las vistas es la rejilla de comunidad
+      y una **segunda** marquesina que no había detectado: fondo
+      turquesa-100, tipografía de marca grande, antes del pie.
 
 ---
 

@@ -6,7 +6,7 @@
 -%}
 
 {%- if items.size > 0 -%}
-  <div class="gia-marquee color-{{ section.settings.color_scheme }}">
+  <div class="gia-marquee gia-marquee--{{ section.settings.variant }} color-{{ section.settings.color_scheme }}">
     <div class="gia-marquee__track" style="--gia-marquee-duration: {{ speed }}s;">
       {%- comment -%}
         La cinta se duplica para que el bucle no muestre huecos. La copia
@@ -36,6 +36,17 @@
   "tag": "section",
   "class": "gia-marquee-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "variant",
+      "label": "Estilo",
+      "options": [
+        { "value": "compact", "label": "Compacta — versalitas pequeñas" },
+        { "value": "display", "label": "Display — tipografía de marca grande" }
+      ],
+      "default": "compact",
+      "info": "El prototipo usa la compacta bajo el hero y la display antes del pie."
+    },
     {
       "type": "range",
       "id": "speed",

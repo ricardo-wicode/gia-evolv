@@ -76,6 +76,76 @@
         "padding_bottom": 0
       }
     },
+    "gia_comparison": {
+      "type": "gia-comparison",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "criterion": "Dosis por porción",
+            "us": "Dosis completa del estudio",
+            "them": "Fracción repartida"
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "criterion": "Transparencia de etiqueta",
+            "us": "Cada miligramo publicado",
+            "them": "Mezclas propietarias"
+          }
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {
+            "criterion": "Forma del ingrediente",
+            "us": "Alta biodisponibilidad",
+            "them": "La más económica"
+          }
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {
+            "criterion": "Certificado por lote",
+            "us": "Sí, en cada lote",
+            "them": "Rara vez disponible"
+          }
+        },
+        "row-5": {
+          "type": "row",
+          "settings": {
+            "criterion": "Asesoría profesional",
+            "us": "Nutriólogos sin costo",
+            "them": "Sin acompañamiento"
+          }
+        },
+        "row-6": {
+          "type": "row",
+          "settings": {
+            "criterion": "Aditivos y rellenos",
+            "us": "Los mínimos necesarios",
+            "them": "Colorantes y saborizantes"
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-6"
+      ],
+      "settings": {
+        "eyebrow": "Comparativa",
+        "heading": "Gia Evolv vs. otras marcas",
+        "col_criterion": "Criterio",
+        "col_us": "Gia Evolv",
+        "col_them": "Otras marcas",
+        "disclaimer": "Comparativa general frente a suplementos de venta masiva. No hace referencia a una marca específica.",
+        "color_scheme": "scheme-6"
+      }
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -98,6 +168,7 @@
   "order": [
     "main",
     "disclosures",
+    "gia_comparison",
     "related-products"
   ]
 }

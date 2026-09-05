@@ -1,0 +1,177 @@
+/* Gia · Explora por objetivo — carril horizontal de tarjetas. */
+
+.gia-goals {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+.gia-goals__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-y) var(--gutter);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gia-goals__rail-wrap {
+  position: relative;
+  margin-top: var(--space-8);
+}
+
+.gia-goals__rail {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 0 0 var(--space-1);
+  margin: 0;
+  list-style: none;
+}
+
+.gia-goals__rail::-webkit-scrollbar {
+  display: none;
+}
+
+.gia-goals__rail:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-lg);
+}
+
+.gia-goals__item {
+  flex: 0 0 clamp(200px, 22vw, 240px);
+  scroll-snap-align: start;
+  margin: 0;
+}
+
+.gia-goals__tile {
+  position: relative;
+  display: block;
+  aspect-ratio: var(--gia-goal-ratio, 4 / 5);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-brand-faint);
+  text-decoration: none;
+}
+
+.gia-goals__tile:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.gia-goals__media {
+  position: absolute;
+  inset: 0;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.gia-goals__media img,
+.gia-goals__media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gia-goals__tile:hover .gia-goals__media,
+.gia-goals__tile:focus-visible .gia-goals__media {
+  transform: scale(1.05);
+}
+
+.gia-goals__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 32, 30, 0) 45%, rgba(0, 32, 30, 0.68) 100%);
+  pointer-events: none;
+}
+
+.gia-goals__text {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.gia-goals__label {
+  font: 700 var(--text-md) / var(--leading-snug) var(--font-primary);
+  color: var(--gia-white);
+}
+
+.gia-goals__caption {
+  font: 400 var(--text-xs) / var(--leading-snug) var(--font-secondary);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* --- Flechas --- */
+
+.gia-goals__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-circle);
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  color: var(--gia-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+              opacity var(--duration-fast) var(--ease-standard);
+}
+
+.gia-goals__arrow:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.gia-goals__arrow:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.gia-goals__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* El icono es un chevron hacia abajo: se gira para cada dirección. */
+.gia-goals__arrow--prev {
+  left: -6px;
+}
+
+.gia-goals__arrow--prev svg {
+  transform: rotate(90deg);
+}
+
+.gia-goals__arrow--next {
+  right: -6px;
+}
+
+.gia-goals__arrow--next svg {
+  transform: rotate(-90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gia-goals__rail {
+    scroll-behavior: auto;
+  }
+
+  .gia-goals__media {
+    transition: none;
+  }
+
+  .gia-goals__tile:hover .gia-goals__media,
+  .gia-goals__tile:focus-visible .gia-goals__media {
+    transform: none;
+  }
+}

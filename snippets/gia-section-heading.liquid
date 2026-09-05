@@ -1,0 +1,21 @@
+{%- comment -%}
+  Cabecera de sección del prototipo: antetítulo, título y descripción.
+  Uso: {% render 'gia-section-heading', eyebrow: '…', title: '…', description: '…', align: 'center' %}
+{%- endcomment -%}
+
+{%- if eyebrow != blank or title != blank or description != blank -%}
+  <div class="gia-heading gia-heading--{{ align | default: 'left' }}">
+    <div class="gia-heading__group">
+      {%- if eyebrow != blank -%}
+        <span class="gia-heading__eyebrow">{{ eyebrow }}</span>
+      {%- endif -%}
+      {%- if title != blank -%}
+        <h2 class="gia-heading__title">{{ title }}</h2>
+      {%- endif -%}
+      {%- if description != blank -%}
+        <p class="gia-heading__description">{{ description }}</p>
+      {%- endif -%}
+    </div>
+    {{ action }}
+  </div>
+{%- endif -%}

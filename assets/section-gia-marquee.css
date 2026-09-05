@@ -68,3 +68,33 @@
     display: none;
   }
 }
+
+/* Variante display: la banda de marca que va antes del pie. */
+
+.gia-marquee--display {
+  padding: 18px 0;
+}
+
+.gia-marquee--display .gia-marquee__run {
+  gap: 40px;
+  padding-right: 40px;
+}
+
+.gia-marquee--display .gia-marquee__item {
+  font: 400 clamp(24px, 3vw, 36px) / 1 var(--font-primary);
+  letter-spacing: 0;
+}
+
+.gia-marquee--display .gia-marquee__dot {
+  border-width: 1.6px;
+}
+
+.gia-marquee--display .gia-marquee__dot--cap {
+  width: 14px;
+  height: 22px;
+}
+
+.gia-marquee--display .gia-marquee__dot--round {
+  width: 20px;
+  height: 20px;
+}

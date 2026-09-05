@@ -2,6 +2,103 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "gia_community": {
+      "type": "gia-community",
+      "blocks": {
+        "tile-1": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 1"
+          }
+        },
+        "tile-2": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 2"
+          }
+        },
+        "tile-3": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 3"
+          }
+        },
+        "tile-4": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 4"
+          }
+        },
+        "tile-5": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 5"
+          }
+        },
+        "tile-6": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 6"
+          }
+        },
+        "tile-7": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 7"
+          }
+        },
+        "tile-8": {
+          "type": "tile",
+          "settings": {
+            "alt": "Comunidad Gia Evolv 8"
+          }
+        }
+      },
+      "block_order": [
+        "tile-1",
+        "tile-2",
+        "tile-3",
+        "tile-4",
+        "tile-5",
+        "tile-6",
+        "tile-7",
+        "tile-8"
+      ],
+      "settings": {
+        "eyebrow": "Comunidad",
+        "heading": "@giaevolv en Instagram",
+        "link_label": "Seguir la cuenta",
+        "link_new_tab": true,
+        "columns": 4,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "gia_marquee_display": {
+      "type": "gia-marquee",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "text": "Nutrición que evoluciona"
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "text": "dosis que sí se sienten"
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2"
+      ],
+      "settings": {
+        "variant": "display",
+        "speed": 42,
+        "color_scheme": "scheme-2"
+      }
+    },
     "gia_footer": {
       "type": "gia-footer",
       "blocks": {
@@ -84,6 +181,8 @@
     }
   },
   "order": [
+    "gia_community",
+    "gia_marquee_display",
     "gia_footer"
   ]
 }
