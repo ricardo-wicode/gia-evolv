@@ -23,8 +23,6 @@
 }
 
 .gia-logo__link:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
   border-radius: var(--radius-sm);
 }
 
@@ -161,10 +159,6 @@
   background: var(--gia-turquoise-50);
 }
 
-.gia-header__icon:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
 
 .gia-header__badge {
   position: absolute;
@@ -196,8 +190,6 @@
 }
 
 .gia-mega__summary:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
   border-radius: var(--radius-sm);
 }
 
@@ -418,8 +410,11 @@
   flex-wrap: wrap;
 }
 
+/* El campo lleva outline:none porque es una píldora compuesta: el foco lo
+   comunica el contenedor entero. */
 .gia-footer__form:focus-within {
-  box-shadow: var(--focus-ring);
+  outline: 2px solid var(--gia-turquoise);
+  outline-offset: 2px;
 }
 
 .gia-footer__input {
@@ -627,3 +622,98 @@
 }
 
 
+
+/* --- Cajón de carrito ------------------------------------------------
+   Restilizado sobre cart-drawer de Dawn. Su JS ya resuelve el foco
+   atrapado, el cierre con Escape y la actualización de líneas: eso no se
+   reescribe, sólo se viste.
+   -------------------------------------------------------------------- */
+
+.cart-drawer {
+  --gia-drawer-width: min(400px, 100%);
+}
+
+.cart-drawer__overlay::after,
+.cart-drawer__overlay {
+  background: rgba(0, 32, 30, 0.42);
+}
+
+.cart-drawer .drawer__inner {
+  width: var(--gia-drawer-width);
+  max-width: 100%;
+  box-shadow: var(--shadow-drawer);
+  border-radius: 0;
+}
+
+.cart-drawer .drawer__header {
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--gia-grey-200);
+  margin: 0;
+}
+
+.cart-drawer .drawer__heading {
+  font: 700 var(--text-md) / 1 var(--font-primary);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+
+.cart-drawer .drawer__contents {
+  padding: var(--space-2) 24px;
+}
+
+.cart-drawer .cart-item {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--gia-grey-50);
+}
+
+.cart-drawer .cart-item__image {
+  border-radius: var(--radius-sm);
+}
+
+.cart-drawer .cart-item__name {
+  font: 600 14px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-ink);
+}
+
+.cart-drawer .cart-item .price,
+.cart-drawer .totals__total-value {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  color: var(--gia-turquoise-600);
+}
+
+.cart-drawer .drawer__footer {
+  border-top: 1px solid var(--gia-grey-200);
+}
+
+.cart-drawer .cart__checkout-button {
+  border-radius: var(--radius-pill);
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gia-turquoise);
+}
+
+.cart-drawer .cart__checkout-button:hover {
+  background: var(--gia-turquoise-600);
+}
+
+.cart-drawer__empty-content {
+  font: 400 var(--text-sm) / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-500);
+}
+
+/* La animación de entrada del prototipo. Se anula si el visitante pide
+   menos movimiento: el cajón aparece ya colocado. */
+@keyframes gia-slide-in-right {
+  from { transform: translateX(100%); }
+  to   { transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cart-drawer.active .drawer__inner {
+    animation: gia-slide-in-right var(--duration-base) var(--ease-out);
+  }
+}

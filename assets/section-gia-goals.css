@@ -35,8 +35,6 @@
 }
 
 .gia-goals__rail:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
   border-radius: var(--radius-lg);
 }
 
@@ -56,10 +54,6 @@
   text-decoration: none;
 }
 
-.gia-goals__tile:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
 
 .gia-goals__media {
   position: absolute;
@@ -134,10 +128,6 @@
   background: rgba(255, 255, 255, 0.95);
 }
 
-.gia-goals__arrow:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
 
 .gia-goals__arrow:disabled {
   opacity: 0.35;

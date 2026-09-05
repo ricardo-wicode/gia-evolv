@@ -80,7 +80,3 @@
   border-color: currentcolor;
 }
 
-.gia-cta__button:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}

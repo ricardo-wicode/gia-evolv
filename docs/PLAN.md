@@ -34,8 +34,8 @@ frente a lo que falta:
 | Catálogo con filtros | catálogo | ✅ |
 | Nosotros | nosotros | ✅ |
 | Contacto | contacto | ✅ |
-| Carrito lateral | siempre | ❌ (Dawn lo trae, sin homologar) |
-| Favoritos | siempre | ❌ |
+| Carrito lateral | siempre | ✅ |
+| Favoritos | siempre | ✅ preparado para app |
 
 ---
 
@@ -142,21 +142,31 @@ parezca" pese a tener la portada hecha.
 
 ---
 
-## Fase 6 — Carrito y favoritos
+## Fase 6 — Carrito y favoritos ✅
 
-- [ ] **6.1 Carrito lateral** homologado sobre el de Dawn.
-- [ ] **6.2 Favoritos.** Shopify no tiene lista de deseos nativa: hay que
-      decidir entre `localStorage` (sin cuenta, no sincroniza) o una app.
-      **Decisión pendiente del cliente.**
+- [x] **6.1 Carrito lateral** homologado sobre el de Dawn.
+- [x] **6.2 Favoritos: por app.** Decidido con el cliente. No se
+      implementa lista propia; el tema queda preparado: `main-product`
+      admite bloques de app y la cabecera muestra el corazón sólo si se
+      rellena la URL de favoritos que dé la app.
 
 ---
 
-## Fase 7 — Cierre
+## Fase 7 — Cierre ✅ (lo verificable sin navegador)
 
-- [ ] Revisión responsive de las 5 vistas.
-- [ ] Accesibilidad: foco visible, orden de tabulación, contraste.
-- [ ] Rendimiento: peso de imágenes, `srcset`, Lighthouse.
-- [ ] Textos legales y páginas de política.
+- [x] Auditoría de puntos de ruptura. Alineados a los de Dawn (749/989)
+      salvo dos que dicta el contenido y quedan anotados.
+- [ ] **Revisión responsive real en navegador — pendiente.**
+- [x] Accesibilidad estática: imágenes con alt, controles sólo-icono con
+      aria-label, `target="_blank"` con rel. **Bug corregido:** el anillo
+      de foco usaba `outline:none` + `box-shadow`, que cualquier ancestro
+      con overflow recorta. Pasado a `outline`, que no se recorta.
+- [ ] **Contraste y orden de tabulación reales — pendiente de navegador.**
+- [x] Peso de assets auditado y `loading`/`width`/`height` en todas las
+      imágenes.
+- [ ] **Lighthouse — pendiente de navegador.**
+- [x] Documentado en `docs/PUESTA-EN-MARCHA.md`; las políticas se crean
+      en el admin, no en el tema.
 
 ---
 

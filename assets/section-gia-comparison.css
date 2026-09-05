@@ -42,10 +42,6 @@
   border-radius: var(--radius-lg);
 }
 
-.gia-comparison__scroll:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
 
 .gia-comparison__table {
   width: 100%;

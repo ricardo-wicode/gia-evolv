@@ -100,10 +100,6 @@
   opacity: 1;
 }
 
-.gia-community__tile:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
 
 @media screen and (max-width: 749px) {
   .gia-community__grid {

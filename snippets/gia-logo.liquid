@@ -18,6 +18,7 @@
   if h < 29
     assign h = 29
   endif
+  assign load = loading | default: 'eager'
   assign classes = 'gia-logo'
   if invert
     assign classes = classes | append: ' gia-logo--invert'
@@ -32,6 +33,7 @@
       | image_tag:
         widths: '120, 240, 360, 600',
         class: classes,
+        loading: load,
         alt: shop.name,
         style: 'height:' | append: h | append: 'px'
     }}
@@ -40,6 +42,7 @@
       src="{{ 'gia-logo.png' | asset_url }}"
       alt="{{ shop.name | escape }}"
       width="180" height="180"
+      loading="{{ load }}"
       class="{{ classes }}"
       style="height:{{ h }}px"
     >

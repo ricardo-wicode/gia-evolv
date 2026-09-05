@@ -254,10 +254,15 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   transform: var(--press-scale);
 }
 
-/* Foco visible con el anillo de marca, en vez del outline por defecto. */
-.focused, *:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
+/* Foco visible en turquesa de marca.
+   Se usa `outline` y no `box-shadow`: el box-shadow lo recorta cualquier
+   ancestro con overflow hidden o auto — el carril de objetivos, las
+   celdas de comunidad, la tabla comparativa — y el foco desaparecería
+   justo donde hace falta. El outline nunca se recorta. */
+.focused,
+*:focus-visible {
+  outline: 2px solid var(--gia-turquoise);
+  outline-offset: 2px;
 }
 
 /* --- Cabecera de sección (snippet gia-section-heading) -------------- */

@@ -108,6 +108,18 @@
         </a>
       {%- endif -%}
 
+      {%- comment -%}
+        Favoritos. El icono sólo aparece cuando hay una URL de destino,
+        que normalmente da la app de lista de deseos. No se implementa
+        una lista propia: sin app, un corazón que no guarda nada es peor
+        que no tener corazón.
+      {%- endcomment -%}
+      {%- if section.settings.wishlist_url != blank -%}
+        <a href="{{ section.settings.wishlist_url }}" class="gia-header__icon" aria-label="Favoritos">
+          {% render 'gia-icon', icon: 'heart', size: 21 %}
+        </a>
+      {%- endif -%}
+
       {%- if section.settings.show_account and shop.customer_accounts_enabled -%}
         <a href="{{ routes.account_url }}" class="gia-header__icon" aria-label="Cuenta">
           {% render 'gia-icon', icon: 'user', size: 21 %}
@@ -193,6 +205,12 @@
       "info": "El prototipo no lo incluye, pero en una tienda real ayuda a encontrar producto."
     },
     { "type": "checkbox", "id": "show_account", "label": "Mostrar cuenta", "default": false },
+    {
+      "type": "url",
+      "id": "wishlist_url",
+      "label": "Página de favoritos",
+      "info": "La proporciona la app de lista de deseos. Sin URL, el icono del corazón no se muestra."
+    },
     { "type": "header", "content": "Apariencia" },
     { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
   ]

@@ -85,9 +85,7 @@
 
 .gia-contact__field input:focus-visible,
 .gia-contact__field textarea:focus-visible {
-  outline: none;
   border-color: var(--gia-turquoise);
-  box-shadow: var(--focus-ring);
 }
 
 .gia-contact__field input[aria-invalid='true'] {
@@ -112,10 +110,6 @@
   background: var(--gia-turquoise-600);
 }
 
-.gia-contact__submit:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
 
 /* --- Acuse y errores --- */
 

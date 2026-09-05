@@ -77,10 +77,6 @@
   color: var(--gia-turquoise-700);
 }
 
-.gia-colbar__chip:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
 
 /* El activo no se distingue sólo por color: además lleva aria-current y
    un contorno más marcado, legible sin percibir el matiz. */

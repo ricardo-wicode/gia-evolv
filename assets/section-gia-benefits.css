@@ -78,10 +78,6 @@
   border-color: var(--gia-turquoise);
 }
 
-.gia-benefits__trigger:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
 
 .gia-benefits__icon {
   flex: none;
@@ -145,8 +141,10 @@
   color: rgba(255, 255, 255, 0.82);
 }
 
-/* En una sola columna la imagen estorba entre los dos grupos: va al final. */
-@media screen and (max-width: 799px) {
+/* En una sola columna la imagen estorba entre los dos grupos: va al final.
+   Se usa el corte de Dawn (749) en vez de uno propio, para no crear un
+   tercer punto de ruptura a 50px del suyo. */
+@media screen and (max-width: 749px) {
   .gia-benefits__media {
     order: 3;
   }
