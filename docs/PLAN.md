@@ -15,10 +15,10 @@ frente a lo que falta:
 
 | Pieza | Vista en el prototipo | Estado |
 |---|---|---|
-| Barra de anuncio | siempre | ⚠️ Dawn por defecto, no homologada |
-| Header + nav + mega menú | siempre | ⚠️ Dawn por defecto, no homologado |
-| Logo | siempre | ❌ sin subir |
-| Footer | siempre | ⚠️ Dawn por defecto, no homologado |
+| Barra de anuncio | siempre | ✅ |
+| Header + nav + mega menú | siempre | ✅ |
+| Logo | siempre | ✅ |
+| Footer | siempre | ✅ |
 | Marquesina | siempre | ⚠️ hecha, pero sólo en la portada |
 | Comunidad Instagram | siempre | ⚠️ hecha, pero sólo en la portada |
 | Hero | portada | ✅ |
@@ -57,27 +57,27 @@ cambian decisiones de las fases siguientes.
 
 ---
 
-## Fase 1 — Chrome compartido
+## Fase 1 — Chrome compartido ✅
 
 Lo que se ve en todas las páginas. Es la causa de que el tema "no se
 parezca" pese a tener la portada hecha.
 
-- [ ] **1.1 Logo.** Subir `b456c919.avif` (más un PNG de respaldo).
+- [x] **1.1 Logo.** Subir `b456c919.avif` (más un PNG de respaldo).
       Header en color, footer invertido a blanco. Respetar la zona de
       seguridad del manual (p.3): 0.42em alrededor. Mínimos de uso:
       29px en digital.
-- [ ] **1.2 Barra de anuncio.** Fondo turquesa `#009389`, texto blanco,
+- [x] **1.2 Barra de anuncio.** Fondo turquesa `#009389`, texto blanco,
       Montserrat 700 12px, `letter-spacing .06em`, mayúsculas, centrado.
       Configurable y ocultable.
-- [ ] **1.3 Header.** Sticky, 74px de alto, borde inferior
+- [x] **1.3 Header.** Sticky, 74px de alto, borde inferior
       `#E4E5E5`. Logo a la izquierda, nav centrado
       (Inicio · Catálogo · Nosotros · Contacto), iconos de favoritos y
       carrito a la derecha con contador en burbuja turquesa.
-- [ ] **1.4 Mega menú.** Se abre al pasar el ratón sobre "Catálogo".
+- [x] **1.4 Mega menú.** Se abre al pasar el ratón sobre "Catálogo".
       Dos columnas: "Por objetivo" (lista de enlaces) y "Más pedidos"
       (tarjetas de producto con imagen y precio). **Debe abrirse también
       con teclado**; en el prototipo es sólo `mouseenter`.
-- [ ] **1.5 Footer.** Bloque de boletín, lema "Para ti, que evolucionas"
+- [x] **1.5 Footer.** Bloque de boletín, lema "Para ti, que evolucionas"
       con el sello circular, tres columnas de enlaces, redes sociales,
       sellos de pago (VISA · MASTERCARD · AMEX · OXXO · SPEI), enlaces
       legales, logo invertido y el aviso sanitario:

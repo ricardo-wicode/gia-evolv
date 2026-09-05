@@ -1,0 +1,211 @@
+{%- liquid
+  assign menus = section.blocks | where: 'type', 'menu'
+  assign socials = section.blocks | where: 'type', 'social'
+  assign badges = section.settings.badges | split: ','
+-%}
+
+<footer class="gia-footer color-{{ section.settings.color_scheme }}">
+  <div class="gia-footer__inner">
+    <div class="gia-footer__top">
+      {%- if section.settings.show_newsletter -%}
+        <div class="gia-footer__newsletter">
+          {%- if section.settings.newsletter_heading != blank -%}
+            <h2 class="gia-footer__heading">{{ section.settings.newsletter_heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.newsletter_text != blank -%}
+            <p class="gia-footer__text">{{ section.settings.newsletter_text }}</p>
+          {%- endif -%}
+
+          {%- form 'customer', class: 'gia-footer__form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <label class="visually-hidden" for="gia-newsletter-{{ section.id }}">
+              {{ section.settings.newsletter_placeholder }}
+            </label>
+            <input
+              id="gia-newsletter-{{ section.id }}"
+              type="email"
+              name="contact[email]"
+              class="gia-footer__input"
+              placeholder="{{ section.settings.newsletter_placeholder | escape }}"
+              autocomplete="email"
+              required
+            >
+            <button type="submit" class="gia-footer__submit" aria-label="Suscribirme">
+              {% render 'gia-icon', icon: 'arrow-right', size: 19 %}
+            </button>
+
+            {%- comment -%}
+              El objeto `form` sólo existe dentro del bloque, así que tanto
+              el acuse como los errores viven aquí.
+            {%- endcomment -%}
+            {%- if form.posted_successfully? -%}
+              <p class="gia-footer__ok" role="status">{{ section.settings.newsletter_success }}</p>
+            {%- elsif form.errors -%}
+              <p class="gia-footer__error" role="alert">
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </p>
+            {%- endif -%}
+          {%- endform -%}
+        </div>
+      {%- endif -%}
+
+      <div class="gia-footer__claim">
+        {%- if section.settings.claim != blank -%}
+          <span class="gia-footer__claim-text">{{ section.settings.claim }}</span>
+        {%- endif -%}
+        {%- if section.settings.seal_label != blank -%}
+          <div class="gia-footer__seal">
+            {% render 'gia-icon', icon: section.settings.seal_icon, size: 26 %}
+            <span class="gia-footer__seal-label">{{ section.settings.seal_label }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <hr class="gia-footer__rule">
+
+    <div class="gia-footer__cols">
+      {%- for block in menus -%}
+        <nav class="gia-footer__col" aria-label="{{ block.settings.title | escape }}" {{ block.shopify_attributes }}>
+          <span class="gia-footer__col-title">{{ block.settings.title }}</span>
+          {%- for link in block.settings.menu.links -%}
+            <a href="{{ link.url }}" class="gia-footer__col-link">{{ link.title }}</a>
+          {%- endfor -%}
+        </nav>
+      {%- endfor -%}
+
+      <div class="gia-footer__col gia-footer__col--meta">
+        {%- if socials.size > 0 -%}
+          <ul class="gia-footer__socials" role="list">
+            {%- for block in socials -%}
+              {%- if block.settings.url != blank -%}
+                <li {{ block.shopify_attributes }}>
+                  <a href="{{ block.settings.url }}" class="gia-footer__social"
+                     aria-label="{{ block.settings.name | escape }}" target="_blank" rel="noopener">
+                    {% render 'gia-icon', icon: block.settings.icon, size: 19 %}
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.badges != blank -%}
+          <ul class="gia-footer__badges" role="list" aria-label="Métodos de pago aceptados">
+            {%- for badge in badges -%}
+              <li class="gia-footer__badge">{{ badge | strip }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="gia-footer__bottom">
+      <div class="gia-footer__legal">
+        <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+        {%- for link in section.settings.legal_menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      </div>
+      {% render 'gia-logo', height: 44, invert: true %}
+    </div>
+
+    {%- comment -%}
+      Aviso sanitario. Va fijo en el código y no como ajuste editable:
+      es obligatorio para suplementos alimenticios en México y no debe
+      poder borrarse desde el personalizador por descuido.
+    {%- endcomment -%}
+    <p class="gia-footer__disclaimer">
+      Los suplementos alimenticios no son medicamentos y no sustituyen una dieta
+      equilibrada. Consulta a tu profesional de salud antes de iniciar cualquier
+      suplementación.
+    </p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Gia · Pie",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Boletín" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Mostrar boletín", "default": true },
+    { "type": "text", "id": "newsletter_heading", "label": "Titular", "default": "Únete al boletín" },
+    { "type": "textarea", "id": "newsletter_text", "label": "Texto", "default": "Fórmulas nuevas, guías de dosis y avisos de stock. Sin spam." },
+    { "type": "text", "id": "newsletter_placeholder", "label": "Marcador del campo", "default": "Tu correo" },
+    { "type": "text", "id": "newsletter_success", "label": "Mensaje de éxito", "default": "Listo, te escribiremos pronto." },
+    { "type": "header", "content": "Lema y sello" },
+    { "type": "text", "id": "claim", "label": "Lema", "default": "Para ti, que evolucionas" },
+    {
+      "type": "select",
+      "id": "seal_icon",
+      "label": "Icono del sello",
+      "options": [
+        { "value": "shield", "label": "Escudo" },
+        { "value": "leaf", "label": "Hoja" },
+        { "value": "flask", "label": "Matraz" },
+        { "value": "document", "label": "Documento" }
+      ],
+      "default": "shield"
+    },
+    { "type": "text", "id": "seal_label", "label": "Texto del sello", "default": "Calidad Gia Evolv" },
+    { "type": "header", "content": "Pie" },
+    {
+      "type": "text",
+      "id": "badges",
+      "label": "Métodos de pago",
+      "info": "Separados por comas. Son sólo texto: no muestran el logo de la marca ni implican certificación.",
+      "default": "VISA, MASTERCARD, AMEX, OXXO, SPEI"
+    },
+    { "type": "link_list", "id": "legal_menu", "label": "Menú legal" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-6" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Columna de enlaces",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Tienda" },
+        { "type": "link_list", "id": "menu", "label": "Menú" }
+      ]
+    },
+    {
+      "type": "social",
+      "name": "Red social",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "options": [
+            { "value": "instagram", "label": "Instagram" },
+            { "value": "facebook", "label": "Facebook" },
+            { "value": "youtube", "label": "YouTube" },
+            { "value": "tiktok", "label": "TikTok" },
+            { "value": "whatsapp", "label": "WhatsApp" }
+          ],
+          "default": "instagram"
+        },
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Instagram" },
+        { "type": "url", "id": "url", "label": "Enlace" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Pie",
+      "blocks": [
+        { "type": "menu", "settings": { "title": "Tienda" } },
+        { "type": "menu", "settings": { "title": "Compañía" } },
+        { "type": "menu", "settings": { "title": "Ayuda" } },
+        { "type": "social", "settings": { "icon": "instagram", "name": "Instagram" } },
+        { "type": "social", "settings": { "icon": "facebook", "name": "Facebook" } },
+        { "type": "social", "settings": { "icon": "youtube", "name": "YouTube" } },
+        { "type": "social", "settings": { "icon": "tiktok", "name": "TikTok" } },
+        { "type": "social", "settings": { "icon": "whatsapp", "name": "WhatsApp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

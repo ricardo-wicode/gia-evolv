@@ -1,0 +1,629 @@
+/* Chrome compartido de Gia Evolv: logo, barra de anuncio, header, footer.
+   Se carga en todas las páginas desde theme.liquid. */
+
+/* --- Logo --------------------------------------------------------- */
+
+.gia-logo {
+  display: block;
+  width: auto;
+  /* Zona de seguridad del manual (p.3): 0.42 × la altura del imagotipo. */
+  padding: calc(0.42em * 0.25);
+  box-sizing: content-box;
+}
+
+.gia-logo--invert {
+  filter: brightness(0) invert(1);
+}
+
+.gia-logo__link {
+  display: flex;
+  align-items: center;
+  flex: none;
+  text-decoration: none;
+}
+
+.gia-logo__link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* --- Barra de anuncio --------------------------------------------- */
+
+.gia-announcement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  text-align: center;
+}
+
+.gia-announcement__item {
+  font: 600 12px / 1 var(--font-secondary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gia-announcement__link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Rotador: los mensajes se apilan en la misma celda y se turnan. */
+.gia-announcement__rotator {
+  display: grid;
+  grid-template-areas: 'msg';
+  align-items: center;
+}
+
+.gia-announcement__item--rotating {
+  grid-area: msg;
+  opacity: 0;
+  animation: gia-ann-cycle calc(var(--gia-ann-dwell) * var(--gia-ann-count)) infinite;
+  animation-delay: calc(var(--gia-ann-dwell) * var(--gia-ann-index));
+}
+
+@keyframes gia-ann-cycle {
+  0%, 2%      { opacity: 0; transform: translateY(4px); }
+  4%, 28%     { opacity: 1; transform: none; }
+  32%, 100%   { opacity: 0; transform: translateY(-4px); }
+}
+
+/* Sin rotación: se apilan en vertical y se leen todos de una vez, en
+   lugar de dejar mensajes ocultos para siempre a opacidad 0. */
+@media (prefers-reduced-motion: reduce) {
+  .gia-announcement__rotator {
+    grid-template-areas: none;
+    gap: var(--space-1);
+  }
+
+  .gia-announcement__item--rotating {
+    grid-area: auto;
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}
+
+/* --- Cabecera ------------------------------------------------------ */
+
+.gia-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  border-bottom: 1px solid var(--gia-grey-200);
+}
+
+.gia-header__bar {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  box-sizing: border-box;
+}
+
+.gia-header__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 34px);
+}
+
+.gia-header__link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 13.5px / 1 var(--font-secondary);
+  letter-spacing: 0.02em;
+  color: inherit;
+  text-decoration: none;
+  padding: 26px 0;
+  cursor: pointer;
+}
+
+.gia-header__link:hover,
+.gia-header__link.is-active {
+  color: var(--gia-turquoise-600);
+}
+
+.gia-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+
+.gia-header__icon {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-circle);
+  border: none;
+  background: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.gia-header__icon:hover {
+  background: var(--gia-turquoise-50);
+}
+
+.gia-header__icon:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.gia-header__badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--gia-turquoise);
+  color: var(--gia-white);
+  font: 700 10px / 17px var(--font-secondary);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* --- Mega menú ----------------------------------------------------- */
+
+.gia-mega {
+  position: static;
+}
+
+.gia-mega__summary {
+  list-style: none;
+}
+
+.gia-mega__summary::-webkit-details-marker {
+  display: none;
+}
+
+.gia-mega__summary:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+.gia-mega[open] > .gia-mega__summary {
+  color: var(--gia-turquoise-600);
+}
+
+.gia-mega[open] > .gia-mega__summary svg {
+  transform: rotate(180deg);
+}
+
+.gia-mega__summary svg {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.gia-mega__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: rgb(var(--color-background));
+  border-top: 1px solid var(--gia-grey-200);
+  border-bottom: 1px solid var(--gia-grey-200);
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.08);
+}
+
+.gia-mega__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 32px var(--gutter) 36px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  box-sizing: border-box;
+}
+
+.gia-mega__col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gia-mega__eyebrow {
+  font: 700 11px / 1 var(--font-secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-grey-500);
+}
+
+.gia-mega__goal {
+  font: 600 14px / 1 var(--font-secondary);
+  color: inherit;
+  text-decoration: none;
+}
+
+.gia-mega__goal:hover {
+  color: var(--gia-turquoise-600);
+}
+
+.gia-mega__all {
+  margin-top: 6px;
+  font: 700 12.5px / 1 var(--font-secondary);
+  letter-spacing: 0.04em;
+  color: var(--gia-turquoise-600);
+  text-decoration: none;
+}
+
+.gia-mega__products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px;
+}
+
+.gia-mega__product {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.gia-mega__product-media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--gia-grey-50);
+  aspect-ratio: 1 / 1;
+}
+
+.gia-mega__product-media img,
+.gia-mega__product-media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gia-mega__product-name {
+  font: 600 13px / var(--leading-snug) var(--font-secondary);
+}
+
+.gia-mega__product-price {
+  font: 700 13px / 1 var(--font-primary);
+  color: var(--gia-turquoise-600);
+}
+
+/* --- Cajón móvil --------------------------------------------------- */
+
+.gia-header__drawer,
+.gia-header__burger {
+  display: none;
+}
+
+.gia-header__drawer > summary {
+  list-style: none;
+}
+
+.gia-header__drawer > summary::-webkit-details-marker {
+  display: none;
+}
+
+.gia-header__drawer-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgb(var(--color-background));
+  border-top: 1px solid var(--gia-grey-200);
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.08);
+  padding: var(--space-4) var(--gutter) var(--space-6);
+}
+
+.gia-header__drawer-link {
+  font: 600 15px / 1 var(--font-secondary);
+  color: inherit;
+  text-decoration: none;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gia-grey-100);
+}
+
+.gia-header__drawer-link--child {
+  font-weight: 400;
+  padding-left: var(--space-4);
+  color: var(--gia-grey-700);
+}
+
+/* Por debajo de 990px la nav horizontal no cabe: se cambia por el cajón,
+   y el mega menú deja de tener sentido porque sus dos columnas no entran. */
+@media screen and (max-width: 989px) {
+  .gia-header__nav {
+    display: none;
+  }
+
+  .gia-header__drawer,
+  .gia-header__burger {
+    display: flex;
+  }
+
+  .gia-header__bar {
+    gap: var(--space-3);
+  }
+}
+
+/* --- Pie ----------------------------------------------------------- */
+
+.gia-footer {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+.gia-footer__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 80px) var(--gutter) 32px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gia-footer__top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+}
+
+.gia-footer__newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 520px;
+}
+
+.gia-footer__heading {
+  margin: 0;
+  font: 400 clamp(28px, 3.6vw, 40px) / var(--leading-tight) var(--font-primary);
+  letter-spacing: -0.02em;
+}
+
+.gia-footer__text {
+  margin: 0;
+  font: 400 14.5px / var(--leading-body) var(--font-secondary);
+  opacity: 0.62;
+}
+
+.gia-footer__form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-pill);
+  padding: 6px 6px 6px 22px;
+  margin-top: var(--space-2);
+  /* El acuse y los errores viven dentro del <form> (el objeto `form` de
+     Liquid sólo existe ahí), así que se les deja saltar de línea en vez
+     de que compartan fila con el campo. */
+  flex-wrap: wrap;
+}
+
+.gia-footer__form:focus-within {
+  box-shadow: var(--focus-ring);
+}
+
+.gia-footer__input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  outline: none;
+  color: inherit;
+  font: 400 14.5px / 1 var(--font-secondary);
+}
+
+.gia-footer__input::placeholder {
+  color: currentcolor;
+  opacity: 0.5;
+}
+
+.gia-footer__submit {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-circle);
+  border: none;
+  background: var(--gia-turquoise);
+  color: var(--gia-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.gia-footer__submit:hover {
+  background: var(--gia-turquoise-600);
+}
+
+.gia-footer__ok,
+.gia-footer__error {
+  flex-basis: 100%;
+  margin: 0 0 0 12px;
+  font: 600 13px / var(--leading-snug) var(--font-secondary);
+}
+
+.gia-footer__ok {
+  color: var(--gia-turquoise-300);
+}
+
+.gia-footer__error {
+  color: var(--gia-warning);
+}
+
+.gia-footer__claim {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.gia-footer__claim-text {
+  font: 400 clamp(24px, 3vw, 34px) / var(--leading-tight) var(--font-primary);
+  opacity: 0.9;
+  text-align: right;
+}
+
+.gia-footer__seal {
+  flex: none;
+  width: 132px;
+  height: 132px;
+  border-radius: var(--radius-circle);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  text-align: center;
+  padding: var(--space-3);
+  box-sizing: border-box;
+}
+
+.gia-footer__seal-label {
+  font: 600 9.5px / var(--leading-snug) var(--font-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.66;
+}
+
+.gia-footer__rule {
+  height: 1px;
+  border: 0;
+  background: var(--border-on-dark);
+  margin: clamp(36px, 4vw, 52px) 0;
+}
+
+.gia-footer__cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: clamp(28px, 4vw, 48px);
+}
+
+.gia-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gia-footer__col--meta {
+  gap: 20px;
+}
+
+.gia-footer__col-title {
+  font: 400 19px / 1 var(--font-primary);
+}
+
+.gia-footer__col-link {
+  font: 400 14px / var(--leading-snug) var(--font-secondary);
+  color: currentcolor;
+  opacity: 0.66;
+  text-decoration: none;
+}
+
+.gia-footer__col-link:hover {
+  opacity: 1;
+}
+
+.gia-footer__socials,
+.gia-footer__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gia-footer__social {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-circle);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: currentcolor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.gia-footer__social:hover {
+  border-color: currentcolor;
+}
+
+.gia-footer__badges {
+  gap: 8px;
+}
+
+.gia-footer__badge {
+  font: 700 10.5px / 1 var(--font-secondary);
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  padding: 9px 10px;
+}
+
+.gia-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-top: clamp(36px, 4vw, 56px);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-on-dark);
+}
+
+.gia-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font: 400 12.5px / var(--leading-body) var(--font-secondary);
+  opacity: 0.55;
+}
+
+.gia-footer__legal a {
+  color: currentcolor;
+  text-decoration: underline;
+}
+
+.gia-footer__disclaimer {
+  margin: 20px 0 0;
+  font: 400 11.5px / var(--leading-body) var(--font-secondary);
+  opacity: 0.4;
+  max-width: 80ch;
+}
+
+@media screen and (max-width: 749px) {
+  .gia-footer__claim {
+    justify-content: flex-start;
+  }
+
+  .gia-footer__claim-text {
+    text-align: left;
+  }
+}
+
+

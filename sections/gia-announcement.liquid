@@ -1,0 +1,70 @@
+{%- liquid
+  assign msgs = section.blocks | where: 'type', 'message'
+-%}
+
+{%- if msgs.size > 0 -%}
+  <div class="gia-announcement color-{{ section.settings.color_scheme }}">
+    {%- if msgs.size == 1 -%}
+      {%- assign b = msgs[0] -%}
+      <div class="gia-announcement__item" {{ b.shopify_attributes }}>
+        {%- if b.settings.link != blank -%}
+          <a href="{{ b.settings.link }}" class="gia-announcement__link">{{ b.settings.text }}</a>
+        {%- else -%}
+          {{ b.settings.text }}
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      {%- comment -%}
+        Con varios mensajes rota entre ellos. Sin JS: cada mensaje se
+        muestra por turnos con una animación escalonada, y la lista queda
+        completa en el DOM para que un lector de pantalla la lea entera.
+        aria-live no: sería una interrupción constante y no aporta.
+      {%- endcomment -%}
+      <div class="gia-announcement__rotator" style="--gia-ann-count: {{ msgs.size }}; --gia-ann-dwell: {{ section.settings.dwell }}s;">
+        {%- for b in msgs -%}
+          <div class="gia-announcement__item gia-announcement__item--rotating"
+               style="--gia-ann-index: {{ forloop.index0 }};" {{ b.shopify_attributes }}>
+            {%- if b.settings.link != blank -%}
+              <a href="{{ b.settings.link }}" class="gia-announcement__link">{{ b.settings.text }}</a>
+            {%- else -%}
+              {{ b.settings.text }}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gia · Barra de anuncio",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "range",
+      "id": "dwell",
+      "label": "Segundos por mensaje",
+      "min": 3, "max": 12, "step": 1, "default": 5,
+      "info": "Sólo se aplica con dos mensajes o más."
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-3" }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Mensaje",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "Envío gratis a partir de $6,000" },
+        { "type": "url", "id": "link", "label": "Enlace" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Barra de anuncio",
+      "blocks": [{ "type": "message", "settings": { "text": "Envío gratis a partir de $6,000" } }]
+    }
+  ]
+}
+{% endschema %}

@@ -2,53 +2,42 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "show_line_separator": true,
-        "show_social": false,
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "enable_country_selector": false,
-        "enable_language_selector": false
-      },
+    "gia_announcement": {
+      "type": "gia-announcement",
       "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
+        "msg-1": {
+          "type": "message",
           "settings": {
-            "text": "Welcome to our store",
-            "text_alignment": "center",
-            "color_scheme": "scheme-1",
-            "link": ""
+            "text": "Envío gratis a partir de $6,000"
           }
         }
       },
       "block_order": [
-        "announcement-bar-0"
-      ]
-    },
-    "header": {
-      "type": "header",
+        "msg-1"
+      ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
-        "logo_position": "middle-left",
+        "dwell": 5,
+        "color_scheme": "scheme-3"
+      }
+    },
+    "gia_header": {
+      "type": "gia-header",
+      "settings": {
         "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "mobile_logo_position": "center",
-        "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "logo_height": 34,
+        "mega_link_title": "Catálogo",
+        "mega_goals_title": "Por objetivo",
+        "mega_all_label": "Ver todo el catálogo",
+        "mega_products_title": "Más pedidos",
+        "mega_products_count": 5,
+        "show_search": false,
+        "show_account": false,
+        "color_scheme": "scheme-1"
       }
     }
   },
   "order": [
-    "announcement-bar",
-    "header"
+    "gia_announcement",
+    "gia_header"
   ]
 }

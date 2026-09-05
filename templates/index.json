@@ -334,37 +334,6 @@
         "columns": 4,
         "color_scheme": "scheme-1"
       }
-    },
-    "gia_newsletter": {
-      "type": "newsletter",
-      "blocks": {
-        "heading-1": {
-          "type": "heading",
-          "settings": {
-            "heading": "Únete al boletín",
-            "heading_size": "h1"
-          }
-        },
-        "paragraph-1": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Recibe tips de bienestar y acceso anticipado a cada lanzamiento.</p>"
-          }
-        },
-        "email_form-1": {
-          "type": "email_form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "heading-1",
-        "paragraph-1",
-        "email_form-1"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "full_width": true
-      }
     }
   },
   "order": [
@@ -374,7 +343,6 @@
     "gia_trust",
     "gia_comparison",
     "gia_blog",
-    "gia_community",
-    "gia_newsletter"
+    "gia_community"
   ]
 }

@@ -1,0 +1,55 @@
+{%- comment -%}
+  Imagotipo Gia Evolv.
+
+  Uso: {% render 'gia-logo', height: 34, invert: true, link: true %}
+
+  El manual (p.3) fija una zona de seguridad de 0.42em alrededor y un uso
+  mínimo de 29px en digital; de ahí el padding y el clamp de abajo.
+
+  invert: en fondos oscuros. `brightness(0) invert(1)` lleva el imagotipo
+  a blanco puro, que es como lo resuelve el prototipo en el footer.
+
+  El archivo del tema es un PNG de 180px. Si llega el SVG del manual,
+  sustituirlo aquí: escalaría sin límite y pesaría menos.
+{%- endcomment -%}
+
+{%- liquid
+  assign h = height | default: 34
+  if h < 29
+    assign h = 29
+  endif
+  assign classes = 'gia-logo'
+  if invert
+    assign classes = classes | append: ' gia-logo--invert'
+  endif
+-%}
+
+{%- capture logo_img -%}
+  {%- if settings.logo != blank -%}
+    {{
+      settings.logo
+      | image_url: width: 600
+      | image_tag:
+        widths: '120, 240, 360, 600',
+        class: classes,
+        alt: shop.name,
+        style: 'height:' | append: h | append: 'px'
+    }}
+  {%- else -%}
+    <img
+      src="{{ 'gia-logo.png' | asset_url }}"
+      alt="{{ shop.name | escape }}"
+      width="180" height="180"
+      class="{{ classes }}"
+      style="height:{{ h }}px"
+    >
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if link -%}
+  <a href="{{ routes.root_url }}" class="gia-logo__link" aria-label="{{ shop.name | escape }}">
+    {{ logo_img }}
+  </a>
+{%- else -%}
+  {{ logo_img }}
+{%- endif -%}

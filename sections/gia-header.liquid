@@ -1,0 +1,200 @@
+{%- liquid
+  assign main_menu = section.settings.menu
+  assign goals_menu = section.settings.mega_menu
+  assign mega_products = section.settings.mega_collection.products | default: collections.all.products
+-%}
+
+<header class="gia-header color-{{ section.settings.color_scheme }}" data-gia-header>
+  <div class="gia-header__bar">
+    {%- comment -%} Abre el cajón en móvil. Es <details>: funciona sin JS. {%- endcomment -%}
+    <details class="gia-header__drawer">
+      <summary class="gia-header__icon gia-header__burger" aria-label="Abrir menú">
+        {% render 'gia-icon', icon: 'menu', size: 21 %}
+      </summary>
+      <nav class="gia-header__drawer-panel" aria-label="Menú principal">
+        {%- for link in main_menu.links -%}
+          <a href="{{ link.url }}" class="gia-header__drawer-link{% if link.active %} is-active{% endif %}">
+            {{ link.title }}
+          </a>
+          {%- for child in link.links -%}
+            <a href="{{ child.url }}" class="gia-header__drawer-link gia-header__drawer-link--child">
+              {{ child.title }}
+            </a>
+          {%- endfor -%}
+        {%- endfor -%}
+      </nav>
+    </details>
+
+    {% render 'gia-logo', height: section.settings.logo_height, link: true %}
+
+    <nav class="gia-header__nav" aria-label="Menú principal">
+      {%- for link in main_menu.links -%}
+        {%- liquid
+          assign is_mega = false
+          if section.settings.mega_link_title != blank and link.title == section.settings.mega_link_title
+            assign is_mega = true
+          endif
+        -%}
+
+        {%- if is_mega -%}
+          {%- comment -%}
+            El prototipo abre este panel sólo con mouseenter, lo que lo
+            deja fuera del alcance del teclado. Aquí es <details>: se
+            abre con Enter o clic siempre, y el JS le añade el hover.
+          {%- endcomment -%}
+          <details class="gia-mega" data-gia-mega>
+            <summary class="gia-header__link gia-mega__summary">
+              {{ link.title }}
+              {% render 'gia-icon', icon: 'chevron-down', size: 13 %}
+            </summary>
+
+            <div class="gia-mega__panel">
+              <div class="gia-mega__inner">
+                <div class="gia-mega__col">
+                  <span class="gia-mega__eyebrow">{{ section.settings.mega_goals_title }}</span>
+                  {%- for goal in goals_menu.links -%}
+                    <a href="{{ goal.url }}" class="gia-mega__goal">{{ goal.title }}</a>
+                  {%- endfor -%}
+                  <a href="{{ link.url }}" class="gia-mega__all">
+                    {{ section.settings.mega_all_label }} &rarr;
+                  </a>
+                </div>
+
+                {%- if mega_products.size > 0 and section.settings.mega_products_count > 0 -%}
+                  <div class="gia-mega__col">
+                    <span class="gia-mega__eyebrow">{{ section.settings.mega_products_title }}</span>
+                    <div class="gia-mega__products">
+                      {%- for product in mega_products limit: section.settings.mega_products_count -%}
+                        <a href="{{ product.url }}" class="gia-mega__product">
+                          <div class="gia-mega__product-media">
+                            {%- if product.featured_image -%}
+                              {{
+                                product.featured_image
+                                | image_url: width: 300
+                                | image_tag:
+                                  loading: 'lazy',
+                                  widths: '150, 200, 300',
+                                  sizes: '150px',
+                                  alt: product.featured_image.alt | default: product.title
+                              }}
+                            {%- else -%}
+                              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                            {%- endif -%}
+                          </div>
+                          <span class="gia-mega__product-name">{{ product.title }}</span>
+                          <span class="gia-mega__product-price">
+                            {{ product.price | money }}
+                          </span>
+                        </a>
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          </details>
+        {%- else -%}
+          <a href="{{ link.url }}" class="gia-header__link{% if link.active %} is-active{% endif %}">
+            {{ link.title }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <div class="gia-header__actions">
+      {%- if section.settings.show_search -%}
+        <a href="{{ routes.search_url }}" class="gia-header__icon" aria-label="Buscar">
+          {% render 'gia-icon', icon: 'search', size: 21 %}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_account and shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="gia-header__icon" aria-label="Cuenta">
+          {% render 'gia-icon', icon: 'user', size: 21 %}
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="gia-header__icon" aria-label="Carrito ({{ cart.item_count }})">
+        {% render 'gia-icon', icon: 'bag', size: 21 %}
+        {%- if cart.item_count > 0 -%}
+          <span class="gia-header__badge" aria-hidden="true">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Progresivo: sin este script el mega menú sigue abriéndose con clic o
+  // Enter, porque es <details>. Esto sólo añade el hover del prototipo,
+  // y sólo donde hay un puntero de verdad.
+  (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    document.querySelectorAll('[data-gia-mega]').forEach(function (mega) {
+      var timer;
+      var open = function () { clearTimeout(timer); mega.open = true; };
+      var close = function () { timer = setTimeout(function () { mega.open = false; }, 120); };
+
+      mega.addEventListener('mouseenter', open);
+      mega.addEventListener('mouseleave', close);
+      // Al tabular fuera del panel se cierra, igual que al sacar el ratón.
+      mega.addEventListener('focusout', function (e) {
+        if (!mega.contains(e.relatedTarget)) mega.open = false;
+      });
+      mega.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && mega.open) {
+          mega.open = false;
+          mega.querySelector('summary').focus();
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Gia · Cabecera",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menú principal", "default": "main-menu" },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Alto del logo",
+      "unit": "px",
+      "min": 29, "max": 60, "step": 1, "default": 34,
+      "info": "El manual fija 29px como uso mínimo en digital."
+    },
+    { "type": "header", "content": "Mega menú" },
+    {
+      "type": "text",
+      "id": "mega_link_title",
+      "label": "Entrada del menú que lo abre",
+      "info": "Debe coincidir exactamente con el título del enlace en el menú principal. Vacío = sin mega menú.",
+      "default": "Catálogo"
+    },
+    { "type": "text", "id": "mega_goals_title", "label": "Título de la primera columna", "default": "Por objetivo" },
+    { "type": "link_list", "id": "mega_menu", "label": "Menú de objetivos" },
+    { "type": "text", "id": "mega_all_label", "label": "Enlace final de la primera columna", "default": "Ver todo el catálogo" },
+    { "type": "text", "id": "mega_products_title", "label": "Título de la segunda columna", "default": "Más pedidos" },
+    { "type": "collection", "id": "mega_collection", "label": "Colección de la segunda columna" },
+    {
+      "type": "range",
+      "id": "mega_products_count",
+      "label": "Productos a mostrar",
+      "min": 0, "max": 6, "step": 1, "default": 5
+    },
+    { "type": "header", "content": "Iconos" },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Mostrar buscador",
+      "default": false,
+      "info": "El prototipo no lo incluye, pero en una tienda real ayuda a encontrar producto."
+    },
+    { "type": "checkbox", "id": "show_account", "label": "Mostrar cuenta", "default": false },
+    { "type": "header", "content": "Apariencia" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ]
+}
+{% endschema %}
