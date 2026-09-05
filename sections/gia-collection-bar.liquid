@@ -1,0 +1,121 @@
+{{ 'section-gia-collection-bar.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign chips = section.blocks | where: 'type', 'chip'
+  assign title = section.settings.heading | default: collection.title
+  assign count = collection.products_count | default: 0
+-%}
+
+<section class="gia-colbar color-{{ section.settings.color_scheme }}">
+  <div class="gia-colbar__inner">
+    <div class="gia-colbar__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="gia-colbar__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1 class="gia-colbar__title">{{ title }}</h1>
+
+      {%- if collection.description != blank and section.settings.show_description -%}
+        <div class="gia-colbar__desc">{{ collection.description }}</div>
+      {%- elsif section.settings.show_count and count > 0 -%}
+        <p class="gia-colbar__desc">
+          {%- if count == 1 -%}
+            1 producto
+          {%- else -%}
+            {{ count }} productos
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+
+    {%- if chips.size > 0 -%}
+      {%- comment -%}
+        Los "chips" del prototipo filtran por objetivo. Aquí son enlaces a
+        colecciones reales, no filtros de cliente: cada objetivo tiene su
+        URL propia, indexable y compartible, y funciona sin JS. El estado
+        activo se marca con aria-current, no sólo con color.
+      {%- endcomment -%}
+      <nav class="gia-colbar__chips" aria-label="Filtrar por objetivo">
+        <ul class="gia-colbar__chip-list" role="list">
+          {%- if section.settings.all_label != blank -%}
+            {%- liquid
+              assign all_url = section.settings.all_link | default: routes.all_products_collection_url
+              assign is_all = false
+              if collection.url == blank or collection.handle == section.settings.all_handle
+                assign is_all = true
+              endif
+            -%}
+            <li>
+              <a href="{{ all_url }}" class="gia-colbar__chip{% if is_all %} is-active{% endif %}"
+                 {% if is_all %}aria-current="page"{% endif %}>
+                {{ section.settings.all_label }}
+              </a>
+            </li>
+          {%- endif -%}
+
+          {%- for block in chips -%}
+            {%- liquid
+              assign col = block.settings.collection
+              assign label = block.settings.label | default: col.title
+              assign url = col.url | default: block.settings.link
+              assign active = false
+              if col != blank and collection.handle == col.handle
+                assign active = true
+              endif
+            -%}
+            {%- if label != blank and url != blank -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ url }}" class="gia-colbar__chip{% if active %} is-active{% endif %}"
+                   {% if active %}aria-current="page"{% endif %}>
+                  {{ label }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gia · Barra de catálogo",
+  "tag": "section",
+  "class": "gia-colbar-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Catálogo" },
+    { "type": "text", "id": "heading", "label": "Titular", "info": "Vacío: usa el nombre de la colección." },
+    { "type": "checkbox", "id": "show_description", "label": "Mostrar descripción de la colección", "default": false },
+    { "type": "checkbox", "id": "show_count", "label": "Mostrar número de productos", "default": true },
+    { "type": "header", "content": "Chips" },
+    { "type": "text", "id": "all_label", "label": "Etiqueta del chip \"todos\"", "default": "Todos" },
+    { "type": "url", "id": "all_link", "label": "Enlace del chip \"todos\"" },
+    { "type": "text", "id": "all_handle", "label": "Handle de la colección \"todos\"", "info": "Para marcarlo como activo cuando se está en ella." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Objetivo",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Colección" },
+        { "type": "text", "id": "label", "label": "Etiqueta", "info": "Vacía: usa el nombre de la colección." },
+        { "type": "url", "id": "link", "label": "Enlace alternativo" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Barra de catálogo",
+      "blocks": [
+        { "type": "chip", "settings": { "label": "Energía" } },
+        { "type": "chip", "settings": { "label": "Sueño" } },
+        { "type": "chip", "settings": { "label": "Movilidad" } },
+        { "type": "chip", "settings": { "label": "Digestión" } },
+        { "type": "chip", "settings": { "label": "Defensas" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

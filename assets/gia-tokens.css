@@ -372,3 +372,70 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
 .product .icon-with-text__item + .icon-with-text__item {
   border-top: 1px solid var(--gia-grey-200);
 }
+
+/* --- Tarjeta de producto ---------------------------------------------
+   El prototipo centra el texto, redondea a 18px y pone el precio en
+   Nexa. Se ajusta la tarjeta de Dawn en vez de escribir otra: la suya ya
+   resuelve variantes, agotados, insignias y añadir rápido.
+   -------------------------------------------------------------------- */
+
+.card__media,
+.card .media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--gia-grey-50);
+}
+
+.card__heading,
+.card__heading a {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  font-size: 15.5px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-wrap: pretty;
+}
+
+.card-information .price,
+.card__information .price {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--gia-ink);
+}
+
+.card__badge .badge {
+  font: 600 11.5px / 1 var(--font-secondary);
+  border-radius: 4px;
+  padding: 7px 10px;
+  background: var(--gia-white);
+  border: 1px solid var(--gia-grey-200);
+  color: var(--gia-grey-700);
+}
+
+.card__badge .badge.color-scheme-4,
+.card__badge .badge--sale {
+  color: var(--gia-turquoise-600);
+  border-color: var(--gia-turquoise-200);
+}
+
+/* Rejilla del catálogo con la medida del prototipo. */
+.product-grid.grid--4-col-desktop,
+.collection .product-grid {
+  --gia-card-min: 250px;
+}
+
+@media screen and (min-width: 750px) {
+  .collection .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--gia-card-min), 1fr));
+    gap: clamp(16px, 2vw, 28px);
+  }
+
+  .collection .product-grid > li {
+    width: auto;
+    max-width: none;
+  }
+}

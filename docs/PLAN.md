@@ -31,7 +31,7 @@ frente a lo que falta:
 | Comparativa | producto | ✅ |
 | Productos relacionados | producto | ✅ |
 | FAQ (acordeón) | producto | ✅ |
-| Catálogo con filtros | catálogo | ❌ |
+| Catálogo con filtros | catálogo | ✅ |
 | Nosotros | nosotros | ❌ |
 | Contacto | contacto | ❌ |
 | Carrito lateral | siempre | ❌ (Dawn lo trae, sin homologar) |
@@ -120,11 +120,14 @@ parezca" pese a tener la portada hecha.
 
 ---
 
-## Fase 4 — Catálogo
+## Fase 4 — Catálogo ✅
 
-- [ ] **4.1 Rejilla** con las tarjetas del diseño (etiqueta de objetivo,
-      badge de agotado, botón de favorito, estrellas).
-- [ ] **4.2 Filtros y orden**, sobre el sistema de filtros de Shopify.
+- [x] **4.1 Rejilla** con las tarjetas del diseño. Restilizada sobre
+      `card-product` de Dawn. El botón de favorito queda para la fase 6.
+- [x] **4.2 Filtros y orden.** Los chips del prototipo son enlaces a
+      colecciones, no filtros de cliente: cada objetivo tiene URL propia,
+      indexable y compartible, y funciona sin JS. El filtrado y el orden
+      reales siguen siendo los de Shopify, en horizontal.
 
 ---
 
