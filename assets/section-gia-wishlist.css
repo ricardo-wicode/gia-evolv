@@ -75,7 +75,7 @@
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--gia-grey-50);
+  background: var(--gia-white);
 }
 
 .gia-wishlist__media img {

@@ -127,35 +127,32 @@
           "type": "social",
           "settings": {
             "icon": "instagram",
-            "name": "Instagram"
+            "name": "Instagram",
+            "url": "https://www.instagram.com/giaevolution/"
           }
         },
         "social-2": {
           "type": "social",
           "settings": {
             "icon": "facebook",
-            "name": "Facebook"
+            "name": "Facebook",
+            "url": "https://www.facebook.com/GiaEvolv"
           }
         },
         "social-3": {
           "type": "social",
           "settings": {
             "icon": "youtube",
-            "name": "YouTube"
+            "name": "YouTube",
+            "url": "https://www.youtube.com/@EdgarArroyoGlz"
           }
         },
         "social-4": {
           "type": "social",
           "settings": {
-            "icon": "tiktok",
-            "name": "TikTok"
-          }
-        },
-        "social-5": {
-          "type": "social",
-          "settings": {
-            "icon": "whatsapp",
-            "name": "WhatsApp"
+            "icon": "x",
+            "name": "X",
+            "url": "https://x.com/GiaMXOficial"
           }
         }
       },
@@ -166,8 +163,7 @@
         "social-1",
         "social-2",
         "social-3",
-        "social-4",
-        "social-5"
+        "social-4"
       ],
       "settings": {
         "show_newsletter": true,
