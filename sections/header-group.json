@@ -32,7 +32,9 @@
         "mega_products_count": 5,
         "show_search": false,
         "show_account": false,
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "mega_menu": "objetivos",
+        "wishlist_url": "/pages/favoritos"
       }
     }
   },

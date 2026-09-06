@@ -71,35 +71,40 @@
           "type": "goal",
           "settings": {
             "label": "Energía",
-            "caption": "Para arrancar el día"
+            "caption": "Para arrancar el día",
+            "collection": "energia"
           }
         },
         "goal-2": {
           "type": "goal",
           "settings": {
             "label": "Sueño",
-            "caption": "Descanso profundo"
+            "caption": "Descanso profundo",
+            "collection": "sueno"
           }
         },
         "goal-3": {
           "type": "goal",
           "settings": {
             "label": "Movilidad",
-            "caption": "Articulaciones y colágeno"
+            "caption": "Articulaciones y colágeno",
+            "collection": "movilidad"
           }
         },
         "goal-4": {
           "type": "goal",
           "settings": {
             "label": "Digestión",
-            "caption": "Fibra y probióticos"
+            "caption": "Fibra y probióticos",
+            "collection": "digestion"
           }
         },
         "goal-5": {
           "type": "goal",
           "settings": {
             "label": "Defensas",
-            "caption": "Vitamina C y zinc"
+            "caption": "Vitamina C y zinc",
+            "collection": "defensas"
           }
         }
       },

@@ -202,7 +202,8 @@
           }
         }
       },
-      "gia_wishlist_enabled": true
+      "gia_wishlist_enabled": true,
+      "gia_wishlist_url": "/pages/favoritos"
     }
   }
 }

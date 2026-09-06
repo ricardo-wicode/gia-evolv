@@ -6,31 +6,36 @@
         "chip-1": {
           "type": "chip",
           "settings": {
-            "label": "Energía"
+            "label": "Energía",
+            "collection": "energia"
           }
         },
         "chip-2": {
           "type": "chip",
           "settings": {
-            "label": "Sueño"
+            "label": "Sueño",
+            "collection": "sueno"
           }
         },
         "chip-3": {
           "type": "chip",
           "settings": {
-            "label": "Movilidad"
+            "label": "Movilidad",
+            "collection": "movilidad"
           }
         },
         "chip-4": {
           "type": "chip",
           "settings": {
-            "label": "Digestión"
+            "label": "Digestión",
+            "collection": "digestion"
           }
         },
         "chip-5": {
           "type": "chip",
           "settings": {
-            "label": "Defensas"
+            "label": "Defensas",
+            "collection": "defensas"
           }
         }
       },
@@ -46,7 +51,8 @@
         "show_description": false,
         "show_count": true,
         "all_label": "Todos",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "all_link": "/collections/all"
       }
     },
     "product-grid": {
