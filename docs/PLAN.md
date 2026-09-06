@@ -35,7 +35,7 @@ frente a lo que falta:
 | Nosotros | nosotros | ✅ |
 | Contacto | contacto | ✅ |
 | Carrito lateral | siempre | ✅ |
-| Favoritos | siempre | ✅ preparado para app |
+| Favoritos | siempre | ✅ localStorage |
 
 ---
 
@@ -145,10 +145,14 @@ parezca" pese a tener la portada hecha.
 ## Fase 6 — Carrito y favoritos ✅
 
 - [x] **6.1 Carrito lateral** homologado sobre el de Dawn.
-- [x] **6.2 Favoritos: por app.** Decidido con el cliente. No se
-      implementa lista propia; el tema queda preparado: `main-product`
-      admite bloques de app y la cabecera muestra el corazón sólo si se
-      rellena la URL de favoritos que dé la app.
+- [x] **6.2 Favoritos con `localStorage`.** Revisado con el cliente: las
+      apps de lista de deseos cobran todas, así que se construye en el
+      tema. Corazón en las tarjetas, contador en la cabecera y página
+      propia. No sincroniza entre dispositivos ni permite recordatorios
+      por correo; migrable a una app después sin rehacer el diseño.
+- [x] **6.3 Estrellas listas para la app de reseñas.** El tema ya lee
+      `reviews.rating`; sólo faltaba teñirlas de marca. Requiere instalar
+      Judge.me (plan gratuito permanente) para que se pinten.
 
 ---
 

@@ -40,6 +40,7 @@ Mientras no tengan colección ni enlace, esos bloques no se pintan.
 |---|---|---|
 | Nosotros | `nosotros` | `page.nosotros` |
 | Contacto | `contacto` | `page.contacto` |
+| Favoritos | `favoritos` | `page.favoritos` |
 
 En Contacto hay que rellenar los datos reales (correo, WhatsApp): los
 dejé vacíos deliberadamente.
@@ -57,16 +58,38 @@ filtros no aparece; los chips de objetivo sí, porque son enlaces.
 
 ## 6. Favoritos
 
-Los favoritos se resuelven con una app de lista de deseos. El tema queda
-preparado:
+Resueltos en el propio tema con `localStorage`, sin app ni coste.
 
-- `main-product` admite bloques de app, así que la app puede insertar su
-  botón en la ficha.
-- La cabecera muestra el icono de corazón **sólo** si se rellena
-  "Página de favoritos" con la URL que dé la app.
+Hace falta crear una página con handle **`favoritos`** y plantilla
+`page.favoritos`, y pegar su URL en *Ajustes del tema → Gia Evolv →
+Página de favoritos*. Sin esa URL, el corazón de la cabecera no aparece.
 
-No hay lista propia: sin app, un corazón que no guarda nada es peor que
-no tener corazón.
+Qué implica esta decisión, para que quede dicho:
+
+- La lista vive en el navegador del visitante. **No sincroniza entre
+  dispositivos** y se pierde si borra los datos del sitio.
+- **No sirve para recordatorios por correo** («lo que guardaste sigue
+  disponible»), que suele ser la razón real por la que se paga una app.
+- Si un producto se despublica, se retira de la lista sola al abrir la
+  página, en vez de dejar una tarjeta rota.
+
+Se puede migrar a una app más adelante sin rehacer el diseño: el corazón,
+el contador y la página ya existen. Para desactivarlo entero hay un
+interruptor en *Ajustes del tema → Gia Evolv → Activar favoritos*.
+
+## 6b. Reseñas — hacen falta para que salgan las estrellas
+
+El diseño lleva estrellas en las tarjetas y en la ficha. Dawn las lee de
+`product.metafields.reviews.rating`, que rellena una app de reseñas;
+Shopify retiró la suya. **Sin app, las estrellas no se pintan** (hay un
+guard, así que no rompe nada, simplemente no aparecen).
+
+Recomendado: **Judge.me**, cuyo plan gratuito es permanente y escribe en
+ese metafield estándar.
+
+⚠️ Si eliges otra, comprueba que escriba en el namespace `reviews`. Hay
+apps que sólo guardan la valoración en su propio metafield, y entonces
+las estrellas del tema siguen vacías por muchas reseñas que tengas.
 
 ## 7. Antes de publicar
 

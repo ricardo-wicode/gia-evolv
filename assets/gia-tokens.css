@@ -444,3 +444,20 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
     max-width: none;
   }
 }
+
+/* --- Estrellas ---------------------------------------------------------
+   Dawn las pinta desde product.metafields.reviews.rating, que rellena la
+   app de reseñas. Sin app el bloque no se emite (hay un guard), así que
+   esto sólo tiene efecto una vez instalada.
+   ---------------------------------------------------------------------- */
+
+.rating-star {
+  --color-rating-star: var(--gia-turquoise);
+}
+
+.rating-count,
+.rating-text {
+  font-family: var(--font-secondary);
+  font-size: 13px;
+  color: var(--gia-grey-500);
+}

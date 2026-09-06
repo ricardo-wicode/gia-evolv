@@ -1,0 +1,16 @@
+{%- comment -%}
+  Corazón de favoritos para una tarjeta o ficha de producto.
+  Uso: {% render 'gia-wishlist-button', product: card_product %}
+
+  Nace con `hidden`: el custom element lo descubre sólo si localStorage
+  está disponible. Sin JS o con el almacenamiento bloqueado, el corazón
+  no llega a verse en vez de quedarse ahí sin guardar nada.
+{%- endcomment -%}
+
+{%- if product != blank and settings.gia_wishlist_enabled -%}
+  <gia-wishlist-button class="gia-wishlist-button" data-handle="{{ product.handle }}" hidden>
+    <button type="button" aria-pressed="false" aria-label="Guardar en favoritos">
+      {% render 'gia-icon', icon: 'heart', size: 18 %}
+    </button>
+  </gia-wishlist-button>
+{%- endif -%}

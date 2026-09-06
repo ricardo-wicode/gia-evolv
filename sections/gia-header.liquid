@@ -109,15 +109,19 @@
       {%- endif -%}
 
       {%- comment -%}
-        Favoritos. El icono sólo aparece cuando hay una URL de destino,
-        que normalmente da la app de lista de deseos. No se implementa
-        una lista propia: sin app, un corazón que no guarda nada es peor
-        que no tener corazón.
+        Favoritos. Nace con `hidden` y el custom element lo descubre sólo
+        si localStorage funciona: sin almacenamiento la lista no puede
+        guardarse, y el icono llevaría a una página siempre vacía.
       {%- endcomment -%}
-      {%- if section.settings.wishlist_url != blank -%}
-        <a href="{{ section.settings.wishlist_url }}" class="gia-header__icon" aria-label="Favoritos">
-          {% render 'gia-icon', icon: 'heart', size: 21 %}
-        </a>
+      {%- if settings.gia_wishlist_enabled -%}
+        {%- assign wl = section.settings.wishlist_url | default: settings.gia_wishlist_url -%}
+        {%- if wl != blank -%}
+          <a href="{{ wl }}" class="gia-header__icon" data-gia-wishlist-link
+             aria-label="Favoritos" hidden>
+            {% render 'gia-icon', icon: 'heart', size: 21 %}
+            <gia-wishlist-count class="gia-header__badge" hidden></gia-wishlist-count>
+          </a>
+        {%- endif -%}
       {%- endif -%}
 
       {%- if section.settings.show_account and shop.customer_accounts_enabled -%}
@@ -209,7 +213,7 @@
       "type": "url",
       "id": "wishlist_url",
       "label": "Página de favoritos",
-      "info": "La proporciona la app de lista de deseos. Sin URL, el icono del corazón no se muestra."
+      "info": "Vacío: usa la URL configurada en los ajustes del tema. Sin ninguna de las dos, el corazón no se muestra."
     },
     { "type": "header", "content": "Apariencia" },
     { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }

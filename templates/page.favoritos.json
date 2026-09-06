@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "gia_wishlist": {
+      "type": "gia-wishlist",
+      "settings": {
+        "eyebrow": "Tu selección",
+        "heading": "Favoritos",
+        "text": "Se guardan en este navegador. Si cambias de dispositivo o borras los datos del sitio, tendrás que volver a elegirlos.",
+        "loading_text": "Cargando tus favoritos…",
+        "empty_text": "Todavía no has guardado nada. Toca el corazón de cualquier producto para tenerlo aquí.",
+        "empty_label": "Ver catálogo",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "gia_wishlist"
+  ]
+}

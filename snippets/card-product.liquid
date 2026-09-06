@@ -126,6 +126,9 @@
                 </a>
               </h3>
             </div>
+            {%- comment -%} Gia Evolv: corazón de favoritos del prototipo. {%- endcomment -%}
+            {% render 'gia-wishlist-button', product: card_product %}
+
             <div class="card__badge {{ settings.badge_position }}">
               {%- if card_product.available == false -%}
                 <span

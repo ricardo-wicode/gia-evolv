@@ -284,6 +284,10 @@
       Capa de marca Gia Evolv. Va DESPUÉS de base.css a propósito:
       los tokens y el puente de gia-tokens.css deben ganar en cascada.
     {%- endcomment -%}
+    {%- if settings.gia_wishlist_enabled -%}
+      <script src="{{ 'gia-wishlist.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
     {% render 'gia-fonts' %}
     {{ 'gia-tokens.css' | asset_url | stylesheet_tag }}
     {{ 'gia-chrome.css' | asset_url | stylesheet_tag }}

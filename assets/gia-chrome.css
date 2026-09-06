@@ -717,3 +717,43 @@
     animation: gia-slide-in-right var(--duration-base) var(--ease-out);
   }
 }
+
+/* --- Corazón de favoritos en la tarjeta ---------------------------- */
+
+.gia-wishlist-button {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  z-index: 2;
+}
+
+.gia-wishlist-button button {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-circle);
+  border: 1px solid var(--gia-grey-200);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--gia-grey-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+
+.gia-wishlist-button button:hover {
+  border-color: var(--gia-turquoise);
+}
+
+/* Guardado: el corazón se rellena. El color por sí solo no bastaría, así
+   que el relleno cambia la forma además del tono, y aria-pressed lleva
+   el estado a la tecnología asistiva. */
+.gia-wishlist-button button.is-on {
+  border-color: var(--gia-turquoise);
+  color: var(--gia-turquoise);
+}
+
+.gia-wishlist-button button.is-on svg {
+  fill: currentcolor;
+}
