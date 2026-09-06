@@ -6,36 +6,36 @@
         "chip-1": {
           "type": "chip",
           "settings": {
-            "label": "Energía",
+            "label": "Energía y rendimiento",
             "collection": "energia"
           }
         },
         "chip-2": {
           "type": "chip",
           "settings": {
-            "label": "Sueño",
-            "collection": "sueno"
+            "label": "Articulaciones y huesos",
+            "collection": "movilidad"
           }
         },
         "chip-3": {
           "type": "chip",
           "settings": {
-            "label": "Movilidad",
-            "collection": "movilidad"
+            "label": "Defensas y antioxidantes",
+            "collection": "defensas"
           }
         },
         "chip-4": {
           "type": "chip",
           "settings": {
-            "label": "Digestión",
-            "collection": "digestion"
+            "label": "Salud celular",
+            "collection": "salud-celular"
           }
         },
         "chip-5": {
           "type": "chip",
           "settings": {
-            "label": "Defensas",
-            "collection": "defensas"
+            "label": "Corazón y circulación",
+            "collection": "corazon-y-circulacion"
           }
         }
       },

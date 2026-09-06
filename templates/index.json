@@ -70,41 +70,41 @@
         "goal-1": {
           "type": "goal",
           "settings": {
-            "label": "Energía",
-            "caption": "Para arrancar el día",
+            "label": "Energía y rendimiento",
+            "caption": "Proteína, magnesio y enfoque",
             "collection": "energia"
           }
         },
         "goal-2": {
           "type": "goal",
           "settings": {
-            "label": "Sueño",
-            "caption": "Descanso profundo",
-            "collection": "sueno"
+            "label": "Articulaciones y huesos",
+            "caption": "Cartílago y densidad ósea",
+            "collection": "movilidad"
           }
         },
         "goal-3": {
           "type": "goal",
           "settings": {
-            "label": "Movilidad",
-            "caption": "Articulaciones y colágeno",
-            "collection": "movilidad"
+            "label": "Defensas y antioxidantes",
+            "caption": "Antioxidantes y micronutrientes",
+            "collection": "defensas"
           }
         },
         "goal-4": {
           "type": "goal",
           "settings": {
-            "label": "Digestión",
-            "caption": "Fibra y probióticos",
-            "collection": "digestion"
+            "label": "Salud celular",
+            "caption": "Regeneración y energía celular",
+            "collection": "salud-celular"
           }
         },
         "goal-5": {
           "type": "goal",
           "settings": {
-            "label": "Defensas",
-            "caption": "Vitamina C y zinc",
-            "collection": "defensas"
+            "label": "Corazón y circulación",
+            "caption": "Flujo sanguíneo y corazón",
+            "collection": "corazon-y-circulacion"
           }
         }
       },
