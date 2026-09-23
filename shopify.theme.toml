@@ -10,4 +10,7 @@
 # SHOPIFY_CLI_THEME_TOKEN, o se pasa con --password.
 
 [environments.gia]
-store = "gia-evolv-2.myshopify.com"
+# El dominio permanente de la tienda, no el principal. Shopify sirve la
+# tienda en gia-evolv-2.myshopify.com, pero el CLI y la Admin API sólo
+# reconocen éste; con el otro devuelve 401 o "no tienes acceso".
+store = "bz98pj-fk.myshopify.com"
