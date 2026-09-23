@@ -1,0 +1,54 @@
+{%- comment -%}
+  Estrellas de un producto, con estado vacío explícito.
+
+  Uso: {% render 'gia-stars', product: card_product %}
+
+  Dawn sólo pinta las estrellas si existe product.metafields.reviews.rating,
+  que rellena la app de reseñas en cuanto el producto tiene la primera. Sin
+  reseñas no dibujaba nada y la tarjeta quedaba con un hueco. Aquí se
+  muestran cinco estrellas apagadas y el texto "Sin reseñas", que informa
+  en vez de callar.
+{%- endcomment -%}
+
+{%- liquid
+  assign rating = product.metafields.reviews.rating.value
+  assign count = product.metafields.reviews.rating_count
+-%}
+
+{%- if rating != blank and count > 0 -%}
+  {%- liquid
+    assign rating_decimal = 0
+    assign decimal = rating.rating | modulo: 1
+    if decimal >= 0.3 and decimal <= 0.7
+      assign rating_decimal = 0.5
+    elsif decimal > 0.7
+      assign rating_decimal = 1
+    endif
+  -%}
+  <div class="gia-stars">
+    <div
+      class="rating"
+      role="img"
+      aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: rating, rating_max: rating.scale_max }}"
+    >
+      <span
+        aria-hidden="true"
+        class="rating-star"
+        style="--rating: {{ rating.rating | floor }}; --rating-max: {{ rating.scale_max }}; --rating-decimal: {{ rating_decimal }};"
+      ></span>
+    </div>
+    <span class="gia-stars__value" aria-hidden="true">{{ rating.rating }}</span>
+    <span class="gia-stars__count" aria-hidden="true">
+      ({{ count }}{% if count == 1 %} reseña{% else %} reseñas{% endif %})
+    </span>
+  </div>
+{%- else -%}
+  <div class="gia-stars gia-stars--empty">
+    {%- comment -%}
+      Las estrellas apagadas son decoración: lo que se lee es el texto.
+      Por eso van aria-hidden y el estado se anuncia una sola vez.
+    {%- endcomment -%}
+    <span class="rating-star" aria-hidden="true" style="--rating: 0; --rating-max: 5; --rating-decimal: 0;"></span>
+    <span class="gia-stars__empty-text">Sin reseñas</span>
+  </div>
+{%- endif -%}

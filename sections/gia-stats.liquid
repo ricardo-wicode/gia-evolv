@@ -1,0 +1,56 @@
+{{ 'section-gia-stats.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign items = section.blocks | where: 'type', 'stat'
+-%}
+
+{%- if items.size > 0 -%}
+  <section class="gia-stats color-{{ section.settings.color_scheme }}">
+    <dl class="gia-stats__inner">
+      {%- for block in items -%}
+        <div class="gia-stats__item" {{ block.shopify_attributes }}>
+          <dt class="gia-stats__value">
+            {{ block.settings.value }}{%- if block.settings.suffix != blank -%}
+              <span class="gia-stats__suffix" aria-hidden="true">{{ block.settings.suffix }}</span>
+            {%- endif -%}
+          </dt>
+          <dd class="gia-stats__label">{{ block.settings.label }}</dd>
+        </div>
+      {%- endfor -%}
+    </dl>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gia · Cifras",
+  "tag": "section",
+  "class": "gia-stats-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Cifra",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Cifra", "default": "+3,000" },
+        { "type": "text", "id": "suffix", "label": "Símbolo", "info": "Se añade pegado a la cifra. Por ejemplo, una estrella." },
+        { "type": "text", "id": "label", "label": "Etiqueta", "default": "clientes activos" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gia · Cifras",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "+3,000", "label": "clientes activos" } },
+        { "type": "stat", "settings": { "value": "4.8", "suffix": "★", "label": "calificación promedio" } },
+        { "type": "stat", "settings": { "value": "28", "label": "estudios clínicos consultados" } },
+        { "type": "stat", "settings": { "value": "100%", "label": "ingredientes certificados" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

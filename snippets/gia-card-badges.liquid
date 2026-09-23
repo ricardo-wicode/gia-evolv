@@ -1,0 +1,41 @@
+{%- comment -%}
+  Insignias de la tarjeta de producto: destacado y categoría.
+
+  Uso: {% render 'gia-card-badges', product: card_product %}
+
+  - Destacado: cualquier etiqueta del producto que empiece por "destacado:".
+    Ej. la etiqueta `destacado:Más vendido` pinta la píldora turquesa.
+    Se usa una etiqueta y no un metafield para que se pueda poner y quitar
+    desde el propio admin de productos, sin tocar el tema.
+  - Categoría: la primera colección del producto que no sea la de portada.
+{%- endcomment -%}
+
+{%- liquid
+  assign flag = ''
+  for t in product.tags
+    assign low = t | downcase
+    if low contains 'destacado:'
+      assign flag = t | split: ':' | last | strip
+      break
+    endif
+  endfor
+
+  assign categoria = ''
+  for c in product.collections
+    unless c.handle == 'frontpage' or c.handle == 'all'
+      assign categoria = c.title
+      break
+    endunless
+  endfor
+-%}
+
+{%- if flag != blank or categoria != blank -%}
+  <div class="gia-card-badges">
+    {%- if flag != blank -%}
+      <span class="gia-card-badge gia-card-badge--flag">{{ flag }}</span>
+    {%- endif -%}
+    {%- if categoria != blank -%}
+      <span class="gia-card-badge">{{ categoria }}</span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

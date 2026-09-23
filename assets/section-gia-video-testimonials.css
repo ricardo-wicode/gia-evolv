@@ -1,0 +1,139 @@
+/* Gia · Video testimonios — carril de tarjetas verticales con fachada. */
+
+.gia-vt { background: rgb(var(--color-background)); color: rgb(var(--color-foreground)); }
+
+.gia-vt__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-y) var(--gutter);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gia-vt__rail-wrap { position: relative; }
+
+.gia-vt__rail {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  margin: 0;
+  padding: 0 0 var(--space-3);
+  list-style: none;
+}
+
+.gia-vt__rail:focus-visible {
+  outline: 2px solid var(--gia-turquoise);
+  outline-offset: 2px;
+  border-radius: var(--radius-lg);
+}
+
+.gia-vt__item {
+  flex: 0 0 clamp(240px, 24vw, 300px);
+  scroll-snap-align: start;
+  margin: 0;
+}
+
+.gia-vt__card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--gia-turquoise-900);
+  color: var(--gia-white);
+}
+
+.gia-vt__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 14px 16px 10px;
+  font: 500 12px / 1 var(--font-secondary);
+}
+
+.gia-vt__duration {
+  font-family: var(--font-mono);
+  opacity: 0.7;
+}
+
+.gia-vt__media {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  background: #06201d;
+  overflow: hidden;
+}
+
+.gia-vt__poster,
+.gia-vt__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  display: block;
+}
+
+.gia-vt__play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-circle);
+  border: none;
+  background: rgba(239, 248, 247, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.gia-vt__play:hover { transform: scale(1.06); }
+
+.gia-vt__play:focus-visible {
+  outline: 2px solid var(--gia-white);
+  outline-offset: 3px;
+}
+
+/* Triángulo de play dibujado en CSS: un glifo más que no hay que cargar. */
+.gia-vt__play-icon {
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-left: 17px solid var(--gia-turquoise-900);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+}
+
+.gia-vt__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 16px;
+  margin-top: auto;
+}
+
+.gia-vt__stars .rating-star { --color-rating-star: var(--gia-warning); }
+
+.gia-vt__quote {
+  margin: 0;
+  font: 600 14.5px / var(--leading-snug) var(--font-secondary);
+  text-wrap: pretty;
+}
+
+.gia-vt__author {
+  margin: 0;
+  font: 400 12.5px / 1 var(--font-secondary);
+  opacity: 0.66;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gia-vt__rail { scroll-behavior: auto; }
+  .gia-vt__play:hover { transform: none; }
+}

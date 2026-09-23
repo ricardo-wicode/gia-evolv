@@ -144,7 +144,7 @@
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
-        "show_rating": false,
+        "show_rating": true,
         "quick_add": "none",
         "columns_mobile": "2",
         "padding_top": 44,
@@ -238,19 +238,243 @@
         "image_fallback_alt": "Personal de laboratorio pipeteando una muestra"
       }
     },
-    "gia_blog": {
-      "type": "featured-blog",
+    "gia_video_testimonials": {
+      "type": "gia-video-testimonials",
+      "blocks": {
+        "video-1": {
+          "type": "video",
+          "settings": {
+            "label": "Citrato de Magnesio",
+            "duration": "0:42",
+            "rating": 5,
+            "quote": "En dos semanas dormí distinto",
+            "author": "María G.",
+            "city": "Guadalajara"
+          }
+        },
+        "video-2": {
+          "type": "video",
+          "settings": {
+            "label": "Nutrición Activa",
+            "duration": "0:36",
+            "rating": 5,
+            "quote": "Ya no me apago a las cuatro de la tarde",
+            "author": "Daniel R.",
+            "city": "CDMX"
+          }
+        },
+        "video-3": {
+          "type": "video",
+          "settings": {
+            "label": "Nutrición Articular",
+            "duration": "0:48",
+            "rating": 5,
+            "quote": "Volví a correr sin molestias en la rodilla",
+            "author": "Lucía M.",
+            "city": "Puebla"
+          }
+        },
+        "video-4": {
+          "type": "video",
+          "settings": {
+            "label": "Nutrición Integral",
+            "duration": "0:51",
+            "rating": 4,
+            "quote": "Viene con la dosis exacta explicada",
+            "author": "Sofía T.",
+            "city": "Monterrey"
+          }
+        }
+      },
+      "block_order": [
+        "video-1",
+        "video-2",
+        "video-3",
+        "video-4"
+      ],
       "settings": {
-        "blog": "news",
-        "post_limit": 3,
-        "heading": "Nuestro blog",
-        "heading_size": "h1",
-        "columns_desktop": 3,
-        "show_view_all": true,
-        "show_image": true,
-        "show_date": false,
-        "show_author": false,
+        "eyebrow": "Testimonios en video",
+        "heading": "Lo que dicen quienes ya evolucionaron",
+        "description": "Historias de 30 a 60 segundos, grabadas en vertical por nuestra propia comunidad.",
         "color_scheme": "scheme-1"
+      }
+    },
+    "gia_testimonials": {
+      "type": "gia-testimonials",
+      "blocks": {
+        "quote-1": {
+          "type": "quote",
+          "settings": {
+            "rating": 5,
+            "quote": "Empecé con Nutrición Activa por las tardes de cansancio y en dos semanas noté la diferencia.",
+            "author": "María G.",
+            "meta": "clienta desde 2023"
+          }
+        },
+        "quote-2": {
+          "type": "quote",
+          "settings": {
+            "rating": 5,
+            "quote": "El citrato de magnesio cambió mis noches. Duermo más profundo y me despierto sin pesadez.",
+            "author": "Daniel R.",
+            "meta": "cliente desde 2022"
+          }
+        },
+        "quote-3": {
+          "type": "quote",
+          "settings": {
+            "rating": 4,
+            "quote": "Lo que más valoro es que todo viene con la dosis exacta explicada. Se siente una marca seria.",
+            "author": "Sofía T.",
+            "meta": "clienta desde 2024"
+          }
+        }
+      },
+      "block_order": [
+        "quote-1",
+        "quote-2",
+        "quote-3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "align": "center",
+        "color_scheme": "scheme-5"
+      }
+    },
+    "gia_stats": {
+      "type": "gia-stats",
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "value": "+3,000",
+            "label": "clientes activos"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "value": "4.8",
+            "suffix": "★",
+            "label": "calificación promedio"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "value": "28",
+            "label": "estudios clínicos consultados"
+          }
+        },
+        "stat-4": {
+          "type": "stat",
+          "settings": {
+            "value": "100%",
+            "label": "ingredientes certificados"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3",
+        "stat-4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
+    },
+    "gia_newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Recibe tips de bienestar y acceso anticipado",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph-1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Un correo al mes, sin spam.</p>"
+          }
+        },
+        "email_form-1": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading-1",
+        "paragraph-1",
+        "email_form-1"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "full_width": false
+      }
+    },
+    "gia_faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row-1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿En cuánto tiempo llega mi pedido?",
+            "row_content": "<p>Entregamos en 2 a 4 días hábiles a todo México. El envío es gratis a partir de $6,000.</p>",
+            "icon": "question_mark"
+          }
+        },
+        "row-2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Puedo combinar varios suplementos?",
+            "row_content": "<p>En la mayoría de los casos sí, pero el orden y el horario importan. Escríbenos y un nutriólogo te arma la pauta sin costo.</p>",
+            "icon": "question_mark"
+          }
+        },
+        "row-3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Sus productos tienen registro y certificación?",
+            "row_content": "<p>Sí. Cada lote llega con certificado de análisis: identidad, potencia, metales pesados y microbiología.</p>",
+            "icon": "question_mark"
+          }
+        },
+        "row-4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Qué pasa si el producto no me funciona?",
+            "row_content": "<p>Escríbenos y revisamos tu caso. Consulta nuestra política de reembolso para los plazos y condiciones vigentes.</p>",
+            "icon": "question_mark"
+          }
+        },
+        "row-5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "¿Puedo pedir factura?",
+            "row_content": "<p>Sí. Solicítala escribiéndonos con tus datos fiscales y el número de pedido.</p>",
+            "icon": "question_mark"
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5"
+      ],
+      "settings": {
+        "caption": "Dudas comunes",
+        "heading": "Preguntas frecuentes",
+        "heading_alignment": "center",
+        "layout": "section",
+        "color_scheme": "scheme-5",
+        "container_color_scheme": "scheme-1",
+        "open_first_collapsible_row": true
       }
     }
   },
@@ -260,6 +484,10 @@
     "gia_goals",
     "featured_collection",
     "gia_trust",
-    "gia_blog"
+    "gia_video_testimonials",
+    "gia_testimonials",
+    "gia_stats",
+    "gia_newsletter",
+    "gia_faq"
   ]
 }

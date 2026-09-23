@@ -518,3 +518,93 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   padding: 6%;
   box-sizing: border-box;
 }
+
+/* --- Flechas de carril (compartidas por gia-rail.js) ------------------ */
+
+.gia-rail-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-circle);
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  color: var(--gia-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+              opacity var(--duration-fast) var(--ease-standard);
+}
+
+.gia-rail-arrow:hover { background: rgba(255, 255, 255, 0.98); }
+.gia-rail-arrow:disabled { opacity: 0.35; cursor: default; }
+.gia-rail-arrow--prev { left: -6px; }
+.gia-rail-arrow--prev svg { transform: rotate(90deg); }
+.gia-rail-arrow--next { right: -6px; }
+.gia-rail-arrow--next svg { transform: rotate(-90deg); }
+
+/* --- Estrellas con estado vacío --------------------------------------- */
+
+.gia-stars {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gia-stars .rating { margin: 0; }
+
+.gia-stars__value {
+  font: 700 13px / 1 var(--font-secondary);
+  color: var(--gia-ink);
+}
+
+.gia-stars__count {
+  font: 400 13px / 1 var(--font-secondary);
+  color: var(--gia-grey-500);
+}
+
+/* Sin reseñas: las estrellas quedan apagadas y el texto lo dice. El color
+   no es la única señal — el texto está siempre presente. */
+.gia-stars--empty .rating-star {
+  --color-rating-star: var(--gia-grey-300);
+}
+
+.gia-stars__empty-text {
+  font: 400 13px / 1 var(--font-secondary);
+  color: var(--gia-grey-400);
+}
+
+/* --- Insignias de la tarjeta ------------------------------------------ */
+
+.gia-card-badges {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  max-width: calc(100% - 64px);
+}
+
+.gia-card-badge {
+  font: 600 11.5px / 1 var(--font-secondary);
+  color: var(--gia-grey-700);
+  background: var(--gia-white);
+  border: 1px solid var(--gia-grey-200);
+  border-radius: 4px;
+  padding: 7px 10px;
+}
+
+.gia-card-badge--flag {
+  color: var(--gia-turquoise-600);
+  border-color: var(--gia-turquoise-200);
+}

@@ -1,0 +1,70 @@
+/* Gia · Testimonios — carril de tarjetas de cita. */
+
+.gia-tm { background: rgb(var(--color-background)); color: rgb(var(--color-foreground)); }
+
+.gia-tm__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-y-tight) var(--gutter);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gia-tm__rail-wrap { position: relative; }
+
+.gia-tm__rail {
+  display: flex;
+  gap: clamp(16px, 2vw, 28px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  margin: 0;
+  padding: 0 0 var(--space-1);
+  list-style: none;
+}
+
+.gia-tm__rail::-webkit-scrollbar { display: none; }
+
+.gia-tm__rail:focus-visible {
+  outline: 2px solid var(--gia-turquoise);
+  outline-offset: 2px;
+  border-radius: var(--radius-lg);
+}
+
+.gia-tm__item {
+  flex: 0 0 clamp(260px, 30vw, 380px);
+  scroll-snap-align: start;
+  margin: 0;
+}
+
+.gia-tm__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: 100%;
+  margin: 0;
+  background: var(--gia-white);
+  border-radius: var(--radius-xl);
+  padding: clamp(22px, 3vw, 32px);
+  box-sizing: border-box;
+}
+
+.gia-tm__stars .rating-star { --color-rating-star: var(--gia-warning); }
+
+.gia-tm__quote {
+  margin: 0;
+  font: 400 15px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+  text-wrap: pretty;
+}
+
+.gia-tm__author {
+  margin-top: auto;
+  font: 700 13.5px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gia-tm__rail { scroll-behavior: auto; }
+}
