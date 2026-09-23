@@ -1,0 +1,92 @@
+{{ 'section-gia-blog.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign blog = blogs[section.settings.blog]
+-%}
+
+{%- if blog.articles_count > 0 -%}
+  <section class="gia-blog color-{{ section.settings.color_scheme }}">
+    <div class="gia-blog__inner">
+      <div class="gia-blog__head">
+        <div class="gia-blog__titles">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="gia-blog__eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="gia-blog__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.link_label != blank -%}
+          <a href="{{ blog.url }}" class="gia-blog__all">{{ section.settings.link_label }} &rarr;</a>
+        {%- endif -%}
+      </div>
+
+      <ul class="gia-blog__grid" role="list">
+        {%- for article in blog.articles limit: section.settings.post_limit -%}
+          {%- liquid
+            # La categoría sale de la primera etiqueta del artículo, que es
+            # como se clasifica un blog en Shopify sin inventar metafields.
+            assign categoria = article.tags.first
+
+            # Tiempo de lectura estimado a 200 palabras por minuto, que es
+            # la media habitual de lectura en pantalla.
+            assign palabras = article.content | strip_html | split: ' ' | size
+            assign minutos = palabras | divided_by: 200
+            if minutos < 1
+              assign minutos = 1
+            endif
+          -%}
+          <li class="gia-blog__item">
+            <a class="gia-blog__card" href="{{ article.url }}">
+              <span class="gia-blog__media">
+                {%- if article.image -%}
+                  {{
+                    article.image
+                    | image_url: width: 800
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '300, 450, 600, 800',
+                      sizes: '(min-width: 990px) 33vw, 90vw',
+                      alt: article.image.alt | default: article.title
+                  }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </span>
+
+              <span class="gia-blog__body">
+                <span class="gia-blog__meta">
+                  {%- if categoria != blank -%}{{ categoria }} &middot; {% endif -%}
+                  {{ minutos }} min
+                </span>
+                <span class="gia-blog__title">{{ article.title }}</span>
+                {%- if article.excerpt_or_content != blank -%}
+                  <span class="gia-blog__excerpt">
+                    {{ article.excerpt_or_content | strip_html | truncatewords: 26 }}
+                  </span>
+                {%- endif -%}
+              </span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gia · Blog",
+  "tag": "section",
+  "class": "gia-blog-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Aprende con nosotros" },
+    { "type": "text", "id": "heading", "label": "Titular", "default": "Nuestro blog" },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "range", "id": "post_limit", "label": "Artículos", "min": 2, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "link_label", "label": "Enlace", "default": "Ver todos los artículos" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "Gia · Blog" }]
+}
+{% endschema %}
