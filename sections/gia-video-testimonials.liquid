@@ -82,6 +82,16 @@
                         {{ v | video_tag: controls: true, playsinline: true, preload: 'none', class: 'gia-vt__video' }}
                       </template>
                     {%- endif -%}
+                  {%- else -%}
+                    {%- comment -%}
+                      Sin vídeo asignado el play se dibuja igual, para que la
+                      tarjeta se lea como en el diseño, pero como <span>
+                      decorativo: no es enfocable ni clicable, así nadie pulsa
+                      un control que no lleva a ninguna parte.
+                    {%- endcomment -%}
+                    <span class="gia-vt__play gia-vt__play--empty" aria-hidden="true">
+                      <span class="gia-vt__play-icon"></span>
+                    </span>
                   {%- endif -%}
                 </div>
 

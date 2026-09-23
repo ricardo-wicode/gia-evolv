@@ -34,6 +34,7 @@
   flex: 0 0 clamp(240px, 24vw, 300px);
   scroll-snap-align: start;
   margin: 0;
+  height: 440px;
 }
 
 .gia-vt__card {
@@ -136,4 +137,10 @@
 @media (prefers-reduced-motion: reduce) {
   .gia-vt__rail { scroll-behavior: auto; }
   .gia-vt__play:hover { transform: none; }
+}
+
+/* Play sin vídeo: mismo aspecto, sin comportamiento. */
+.gia-vt__play--empty {
+  cursor: default;
+  opacity: 0.55;
 }

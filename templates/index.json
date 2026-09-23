@@ -386,34 +386,15 @@
       }
     },
     "gia_newsletter": {
-      "type": "newsletter",
-      "blocks": {
-        "heading-1": {
-          "type": "heading",
-          "settings": {
-            "heading": "Recibe tips de bienestar y acceso anticipado",
-            "heading_size": "h1"
-          }
-        },
-        "paragraph-1": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Un correo al mes, sin spam.</p>"
-          }
-        },
-        "email_form-1": {
-          "type": "email_form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "heading-1",
-        "paragraph-1",
-        "email_form-1"
-      ],
+      "type": "gia-newsletter",
       "settings": {
-        "color_scheme": "scheme-4",
-        "full_width": false
+        "eyebrow": "Newsletter",
+        "heading": "Recibe tips de bienestar y acceso anticipado",
+        "text": "Un correo al mes, sin spam.",
+        "placeholder": "tu@correo.com",
+        "button_label": "Suscribirme",
+        "success": "Listo, te escribiremos pronto.",
+        "color_scheme": "scheme-4"
       }
     },
     "gia_faq": {

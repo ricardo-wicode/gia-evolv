@@ -608,3 +608,25 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   color: var(--gia-turquoise-600);
   border-color: var(--gia-turquoise-200);
 }
+
+/* --- Estrellas fuera de tarjeta y ficha --------------------------------
+   `.rating-star` calcula --percent a partir de --font-size y
+   --letter-spacing, que Dawn sólo define en `.product` y `.card-wrapper`.
+   Fuera de esos contextos el calc queda inválido y, como el glifo se
+   rellena con -webkit-text-fill-color: transparent, las estrellas se
+   vuelven invisibles en vez de fallar de forma evidente. Hay que darles
+   las dos variables allá donde se usen.
+   ---------------------------------------------------------------------- */
+
+.gia-tm__stars .rating-star,
+.gia-vt__stars .rating-star,
+.gia-stars .rating-star {
+  /* En la escala de Dawn el rem vale 10px, así que estos números son
+     píxeles divididos por diez: la ficha usa 1.7 y la tarjeta 1.4. */
+  --letter-spacing: 0.35;
+  --font-size: 1.5;
+}
+
+.gia-stars .rating-star {
+  --font-size: 1.4;
+}
