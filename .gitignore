@@ -14,3 +14,8 @@ node_modules
 # Se quedan en disco para `shopify theme push`, pero fuera de este repo
 # porque es público. Al comprar la licencia, quitar estas líneas.
 assets/nexa-*.otf
+
+# Tokens de Theme Access: nunca deben versionarse (este repo es público).
+*.token
+.env
+.env.*

@@ -1,0 +1,13 @@
+# Entornos del CLI de Shopify.
+#
+# Uso:  shopify theme dev -e gia
+#       shopify theme push -e gia --unpublished --theme "Gia Evolv"
+#
+# Fija la tienda para que el CLI no tome la última usada, que es lo que
+# pasa al alternar entre proyectos de clientes.
+#
+# El token NO va aquí: este repo es público. Va en el entorno, como
+# SHOPIFY_CLI_THEME_TOKEN, o se pasa con --password.
+
+[environments.gia]
+store = "gia-evolv-2.myshopify.com"
