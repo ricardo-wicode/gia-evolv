@@ -729,3 +729,81 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   letter-spacing: -0.02em;
   text-align: left;
 }
+
+/* --- "Agregar al carrito" de la tarjeta -------------------------------
+   El diseño lo quiere como enlace fantasma bajo el precio. Dawn lo emite
+   con `button--full-width`, así que el subrayado cruzaba la tarjeta
+   entera en vez de ceñirse al texto. Aquí el botón se encoge a su
+   contenido y se centra.
+   -------------------------------------------------------------------- */
+
+.card-wrapper .quick-add {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-3);
+}
+
+.card-wrapper .quick-add > product-form,
+.card-wrapper .quick-add form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-wrapper .quick-add__submit,
+.card-wrapper .quick-add .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  flex: 0 0 auto;
+  padding: 2px 2px 6px;
+  border: none;
+  border-bottom: 1.5px solid var(--gia-turquoise-200);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--gia-turquoise-600);
+  font: 700 12px / 1.2 var(--font-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
+}
+
+/* Dawn le cuelga un ::after para el borde del botón sólido: aquí sobra. */
+.card-wrapper .quick-add__submit::after,
+.card-wrapper .quick-add .button::after {
+  content: none;
+}
+
+.card-wrapper .quick-add__submit:hover,
+.card-wrapper .quick-add .button:hover {
+  color: var(--gia-turquoise-700);
+  border-color: var(--gia-turquoise);
+  background: none;
+}
+
+.card-wrapper .quick-add__submit:focus-visible {
+  outline: 2px solid var(--gia-turquoise);
+  outline-offset: 4px;
+}
+
+/* El spinner de carga se dimensiona solo dentro de un botón alto; en uno
+   de texto hay que acotarlo o estira la tarjeta al pulsar. */
+.card-wrapper .quick-add .loading__spinner {
+  width: 16px;
+  height: 16px;
+}
+
+/* Agotado: se apaga en gris y deja de invitar al clic. */
+.card-wrapper .quick-add__submit[disabled],
+.card-wrapper .quick-add .button[disabled] {
+  color: var(--gia-grey-400);
+  border-color: var(--gia-grey-200);
+  cursor: default;
+}

@@ -640,18 +640,16 @@
    reescribe, sólo se viste.
    -------------------------------------------------------------------- */
 
-.cart-drawer {
-  --gia-drawer-width: min(400px, 100%);
-}
-
+/* El ancho NO se toca aquí. Dawn dimensiona el contenedor `.cart-drawer`
+   y deja `.drawer__inner` al 100% de él, porque su animación de entrada
+   es un translateX(100%): fijarle un ancho propio al inner descuadra ese
+   100% y el panel queda flotando fuera del borde. */
 .cart-drawer__overlay::after,
 .cart-drawer__overlay {
   background: rgba(0, 32, 30, 0.42);
 }
 
 .cart-drawer .drawer__inner {
-  width: var(--gia-drawer-width);
-  max-width: 100%;
   box-shadow: var(--shadow-drawer);
   border-radius: 0;
 }
@@ -716,18 +714,8 @@
   color: var(--gia-grey-500);
 }
 
-/* La animación de entrada del prototipo. Se anula si el visitante pide
-   menos movimiento: el cajón aparece ya colocado. */
-@keyframes gia-slide-in-right {
-  from { transform: translateX(100%); }
-  to   { transform: none; }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .cart-drawer.active .drawer__inner {
-    animation: gia-slide-in-right var(--duration-base) var(--ease-out);
-  }
-}
+/* Sin animación propia: Dawn ya desliza el panel con su transición, y
+   duplicarla sólo compite con ella. */
 
 /* --- Corazón de favoritos en la tarjeta ---------------------------- */
 

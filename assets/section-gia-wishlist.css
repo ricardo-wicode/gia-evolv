@@ -158,3 +158,21 @@
   font: 400 14px / 1 var(--font-secondary);
   color: var(--gia-grey-500);
 }
+
+/* Respaldo cuando no se pudieron leer los datos del producto. */
+.gia-wishlist__item--minima .gia-wishlist__card {
+  min-height: 140px;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.gia-wishlist__name {
+  text-transform: capitalize;
+}
+
+.gia-wishlist__hint {
+  font: 700 12px / 1 var(--font-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-600);
+}

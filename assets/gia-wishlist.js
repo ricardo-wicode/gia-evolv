@@ -199,30 +199,68 @@
     this.empty.hidden = true;
     this.loading.hidden = false;
 
+    var root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+
     Promise.all(handles.map(function (h) {
-      return fetch(window.Shopify && window.Shopify.routes && window.Shopify.routes.root
-        ? window.Shopify.routes.root + 'products/' + encodeURIComponent(h) + '.js'
-        : '/products/' + encodeURIComponent(h) + '.js')
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .catch(function () { return null; });
-    })).then(function (products) {
+      return fetch(root + 'products/' + encodeURIComponent(h) + '.js')
+        .then(function (r) {
+          // Sólo un 404 significa que el producto ya no existe. Cualquier
+          // otro fallo —red caída, 401 del servidor de desarrollo, un 500
+          // pasajero— no debe costarle al visitante su lista.
+          if (r.status === 404) return { handle: h, gone: true };
+          if (!r.ok) return { handle: h, unknown: true };
+          return r.json().then(function (data) { return { handle: h, data: data }; });
+        })
+        .catch(function () { return { handle: h, unknown: true }; });
+    })).then(function (results) {
       self.loading.hidden = true;
 
-      // Un producto puede haber sido borrado o despublicado: se limpia de
-      // la lista en vez de dejar una tarjeta rota para siempre.
-      var stale = [];
-      products.forEach(function (p, i) { if (!p) stale.push(handles[i]); });
-      if (stale.length) {
-        stale.forEach(function (h) { Wishlist.remove(h); });
-        return;
+      var gone = results.filter(function (r) { return r.gone; });
+      if (gone.length) {
+        gone.forEach(function (r) { Wishlist.remove(r.handle); });
+        return; // remove() dispara el evento y esto se vuelve a pintar
       }
 
       self.grid.innerHTML = '';
-      products.forEach(function (p) {
-        self.grid.appendChild(self.card(p));
+      results.forEach(function (r) {
+        self.grid.appendChild(r.data ? self.card(r.data) : self.cardMinima(r.handle));
       });
-      self.empty.hidden = products.length > 0;
+      self.empty.hidden = results.length > 0;
     });
+  };
+
+  // Tarjeta de respaldo cuando no se pudieron leer los datos del producto:
+  // mejor un enlace que funciona que una tarjeta rota o un hueco.
+  GiaWishlistList.prototype.cardMinima = function (handle) {
+    var root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+    var li = document.createElement('li');
+    li.className = 'gia-wishlist__item gia-wishlist__item--minima';
+
+    var a = document.createElement('a');
+    a.className = 'gia-wishlist__card';
+    a.href = root + 'products/' + encodeURIComponent(handle);
+
+    var name = document.createElement('span');
+    name.className = 'gia-wishlist__name';
+    name.textContent = handle.replace(/-/g, ' ');
+    a.appendChild(name);
+
+    var hint = document.createElement('span');
+    hint.className = 'gia-wishlist__hint';
+    hint.textContent = 'Ver producto';
+    a.appendChild(hint);
+
+    li.appendChild(a);
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'gia-wishlist__remove';
+    btn.textContent = 'Quitar';
+    btn.setAttribute('aria-label', 'Quitar de favoritos');
+    btn.addEventListener('click', function () { Wishlist.remove(handle); });
+    li.appendChild(btn);
+
+    return li;
   };
 
   GiaWishlistList.prototype.card = function (p) {
