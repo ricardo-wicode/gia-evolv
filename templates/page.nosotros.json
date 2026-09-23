@@ -29,6 +29,47 @@
         "color_scheme": "scheme-1"
       }
     },
+    "gia_mvv": {
+      "type": "gia-columns",
+      "blocks": {
+        "column-1": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Misión",
+            "title": "Que la suplementación sea verificable",
+            "text": "Fórmulas con dosis reales y etiquetas completas, para que cualquiera pueda comprobar lo que está tomando."
+          }
+        },
+        "column-2": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Visión",
+            "title": "Ser la referencia clínica en México",
+            "text": "Que un nutriólogo pueda recomendar Gia Evolv sin tener que advertir nada sobre la etiqueta."
+          }
+        },
+        "column-3": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Valores",
+            "title": "Evidencia, transparencia, cercanía",
+            "text": "Decimos lo que un producto hace y lo que no. Contestamos antes y después de la compra."
+          }
+        }
+      },
+      "block_order": [
+        "column-1",
+        "column-2",
+        "column-3"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "description": "",
+        "align": "left",
+        "color_scheme": "scheme-5"
+      }
+    },
     "gia_differentiators": {
       "type": "gia-trust",
       "blocks": {
@@ -93,6 +134,7 @@
   },
   "order": [
     "gia_editorial",
+    "gia_mvv",
     "gia_differentiators",
     "gia_cta"
   ]

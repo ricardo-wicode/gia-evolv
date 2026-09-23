@@ -83,11 +83,20 @@
   outline-offset: 2px;
 }
 
+/* La imagen es el remate de la tarjeta, no su contenido: a 16/10 se
+   comía la mitad del alto y empujaba el texto fuera de vista. Con 2/1
+   queda como banda superior, y el tope en píxeles evita que en pantallas
+   anchas vuelva a crecer sin freno. */
 .gia-blog__media {
   display: block;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 2 / 1;
+  max-height: 148px;
   background: var(--gia-grey-50);
   overflow: hidden;
+}
+
+@media screen and (min-width: 750px) {
+  .gia-blog__media { max-height: 190px; }
 }
 
 .gia-blog__media img,

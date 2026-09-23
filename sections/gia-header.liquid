@@ -130,7 +130,13 @@
         </a>
       {%- endif -%}
 
-      <a href="{{ routes.cart_url }}" class="gia-header__icon" aria-label="Carrito ({{ cart.item_count }})">
+      {%- comment -%}
+        cart-drawer.js de Dawn busca este id para abrir el cajón. Sigue
+        siendo un enlace real a /cart, así que sin JS el carrito se abre
+        como página en vez de no hacer nada.
+      {%- endcomment -%}
+      <a href="{{ routes.cart_url }}" id="cart-icon-bubble" class="gia-header__icon"
+         aria-label="Carrito ({{ cart.item_count }})">
         {% render 'gia-icon', icon: 'bag', size: 21 %}
         {%- if cart.item_count > 0 -%}
           <span class="gia-header__badge" aria-hidden="true">{{ cart.item_count }}</span>
@@ -171,6 +177,8 @@
 {% schema %}
 {
   "name": "Gia · Cabecera",
+  "tag": "div",
+  "class": "gia-header-wrapper",
   "settings": [
     { "type": "link_list", "id": "menu", "label": "Menú principal", "default": "main-menu" },
     {

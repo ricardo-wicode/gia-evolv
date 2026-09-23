@@ -88,9 +88,18 @@
 
 /* --- Cabecera ------------------------------------------------------ */
 
-.gia-header {
+/* El sticky va en el envoltorio de la sección, no en la cabecera.
+   Un elemento sticky sólo se pega dentro de los límites de su contenedor,
+   y Shopify envuelve cada sección en su propio div: pegado a la cabecera,
+   se despegaba en cuanto ese div salía de pantalla. */
+.gia-header-wrapper {
   position: sticky;
   top: 0;
+  z-index: 40;
+}
+
+.gia-header {
+  position: relative;
   z-index: 40;
   background: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
