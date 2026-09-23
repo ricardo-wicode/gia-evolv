@@ -43,7 +43,32 @@
                 la portada no arrastra megabytes de vídeo ni scripts de
                 terceros que además rastrean sin consentimiento.
               {%- endcomment -%}
-              <article class="gia-vt__card">
+              {%- comment -%}
+                Una sola superficie: la etiqueta, el play y el texto van
+                superpuestos sobre el póster, como en el diseño. No se
+                apilan en bloques, que partía la tarjeta en dos.
+              {%- endcomment -%}
+              <article class="gia-vt__card"
+                       data-gia-video-facade
+                       {% if v != blank %}data-video-id="{{ v.id }}"{% endif %}
+                       {% if ext != blank %}data-external="{{ ext | escape }}"{% endif %}>
+
+                {%- if poster != blank -%}
+                  {{
+                    poster
+                    | image_url: width: 800
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '300, 450, 600, 800',
+                      sizes: '(min-width: 990px) 25vw, 70vw',
+                      class: 'gia-vt__poster',
+                      alt: block.settings.quote | default: section.settings.heading
+                  }}
+                {%- endif -%}
+
+                {%- comment -%} Degrada el pie para que el texto se lea sobre cualquier fotograma. {%- endcomment -%}
+                <span class="gia-vt__scrim" aria-hidden="true"></span>
+
                 <div class="gia-vt__head">
                   {%- if block.settings.label != blank -%}
                     <span class="gia-vt__label">{{ block.settings.label }}</span>
@@ -53,47 +78,25 @@
                   {%- endif -%}
                 </div>
 
-                <div class="gia-vt__media"
-                     data-gia-video-facade
-                     {% if v != blank %}data-video-id="{{ v.id }}"{% endif %}
-                     {% if ext != blank %}data-external="{{ ext | escape }}"{% endif %}>
-                  {%- if poster != blank -%}
-                    {{
-                      poster
-                      | image_url: width: 800
-                      | image_tag:
-                        loading: 'lazy',
-                        widths: '300, 450, 600, 800',
-                        sizes: '(min-width: 990px) 25vw, 70vw',
-                        class: 'gia-vt__poster',
-                        alt: block.settings.quote | default: section.settings.heading
-                    }}
+                {%- if v != blank or ext != blank -%}
+                  <button type="button" class="gia-vt__play"
+                          aria-label="Reproducir el testimonio de {{ block.settings.author | default: 'un cliente' | escape }}">
+                    <span class="gia-vt__play-icon" aria-hidden="true"></span>
+                  </button>
+                  {%- if v != blank -%}
+                    <template data-gia-video-source>
+                      {{ v | video_tag: controls: true, playsinline: true, preload: 'none', class: 'gia-vt__video' }}
+                    </template>
                   {%- endif -%}
-
-                  {%- if v != blank or ext != blank -%}
-                    <button type="button" class="gia-vt__play"
-                            aria-label="Reproducir el testimonio de {{ block.settings.author | default: 'un cliente' | escape }}">
-                      <span class="gia-vt__play-icon" aria-hidden="true"></span>
-                    </button>
-
-                    {%- if v != blank -%}
-                      {%- comment -%} La plantilla del vídeo real, sin cargar hasta el clic. {%- endcomment -%}
-                      <template data-gia-video-source>
-                        {{ v | video_tag: controls: true, playsinline: true, preload: 'none', class: 'gia-vt__video' }}
-                      </template>
-                    {%- endif -%}
-                  {%- else -%}
-                    {%- comment -%}
-                      Sin vídeo asignado el play se dibuja igual, para que la
-                      tarjeta se lea como en el diseño, pero como <span>
-                      decorativo: no es enfocable ni clicable, así nadie pulsa
-                      un control que no lleva a ninguna parte.
-                    {%- endcomment -%}
-                    <span class="gia-vt__play gia-vt__play--empty" aria-hidden="true">
-                      <span class="gia-vt__play-icon"></span>
-                    </span>
-                  {%- endif -%}
-                </div>
+                {%- else -%}
+                  {%- comment -%}
+                    Sin vídeo el play se dibuja igual, pero como <span>
+                    decorativo: se ve, no se puede pulsar ni enfocar.
+                  {%- endcomment -%}
+                  <span class="gia-vt__play gia-vt__play--empty" aria-hidden="true">
+                    <span class="gia-vt__play-icon"></span>
+                  </span>
+                {%- endif -%}
 
                 <div class="gia-vt__body">
                   {%- if block.settings.rating > 0 -%}

@@ -1,4 +1,6 @@
-/* Gia · Video testimonios — carril de tarjetas verticales con fachada. */
+/* Gia · Video testimonios — carril de tarjetas verticales.
+   Cada tarjeta es una sola superficie: etiqueta, play y texto van
+   superpuestos sobre el póster, no apilados en bloques. */
 
 .gia-vt { background: rgb(var(--color-background)); color: rgb(var(--color-foreground)); }
 
@@ -14,58 +16,42 @@
 
 .gia-vt__rail {
   display: flex;
-  gap: var(--space-4);
+  gap: clamp(14px, 1.6vw, 22px);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  scrollbar-width: thin;
+  scrollbar-width: none;
   margin: 0;
-  padding: 0 0 var(--space-3);
+  padding: 0 0 var(--space-2);
   list-style: none;
 }
+
+.gia-vt__rail::-webkit-scrollbar { display: none; }
 
 .gia-vt__rail:focus-visible {
   outline: 2px solid var(--gia-turquoise);
   outline-offset: 2px;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
 }
 
 .gia-vt__item {
-  flex: 0 0 clamp(240px, 24vw, 300px);
+  flex: 0 0 clamp(230px, 23vw, 290px);
   scroll-snap-align: start;
   margin: 0;
-  height: 440px;
 }
+
+/* --- La tarjeta --- */
 
 .gia-vt__card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  background: var(--gia-turquoise-900);
-  color: var(--gia-white);
-}
-
-.gia-vt__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: 14px 16px 10px;
-  font: 500 12px / 1 var(--font-secondary);
-}
-
-.gia-vt__duration {
-  font-family: var(--font-mono);
-  opacity: 0.7;
-}
-
-.gia-vt__media {
   position: relative;
+  display: block;
   aspect-ratio: 9 / 16;
-  background: #06201d;
+  border-radius: 20px;
   overflow: hidden;
+  /* Fondo de respaldo cuando aún no hay póster: un verde casi negro, no
+     un gris, para que la tarjeta vacía ya lea como el diseño. */
+  background: linear-gradient(180deg, #0a1a18 0%, #071412 100%);
+  color: var(--gia-white);
 }
 
 .gia-vt__poster,
@@ -79,15 +65,67 @@
   display: block;
 }
 
+/* Degradado inferior: el texto tiene que leerse sobre cualquier fotograma. */
+.gia-vt__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(4, 16, 14, 0.55) 0%,
+    rgba(4, 16, 14, 0) 26%,
+    rgba(4, 16, 14, 0) 42%,
+    rgba(4, 16, 14, 0.82) 82%,
+    rgba(4, 16, 14, 0.95) 100%);
+}
+
+/* --- Cabecera --- */
+
+.gia-vt__head {
+  position: absolute;
+  inset: 14px 14px auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  z-index: 2;
+}
+
+.gia-vt__label,
+.gia-vt__duration {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+  border-radius: 7px;
+  padding: 6px 9px;
+}
+
+.gia-vt__label {
+  font: 600 12.5px / 1 var(--font-secondary);
+  color: var(--gia-white);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gia-vt__duration {
+  flex: none;
+  font: 400 12px / 1 var(--font-mono);
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.04em;
+}
+
+/* --- Play --- */
+
 .gia-vt__play {
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 64px;
-  height: 64px;
+  z-index: 2;
+  width: 68px;
+  height: 68px;
   border-radius: var(--radius-circle);
   border: none;
-  background: rgba(239, 248, 247, 0.94);
+  padding: 0;
+  background: #eef3f1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,36 +140,43 @@
   outline-offset: 3px;
 }
 
-/* Triángulo de play dibujado en CSS: un glifo más que no hay que cargar. */
+.gia-vt__play--empty { cursor: default; }
+
+/* Triángulo en CSS: un glifo menos que cargar. */
 .gia-vt__play-icon {
   width: 0;
   height: 0;
-  margin-left: 4px;
-  border-left: 17px solid var(--gia-turquoise-900);
-  border-top: 11px solid transparent;
-  border-bottom: 11px solid transparent;
+  margin-left: 5px;
+  border-left: 19px solid var(--gia-turquoise-900);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
 }
 
+/* --- Pie --- */
+
 .gia-vt__body {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  padding: 16px;
-  margin-top: auto;
+  gap: 7px;
+  padding: 18px 18px 20px;
 }
 
 .gia-vt__stars .rating-star { --color-rating-star: var(--gia-warning); }
 
 .gia-vt__quote {
   margin: 0;
-  font: 600 14.5px / var(--leading-snug) var(--font-secondary);
+  font: 600 15px / 1.35 var(--font-secondary);
+  color: var(--gia-white);
   text-wrap: pretty;
 }
 
 .gia-vt__author {
   margin: 0;
   font: 400 12.5px / 1 var(--font-secondary);
-  opacity: 0.66;
+  color: rgba(255, 255, 255, 0.62);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -139,8 +184,9 @@
   .gia-vt__play:hover { transform: none; }
 }
 
-/* Play sin vídeo: mismo aspecto, sin comportamiento. */
-.gia-vt__play--empty {
-  cursor: default;
-  opacity: 0.55;
+/* Reproduciendo: fuera las capas de la portada. */
+.gia-vt__card.is-playing .gia-vt__scrim,
+.gia-vt__card.is-playing .gia-vt__head,
+.gia-vt__card.is-playing .gia-vt__body {
+  display: none;
 }

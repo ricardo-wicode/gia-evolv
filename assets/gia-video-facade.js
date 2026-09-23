@@ -49,13 +49,16 @@
       f.className = 'gia-vt__video';
       f.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
       f.setAttribute('allowfullscreen', '');
-      f.setAttribute('title', facade.closest('.gia-vt__card')?.querySelector('.gia-vt__quote')?.textContent || 'Video');
+      f.setAttribute('title', facade.querySelector('.gia-vt__quote')?.textContent?.trim() || 'Video testimonio');
       node = f;
     } else {
       return;
     }
 
     facade.dataset.giaPlaying = '1';
+    // La clase retira el degradado, la cabecera y el pie: son ayudas para
+    // leer la portada, y encima del vídeo sólo estorban.
+    facade.classList.add('is-playing');
     var poster = facade.querySelector('.gia-vt__poster');
     var button = facade.querySelector('.gia-vt__play');
     if (poster) poster.remove();
