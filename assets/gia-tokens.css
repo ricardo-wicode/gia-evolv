@@ -497,12 +497,22 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
 /* Los selectores llevan un nivel de más a propósito: component-card.css y
    base.css se cargan DESPUÉS de esta hoja y fijan `cover` con la misma
    especificidad, así que ganarían por orden. */
-.card-wrapper .card__media .media img,
+.card-wrapper:not(.article-card-wrapper) .card__media .media img,
 .gia-mega__product .gia-mega__product-media img,
 .gia-wishlist__card .gia-wishlist__media img {
   object-fit: contain;
   padding: 8%;
   box-sizing: border-box;
+}
+
+/* Las tarjetas de artículo comparten las clases .card-wrapper y
+   .card__media con las de producto, así que hay que excluirlas: una foto
+   editorial se recorta para llenar, no se encaja con márgenes como un
+   packshot. */
+.article-card-wrapper .card__media .media img,
+.main-blog .article-card__image img {
+  object-fit: cover;
+  padding: 0;
 }
 
 /* La galería de la ficha también: ahí el recorte se come el producto. */
@@ -693,6 +703,7 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   padding: 20px 22px 24px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: 10px;
 }
 
