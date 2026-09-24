@@ -97,7 +97,7 @@
   position: absolute;
   inset: auto 22px 22px 22px;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-4);
 }
@@ -107,6 +107,7 @@
   flex-direction: column;
   gap: 5px;
   max-width: 60%;
+  display: none; 
 }
 
 .gia-trust__figure-eyebrow {
@@ -142,6 +143,7 @@
   font: 600 10.5px / var(--leading-snug) var(--font-secondary);
   color: var(--gia-grey-700);
   max-width: 11ch;
+  text-align: center;
 }
 
 /* --- Pilares --- */

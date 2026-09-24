@@ -631,9 +631,16 @@ details > * {
 
 .benefit .inline-richtext {
   font-size: 12.5px;
-  line-height: 1.35;
   text-align: center;
 }
+
+.product .icon-with-text__item {
+  font-size: 12px;
+  text-align: center;
+    line-height: 1;
+  font-weight: 600;
+}
+
 .icon-arrow {
   width: 1.5rem;
 }
