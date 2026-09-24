@@ -785,22 +785,26 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
 }
 
 /* --- "Agregar al carrito" de la tarjeta -------------------------------
-   El diseño lo quiere como enlace fantasma bajo el precio. Dawn lo emite
-   con `button--full-width`, así que el subrayado cruzaba la tarjeta
-   entera en vez de ceñirse al texto. Aquí el botón se encoge a su
-   contenido y se centra.
+   Botón primario, no enlace: en una tarjeta con nombre, valoración y
+   precio, un texto subrayado más se confundía con el resto. Relleno y
+   aire propio para que se lea como la acción de la tarjeta.
    -------------------------------------------------------------------- */
 
-.card-wrapper .quick-add {
+/* `.card .quick-add` y no sólo `.card-wrapper .quick-add`: Dawn fija
+   `.card--card .quick-add { margin: 0 1.3rem 1rem }` con el atajo, que
+   resetea el margen superior, y su hoja carga después que ésta. */
+.card-wrapper .card .quick-add {
   display: flex;
   justify-content: center;
-  margin-top: var(--space-3);
+  margin: var(--space-6) 0 var(--space-3);
+  padding: 0 var(--space-2);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card-wrapper .quick-add > product-form,
 .card-wrapper .quick-add form {
   display: flex;
-  justify-content: center;
   width: 100%;
 }
 
@@ -809,27 +813,24 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: auto;
-  min-width: 0;
-  min-height: 0;
-  flex: 0 0 auto;
-  padding: 2px 2px 6px;
+  width: 100%;
+  min-height: 46px;
+  padding: 0 18px;
   border: none;
-  border-bottom: 1.5px solid var(--gia-turquoise-200);
-  border-radius: 0;
-  background: none;
+  border-radius: var(--radius-pill);
+  background: var(--gia-btn-bg);
   box-shadow: none;
-  color: var(--gia-turquoise-600);
+  color: var(--gia-btn-text);
   font: 700 12px / 1.2 var(--font-secondary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
   cursor: pointer;
-  transition: color var(--duration-fast) var(--ease-standard),
-              border-color var(--duration-fast) var(--ease-standard);
+  transition: background var(--duration-fast) var(--ease-standard);
 }
 
-/* Dawn le cuelga un ::after para el borde del botón sólido: aquí sobra. */
+/* Dawn le cuelga un ::after para dibujar el borde del botón; con relleno
+   sólido sobra. */
 .card-wrapper .quick-add__submit::after,
 .card-wrapper .quick-add .button::after {
   content: none;
@@ -837,85 +838,28 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
 
 .card-wrapper .quick-add__submit:hover,
 .card-wrapper .quick-add .button:hover {
-  color: var(--gia-turquoise-700);
-  border-color: var(--gia-turquoise);
-  background: none;
+  background: var(--gia-btn-bg-hover);
+  color: var(--gia-btn-text);
 }
 
 .card-wrapper .quick-add__submit:focus-visible {
   outline: 2px solid var(--gia-turquoise);
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 
-/* El spinner de carga se dimensiona solo dentro de un botón alto; en uno
-   de texto hay que acotarlo o estira la tarjeta al pulsar. */
+/* El spinner se dimensiona solo en botones altos; aquí se acota para que
+   no estire la tarjeta al pulsar. */
 .card-wrapper .quick-add .loading__spinner {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
-/* Agotado: se apaga en gris y deja de invitar al clic. */
+/* Agotado: mismo botón apagado, sin invitar al clic. */
 .card-wrapper .quick-add__submit[disabled],
 .card-wrapper .quick-add .button[disabled] {
-  color: var(--gia-grey-400);
-  border-color: var(--gia-grey-200);
+  background: var(--gia-turquoise-200);
+  color: var(--gia-white);
   cursor: default;
-}
-
-/* --- El artículo más reciente, destacado ------------------------------
-   Ocupa el ancho completo y se dispone en horizontal: la imagen manda a
-   la izquierda y el texto respira a la derecha. Los demás siguen como
-   tarjetas normales debajo.
-   -------------------------------------------------------------------- */
-
-@media screen and (min-width: 990px) {
-  .main-blog .blog-articles {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .main-blog .blog-articles__article:first-child {
-    grid-column: 1 / -1;
-  }
-
-  .main-blog .blog-articles__article:first-child .card {
-    display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    align-items: stretch;
-  }
-
-  /* .card__inner es flex: sin ancho explícito, el envoltorio se encoge al
-     tamaño intrínseco de la imagen en vez de ocupar su columna. */
-  .main-blog .blog-articles__article:first-child .card__inner {
-    display: block;
-  }
-
-  .main-blog .blog-articles__article:first-child .card .card__inner .article-card__image-wrapper {
-    aspect-ratio: auto;
-    max-height: none;
-    width: 100%;
-    height: 100%;
-    min-height: 340px;
-    /* En la destacada el texto va a la derecha, así que el redondeo vive
-       en el lado izquierdo y el derecho queda a ras del contenido. */
-    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-  }
-
-  .main-blog .blog-articles__article:first-child .card__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: clamp(28px, 3vw, 44px);
-    gap: 14px;
-  }
-
-  .main-blog .blog-articles__article:first-child .card__heading {
-    font-size: 28px;
-    line-height: 1.22;
-  }
-
-  .main-blog .blog-articles__article:first-child .article-card__excerpt {
-    font-size: 16px;
-  }
 }
 
 /* ======================================================================
@@ -1047,14 +991,17 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
     font-size: 11px;
   }
 
-  .card-wrapper .quick-add {
-    margin-top: var(--space-2);
+  .card-wrapper .card .quick-add {
+    margin: var(--space-5) 0 var(--space-2);
+    padding: 0 var(--space-1);
   }
 
   .card-wrapper .quick-add__submit,
   .card-wrapper .quick-add .button {
+    min-height: 42px;
+    padding: 0 12px;
     font-size: 11px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
   }
 
   .card-wrapper .card__content {
