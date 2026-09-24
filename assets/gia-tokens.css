@@ -313,8 +313,26 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
 /* --- Ficha de producto -----------------------------------------------
    Ajustes sobre el marcado de Dawn para acercarlo al prototipo. Se
    restiliza en vez de reescribir main-product: ahí viven las variantes,
-   el inventario y el carrito, que no conviene reimplementar.
+   el inventario y el carrito.
    -------------------------------------------------------------------- */
+
+/* Píldora de categoría sobre el título */
+.gia-product__pill {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-bottom: var(--space-3);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--gia-turquoise-100);
+  color: var(--gia-turquoise-700);
+  font: 600 13px / 1 var(--font-secondary);
+  text-decoration: none;
+}
+
+.gia-product__pill:hover {
+  background: var(--gia-turquoise-200);
+}
 
 .product__title > h1,
 .product__title > h2 {
@@ -328,8 +346,8 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
 .product .price,
 .product .price__regular .price-item {
   font-family: var(--font-primary);
-  font-weight: 500;
-  font-size: 24px;
+  font-weight: 700;
+  font-size: clamp(26px, 3vw, 32px);
   line-height: 1;
   color: var(--gia-turquoise-600);
 }
@@ -352,17 +370,36 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   overflow: hidden;
 }
 
+.product .product__description {
+  font: 400 16px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+}
+
+/* Cantidad y comprar en una fila, como el prototipo */
+.product-form__quantity {
+  margin-bottom: 0;
+}
+
+.product .product-form__input--quantity,
+.product .quantity {
+  border-radius: var(--radius-md);
+}
+
 .product-form__buttons .button,
 .product-form__submit {
   border-radius: var(--radius-pill);
   font-family: var(--font-secondary);
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  min-height: 52px;
 }
 
-/* Filas de confianza (bloques icon-with-text): el prototipo las agrupa
-   en una caja con separadores, no sueltas. */
+.product__tax {
+  font: 400 13.5px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-grey-500);
+}
+
+/* Filas de confianza agrupadas en una caja con separadores */
 .product .icon-with-text {
   border: 1px solid var(--gia-grey-200);
   border-radius: var(--radius-md);
@@ -378,104 +415,92 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   border-top: 1px solid var(--gia-grey-200);
 }
 
-/* --- Tarjeta de producto ---------------------------------------------
-   El prototipo centra el texto, redondea a 18px y pone el precio en
-   Nexa. Se ajusta la tarjeta de Dawn en vez de escribir otra: la suya ya
-   resuelve variantes, agotados, insignias y añadir rápido.
-   -------------------------------------------------------------------- */
-
-/* El área de imagen va en blanco, igual que el cuerpo de la tarjeta: con
-   un gris de fondo el bote se lee como si flotara sobre otro bloque. */
-.card__media,
-.card .media,
-.card-wrapper .card__inner {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--gia-white);
-}
-
-.card__heading,
-.card__heading a {
-  font-family: var(--font-secondary);
-  font-weight: 600;
-  font-size: 15.5px;
-  line-height: 1.4;
-  letter-spacing: 0;
-  text-wrap: pretty;
-}
-
-.card-information .price,
-.card__information .price {
-  font-family: var(--font-primary);
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: -0.01em;
+/* Acordeón */
+.product__accordion .accordion__title,
+.product__accordion summary {
+  font: 700 15.5px / 1.3 var(--font-secondary);
   color: var(--gia-ink);
 }
 
-.card__badge .badge {
-  font: 600 11.5px / 1 var(--font-secondary);
-  border-radius: 4px;
-  padding: 7px 10px;
-  background: var(--gia-white);
-  border: 1px solid var(--gia-grey-200);
-  color: var(--gia-grey-700);
+.product__accordion {
+  border-top: 1px solid var(--gia-grey-200);
 }
 
-.card__badge .badge.color-scheme-4,
-.card__badge .badge--sale {
-  color: var(--gia-turquoise-600);
-  border-color: var(--gia-turquoise-200);
+.product__accordion:last-of-type {
+  border-bottom: 1px solid var(--gia-grey-200);
 }
 
-/* --- Rejilla de producto ---------------------------------------------
-   Columnas fijas, no `auto-fit`. Con auto-fit las columnas vacías se
-   colapsan y las tarjetas se estiran a todo el ancho: una colección de
-   un solo producto mostraba una tarjeta gigante. Con un número fijo de
-   columnas, una tarjeta mide lo mismo tenga la colección 1 producto o 30.
-   -------------------------------------------------------------------- */
-
-/* `:not(.slider)` importa: cuando Dawn convierte la rejilla en carrusel
-   —swipe_on_mobile— hay que dejarle su flex, o el carril deja de
-   desplazarse. */
-.collection .product-grid:not(.slider),
-.gia-wishlist__grid {
+/* --- Cantidad y comprar en la misma fila ---
+   El selector de cantidad y el formulario son hermanos sin contenedor
+   común, así que la fila se arma con grid sobre el contenedor: todo
+   ocupa las dos columnas salvo la cantidad, y el formulario cae a su
+   derecha. */
+/* Se nombran las dos clases: en escritorio Dawn fija
+   `.product__column-sticky { display: block }` dentro de una media
+   query, con la misma especificidad y en una hoja que carga después. */
+.product__info-container,
+.product__info-container.product__column-sticky {
   display: grid;
-  gap: clamp(16px, 2vw, 28px);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 108px minmax(0, 1fr);
+  align-items: start;
+  column-gap: var(--space-3);
 }
 
-/* Los .grid__item de Dawn llevan anchos en porcentaje pensados para su
-   flex. Dentro de un grid ese porcentaje se calcula contra la columna, no
-   contra el contenedor, y la tarjeta se quedaba a la mitad de su celda.
-   Va fuera de toda media query: el fallo se daba en todos los anchos. */
-.collection .product-grid:not(.slider) > li,
-.gia-wishlist__grid > li {
-  width: auto;
+.product__info-container > * {
+  grid-column: 1 / -1;
+}
+
+.product__info-container > .product-form__quantity {
+  grid-column: 1;
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+/* El selector de Dawn trae un ancho mínimo propio pensado para ocupar
+   toda la línea; dentro de la columna hay que soltarlo o se sale y pisa
+   el botón. */
+.product__info-container > .product-form__quantity .quantity,
+.product__info-container > .product-form__quantity .price-per-item__container {
+  width: 100%;
+  min-width: 0;
   max-width: none;
 }
 
-@media screen and (min-width: 750px) {
-  .collection .product-grid:not(.slider),
-  .gia-wishlist__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+.product__info-container > .product-form__quantity + * {
+  grid-column: 2;
+  align-self: center;
+}
+
+.product-form__buttons {
+  max-width: none;
+}
+
+.product-form__buttons .button,
+.product-form__submit {
+  width: 100%;
+}
+
+/* --- La ficha en móvil ---
+   Menos aire entre bloques para que el precio y el botón queden a la
+   vista sin tener que hacer scroll. */
+@media screen and (max-width: 749px) {
+  .product__info-container > * + * {
+    margin-top: var(--space-3);
   }
-}
 
-/* La altura también se estandariza: la media es 1:1 y el título se corta
-   a dos líneas, así los precios quedan alineados entre tarjetas aunque
-   los nombres midan distinto. */
-.card-wrapper .card__heading a,
-.gia-wishlist__name {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+  .product__info-container {
+    grid-template-columns: 96px minmax(0, 1fr);
+    column-gap: var(--space-2);
+  }
 
-.card-wrapper .card__inner {
-  height: 100%;
+  .product .icon-with-text__item {
+    padding: 13px 14px;
+  }
+
+  .product .icon-with-text__item h3,
+  .product .icon-with-text__item p {
+    font-size: 14px;
+  }
 }
 
 /* --- Estrellas ---------------------------------------------------------

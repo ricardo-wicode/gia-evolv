@@ -1,0 +1,44 @@
+{{ 'section-gia-breadcrumb.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign col = product.collections | where: 'handle' | first
+  for c in product.collections
+    unless c.handle == 'frontpage' or c.handle == 'all'
+      assign col = c
+      break
+    endunless
+  endfor
+-%}
+
+<nav class="gia-breadcrumb color-{{ section.settings.color_scheme }}" aria-label="Migas de pan">
+  <ol class="gia-breadcrumb__list" role="list">
+    <li><a href="{{ routes.root_url }}">{{ section.settings.home_label }}</a></li>
+    <li aria-hidden="true" class="gia-breadcrumb__sep">/</li>
+    <li>
+      <a href="{{ routes.all_products_collection_url }}">{{ section.settings.catalog_label }}</a>
+    </li>
+    {%- if col != blank -%}
+      <li aria-hidden="true" class="gia-breadcrumb__sep">/</li>
+      <li><a href="{{ col.url }}">{{ col.title }}</a></li>
+    {%- endif -%}
+    <li aria-hidden="true" class="gia-breadcrumb__sep">/</li>
+    {%- comment -%}
+      La página actual no es un enlace, y se marca con aria-current para
+      que un lector de pantalla sepa dónde está.
+    {%- endcomment -%}
+    <li><span aria-current="page">{{ product.title }}</span></li>
+  </ol>
+</nav>
+
+{% schema %}
+{
+  "name": "Gia · Migas de pan",
+  "tag": "div",
+  "class": "gia-breadcrumb-wrapper",
+  "settings": [
+    { "type": "text", "id": "home_label", "label": "Inicio", "default": "Inicio" },
+    { "type": "text", "id": "catalog_label", "label": "Catálogo", "default": "Catálogo" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ]
+}
+{% endschema %}
