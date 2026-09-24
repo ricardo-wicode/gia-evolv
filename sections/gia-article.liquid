@@ -1,0 +1,152 @@
+{{ 'section-gia-article.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign categoria = article.tags.first
+  assign palabras = article.content | strip_html | split: ' ' | size
+  assign minutos = palabras | divided_by: 200
+  if minutos < 1
+    assign minutos = 1
+  endif
+
+  # blog.previous_article y blog.next_article devuelven una URL, no un
+  # objeto, así que para pintar el título del vecino hay que recorrer los
+  # artículos del blog y quedarse con los de al lado.
+  assign idx = -1
+  assign total = 0
+  for a in blog.articles
+    if a.id == article.id
+      assign idx = forloop.index0
+    endif
+    assign total = forloop.index
+  endfor
+-%}
+
+<article class="gia-article color-{{ section.settings.color_scheme }}">
+  <header class="gia-article__head">
+    <div class="gia-article__head-inner">
+      <nav class="gia-article__crumbs" aria-label="Migas de pan">
+        <a href="{{ blog.url }}">{{ blog.title }}</a>
+      </nav>
+
+      {%- if categoria != blank -%}
+        <span class="gia-article__eyebrow">{{ categoria }}</span>
+      {%- endif -%}
+
+      <h1 class="gia-article__title">{{ article.title }}</h1>
+
+      <p class="gia-article__meta">
+        {%- comment -%}
+          time_tag y no date: el filtro `date` no se traduce y devolvía
+          «23 de September de 2026». time_tag pasa por la capa de
+          localización y emite además el <time datetime> correcto.
+        {%- endcomment -%}
+        {{ article.published_at | time_tag: format: 'date' }}
+        <span aria-hidden="true">&middot;</span>
+        <span>{{ minutos }} min de lectura</span>
+        {%- if section.settings.show_author and article.author != blank -%}
+          <span aria-hidden="true">&middot;</span>
+          <span>{{ article.author }}</span>
+        {%- endif -%}
+      </p>
+    </div>
+  </header>
+
+  {%- if article.image -%}
+    <div class="gia-article__hero">
+      {%- comment -%}
+        La proporción vive en este marco y no en la <img>: con atributos
+        width/height propios, una foto vertical ignoraba el aspect-ratio
+        del CSS y se estiraba hasta el tope de altura.
+      {%- endcomment -%}
+      <span class="gia-article__hero-frame">
+        {{
+          article.image
+          | image_url: width: 1600
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '600, 900, 1200, 1600',
+            sizes: '(min-width: 1100px) 1040px, 100vw',
+            alt: article.image.alt | default: article.title
+        }}
+      </span>
+    </div>
+  {%- endif -%}
+
+  <div class="gia-article__body rte">
+    {{ article.content }}
+  </div>
+
+  {%- if section.settings.show_share -%}
+    <div class="gia-article__share">
+      {%- comment -%}
+        Enlaces de compartir directos, sin el script de cada red: un botón
+        oficial de Facebook o X carga su rastreador en cuanto se pinta la
+        página, aunque nadie comparta nada.
+      {%- endcomment -%}
+      <span class="gia-article__share-label">Compartir</span>
+      {%- assign url = shop.url | append: article.url | url_encode -%}
+      {%- assign titulo = article.title | url_encode -%}
+      <a href="https://api.whatsapp.com/send?text={{ titulo }}%20{{ url }}" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp">
+        {% render 'gia-icon', icon: 'whatsapp', size: 18 %}
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}" target="_blank" rel="noopener" aria-label="Compartir en Facebook">
+        {% render 'gia-icon', icon: 'facebook', size: 18 %}
+      </a>
+      <a href="https://x.com/intent/post?text={{ titulo }}&url={{ url }}" target="_blank" rel="noopener" aria-label="Compartir en X">
+        {% render 'gia-icon', icon: 'x', size: 18 %}
+      </a>
+    </div>
+  {%- endif -%}
+
+  {%- if idx >= 0 and total > 1 -%}
+    <nav class="gia-article__nav" aria-label="Más artículos">
+      {%- for a in blog.articles -%}
+        {%- liquid
+          assign anterior = idx | minus: 1
+          assign siguiente = idx | plus: 1
+        -%}
+        {%- if forloop.index0 == anterior -%}
+          <a class="gia-article__nav-link gia-article__nav-link--prev" href="{{ a.url }}" rel="prev">
+            <span class="gia-article__nav-arrow" aria-hidden="true">
+              {% render 'gia-icon', icon: 'chevron-down', size: 18 %}
+            </span>
+            <span class="gia-article__nav-text">
+              <span class="gia-article__nav-label">Anterior</span>
+              <span class="gia-article__nav-title">{{ a.title }}</span>
+            </span>
+          </a>
+        {%- endif -%}
+        {%- if forloop.index0 == siguiente -%}
+          <a class="gia-article__nav-link gia-article__nav-link--next" href="{{ a.url }}" rel="next">
+            <span class="gia-article__nav-text">
+              <span class="gia-article__nav-label">Siguiente</span>
+              <span class="gia-article__nav-title">{{ a.title }}</span>
+            </span>
+            <span class="gia-article__nav-arrow" aria-hidden="true">
+              {% render 'gia-icon', icon: 'chevron-down', size: 18 %}
+            </span>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
+
+  <p class="gia-article__back">
+    <a href="{{ blog.url }}">&larr; {{ section.settings.back_label }}</a>
+  </p>
+</article>
+
+{% schema %}
+{
+  "name": "Gia · Artículo",
+  "tag": "section",
+  "class": "gia-article-section",
+  "settings": [
+    { "type": "checkbox", "id": "show_author", "label": "Mostrar autor", "default": false },
+    { "type": "checkbox", "id": "show_share", "label": "Mostrar botones de compartir", "default": true },
+    { "type": "text", "id": "back_label", "label": "Texto del enlace de vuelta", "default": "Volver al blog" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

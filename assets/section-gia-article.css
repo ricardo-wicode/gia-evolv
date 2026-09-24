@@ -1,0 +1,291 @@
+/* Gia · Artículo — detalle de una entrada del blog. */
+
+.gia-article {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  padding-bottom: clamp(56px, 8vw, 96px);
+}
+
+/* Una sola medida para todo el artículo: cabecera, imagen, cuerpo y
+   navegación comparten columna, así nada se descoloca al hacer scroll. */
+.gia-article__head-inner,
+.gia-article__hero,
+.gia-article__body,
+.gia-article__share,
+.gia-article__nav,
+.gia-article__back {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* --- Cabecera --- */
+
+.gia-article__head {
+  padding: clamp(32px, 5vw, 56px) 0 clamp(20px, 3vw, 32px);
+}
+
+.gia-article__head-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.gia-article__crumbs a {
+  font: 700 12px / 1 var(--font-secondary);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gia-grey-500);
+  text-decoration: none;
+}
+
+.gia-article__crumbs a:hover { color: var(--gia-turquoise-600); }
+
+.gia-article__eyebrow {
+  align-self: flex-start;
+  font: 700 11.5px / 1 var(--font-secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-600);
+  background: var(--gia-turquoise-50);
+  border-radius: var(--radius-pill);
+  padding: 8px 14px;
+}
+
+.gia-article__title {
+  margin: 0;
+  font: 700 clamp(28px, 4vw, 42px) / 1.14 var(--font-primary);
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+.gia-article__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  font: 400 13.5px / 1 var(--font-secondary);
+  color: var(--gia-grey-500);
+}
+
+/* --- Imagen principal ---
+   Con tope de proporción y de alto: sin él, una foto vertical ocupaba
+   varias pantallas y el texto quedaba fuera de vista al abrir. */
+.gia-article__hero {
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.gia-article__hero-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 420px;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--gia-grey-50);
+}
+
+.gia-article__hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* En móvil una banda de 16:9 sigue siendo alta para lo poco que se ve de
+   texto en pantalla: se recorta algo más. */
+@media screen and (max-width: 749px) {
+  .gia-article__hero-frame {
+    aspect-ratio: 3 / 2;
+    max-height: 260px;
+  }
+}
+
+/* --- Cuerpo --- */
+
+.gia-article__body {
+  font: 400 17px / 1.75 var(--font-secondary);
+  color: var(--gia-grey-700);
+}
+
+.gia-article__body > * + * { margin-top: 1.15em; }
+
+.gia-article__body h2,
+.gia-article__body h3,
+.gia-article__body h4 {
+  margin: 1.9em 0 0.55em;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--gia-ink);
+  text-wrap: pretty;
+}
+
+.gia-article__body h2 { font-size: 24px; }
+.gia-article__body h3 { font-size: 19px; }
+.gia-article__body h4 { font-size: 17px; }
+
+.gia-article__body p { margin: 0; }
+.gia-article__body strong { color: var(--gia-ink); }
+
+.gia-article__body ul,
+.gia-article__body ol { margin: 0; padding-left: 1.4em; }
+.gia-article__body li + li { margin-top: 0.5em; }
+
+.gia-article__body a {
+  color: var(--gia-turquoise-700);
+  text-underline-offset: 3px;
+}
+
+.gia-article__body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+.gia-article__body blockquote {
+  margin: 1.6em 0;
+  padding-left: var(--space-6);
+  border-left: 3px solid var(--gia-turquoise-200);
+  font-style: normal;
+  color: var(--gia-ink);
+}
+
+/* --- Compartir --- */
+
+.gia-article__share {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--gia-grey-200);
+}
+
+.gia-article__share-label {
+  font: 700 11.5px / 1 var(--font-secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-grey-500);
+  margin-right: var(--space-1);
+}
+
+.gia-article__share a {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-circle);
+  border: 1px solid var(--gia-grey-200);
+  color: var(--gia-grey-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+
+.gia-article__share a:hover {
+  border-color: var(--gia-turquoise);
+  color: var(--gia-turquoise-600);
+}
+
+/* --- Anterior / siguiente --- */
+
+.gia-article__nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-top: clamp(36px, 5vw, 56px);
+}
+
+@media screen and (min-width: 750px) {
+  .gia-article__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.gia-article__nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 20px 22px;
+  border: 1px solid var(--gia-grey-200);
+  border-radius: var(--radius-lg);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.gia-article__nav-link:hover { border-color: var(--gia-turquoise); }
+
+.gia-article__nav-link:focus-visible {
+  outline: 2px solid var(--gia-turquoise);
+  outline-offset: 2px;
+}
+
+/* El "siguiente" se alinea a la derecha aunque no haya "anterior": así la
+   pareja mantiene su sitio y no salta según qué artículo se lea. */
+.gia-article__nav-link--next {
+  grid-column: 2;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 749px) {
+  .gia-article__nav-link--next { grid-column: 1; }
+}
+
+.gia-article__nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.gia-article__nav-label {
+  font: 700 11px / 1 var(--font-secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-600);
+}
+
+.gia-article__nav-title {
+  font: 600 15px / 1.35 var(--font-secondary);
+  color: var(--gia-ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gia-article__nav-arrow {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-circle);
+  background: var(--gia-turquoise-50);
+  color: var(--gia-turquoise-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* El icono es un chevron hacia abajo: se gira para cada dirección. */
+.gia-article__nav-link--prev .gia-article__nav-arrow svg { transform: rotate(90deg); }
+.gia-article__nav-link--next .gia-article__nav-arrow svg { transform: rotate(-90deg); }
+
+/* --- Volver --- */
+
+.gia-article__back {
+  margin: clamp(32px, 4vw, 48px) auto 0;
+  font: 700 13.5px / 1 var(--font-secondary);
+}
+
+.gia-article__back a {
+  color: var(--gia-turquoise-600);
+  text-decoration: none;
+}
+
+.gia-article__back a:hover { text-decoration: underline; }
