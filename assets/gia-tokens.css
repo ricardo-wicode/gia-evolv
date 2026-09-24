@@ -877,6 +877,15 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   --gia-btn-text: var(--gia-white);
 }
 
+/* `.button` a secas es el botón primario de Dawn: lo usan «Ver todo»,
+   «Seguir comprando» y los de las secciones. Se excluye scheme-3, cuyo
+   fondo ya es el turquesa de marca y donde un botón del mismo color
+   desaparecería. */
+.color-scheme-1 .button:not(.button--secondary):not(.button--tertiary),
+.color-scheme-2 .button:not(.button--secondary):not(.button--tertiary),
+.color-scheme-4 .button:not(.button--secondary):not(.button--tertiary),
+.color-scheme-5 .button:not(.button--secondary):not(.button--tertiary),
+.color-scheme-6 .button:not(.button--secondary):not(.button--tertiary),
 /* Botones propios */
 .gia-hero__cta,
 .gia-editorial__cta,
@@ -914,8 +923,19 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   color: var(--gia-btn-text);
 }
 
+/* Hover del `.button` plano */
+.color-scheme-1 .button:not(.button--secondary):not(.button--tertiary):hover,
+.color-scheme-2 .button:not(.button--secondary):not(.button--tertiary):hover,
+.color-scheme-4 .button:not(.button--secondary):not(.button--tertiary):hover,
+.color-scheme-5 .button:not(.button--secondary):not(.button--tertiary):hover,
+.color-scheme-6 .button:not(.button--secondary):not(.button--tertiary):hover {
+  background: var(--gia-btn-bg-hover);
+  color: var(--gia-btn-text);
+}
+
 /* Dawn dibuja el borde del botón con un ::after; aquí sobra, porque el
    relleno ya define la forma. */
+.button:not(.button--secondary):not(.button--tertiary)::after,
 .button--primary::after,
 .product-form__submit::after,
 .cart__checkout-button::after,

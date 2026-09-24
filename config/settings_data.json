@@ -43,8 +43,8 @@
             "background": "#003D39",
             "background_gradient": "",
             "text": "#FFFFFF",
-            "button": "#71C4BE",
-            "button_label": "#003D39",
+            "button": "#009389",
+            "button_label": "#FFFFFF",
             "secondary_button_label": "#B4DEDA",
             "shadow": "#000000"
           }
@@ -54,7 +54,7 @@
             "background": "#F8F8F8",
             "background_gradient": "",
             "text": "#141414",
-            "button": "#141414",
+            "button": "#009389",
             "button_label": "#FFFFFF",
             "secondary_button_label": "#141414",
             "shadow": "#141414"
