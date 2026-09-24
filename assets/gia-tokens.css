@@ -328,8 +328,8 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
 .product .price,
 .product .price__regular .price-item {
   font-family: var(--font-primary);
-  font-weight: 700;
-  font-size: 30px;
+  font-weight: 500;
+  font-size: 24px;
   line-height: 1;
   color: var(--gia-turquoise-600);
 }

@@ -86,3 +86,19 @@
   color: var(--gia-white);
   font-weight: 700;
 }
+
+/* La barra comparte fondo con la rejilla, así que el aire de abajo lo
+   pone la rejilla y aquí sólo queda el borde de los chips. */
+.gia-colbar__inner {
+  padding-bottom: 0;
+}
+
+/* Sobre gris, el borde de los chips necesita algo más de peso para no
+   diluirse; el activo ya destaca por relleno. */
+.gia-colbar__chip {
+  border-color: var(--gia-grey-300);
+}
+
+.gia-colbar__chip.is-active {
+  border-color: var(--gia-turquoise);
+}
