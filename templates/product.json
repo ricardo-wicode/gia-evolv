@@ -29,9 +29,11 @@
           "type": "price",
           "settings": {}
         },
-        "description": {
-          "type": "description",
-          "settings": {}
+        "resumen": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- liquid\n  # Los parrafos de la descripcion son <br><br>, no <p>: se aplanan a\n  # espacios antes de strip_html o las frases quedan pegadas. El primer\n  # 'Descripción' es un encabezado dentro del propio HTML del ERP.\n  assign plano = product.description | replace: '<br>', ' ' | replace: '<br/>', ' ' | replace: '<br />', ' ' | strip_html\n  assign plano = plano | strip | remove_first: 'Descripción' | strip\n  if plano contains 'Beneficios clave:'\n    assign plano = plano | split: 'Beneficios clave:' | first\n  endif\n  if plano contains 'Ingredientes principales:'\n    assign plano = plano | split: 'Ingredientes principales:' | first\n  endif\n-%}\n{%- if plano != blank -%}\n  <p class=\"gia-product__summary\">{{ plano | truncatewords: 28 }}</p>\n{%- endif -%}"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -50,11 +52,15 @@
           "settings": {}
         },
         "tab_1": {
-          "type": "collapsible_tab",
+          "type": "custom_liquid",
           "settings": {
-            "heading": "Presentación",
-            "content": "<p>Consulta la presentación y el contenido neto en la etiqueta del producto.</p>",
-            "icon": "question_mark"
+            "custom_liquid": "{%- liquid\n  # El ERP escribe la presentacion y los ingredientes con clases\n  # estables (pdp-present / present-title). Se extraen de ahi: es el\n  # dato real de cada producto, no un texto igual para todos.\n  assign pres = ''\n  assign ingr = ''\n  if product.description contains 'Presentación:</span>'\n    assign tmp = product.description | split: 'Presentación:</span>' | last\n    assign pres = tmp | split: '</div>' | first | strip_html | strip\n  endif\n  if product.description contains 'Ingredientes principales:</span>'\n    assign tmp2 = product.description | split: 'Ingredientes principales:</span>' | last\n    assign ingr = tmp2 | split: '</div>' | first | strip_html | strip\n  endif\n-%}\n<div class=\"product__accordion accordion quick-add-hidden\">\n  <details id=\"Details-presentacion-{{ section.id }}\">\n    <summary>\n      <div class=\"summary__title\">\n        {% render 'icon-accordion', icon: 'box' %}\n        <h2 class=\"h4 accordion__title inline-richtext\">Presentación</h2>\n      </div>\n      {{- 'icon-caret.svg' | inline_asset_content -}}\n    </summary>\n    <div class=\"accordion__content rte\">\n      {%- if pres != blank or ingr != blank -%}\n        {%- if pres != blank -%}<p><strong>Presentación:</strong> {{ pres }}</p>{%- endif -%}\n        {%- if ingr != blank -%}<p><strong>Ingredientes principales:</strong> {{ ingr }}</p>{%- endif -%}\n      {%- else -%}\n        <p>Consulta la presentación y el contenido neto en la etiqueta del producto.</p>\n      {%- endif -%}\n    </div>\n  </details>\n</div>"
+          }
+        },
+        "acordeon_descripcion": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- if product.description != blank -%}\n  <div class=\"product__accordion accordion quick-add-hidden\">\n    <details id=\"Details-descripcion-{{ section.id }}\">\n      <summary>\n        <div class=\"summary__title\">\n          {% render 'icon-accordion', icon: 'clipboard' %}\n          <h2 class=\"h4 accordion__title inline-richtext\">Descripción</h2>\n        </div>\n        {{- 'icon-caret.svg' | inline_asset_content -}}\n      </summary>\n      <div class=\"accordion__content rte\" id=\"ProductAccordion-descripcion-{{ section.id }}\">\n        {{ product.description }}\n      </div>\n    </details>\n  </div>\n{%- endif -%}"
           }
         },
         "tab_2": {
@@ -72,14 +78,6 @@
             "content": "<p>Sigue la dosis indicada en la etiqueta. Nuestro equipo de nutrición puede ajustarla a tu caso sin costo.</p>",
             "icon": "check_mark"
           }
-        },
-        "tab_4": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Envíos y devoluciones",
-            "content": "<p>Enviamos a todo México en 2 a 4 días hábiles, con envío gratis a partir de $6,000. Consulta nuestra política de reembolso.</p>",
-            "icon": "truck"
-          }
         }
       },
       "block_order": [
@@ -87,15 +85,15 @@
         "title",
         "rating",
         "price",
-        "description",
+        "resumen",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
         "trust_pay",
         "tab_1",
+        "acordeon_descripcion",
         "tab_2",
-        "tab_3",
-        "tab_4"
+        "tab_3"
       ],
       "settings": {
         "enable_sticky_info": true,

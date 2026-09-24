@@ -42,18 +42,23 @@
   color: var(--gia-ink);
 }
 
-/* En móvil la ruta puede ser larga: se recorta el nombre del producto en
-   vez de romper la línea en tres. */
+/* En móvil la ruta se hace pequeña, envuelve si hace falta y el nombre
+   del producto se recorta con puntos suspensivos: nunca desborda la
+   pantalla. El nombre completo ya está en el h1, justo debajo. */
 @media screen and (max-width: 749px) {
   .gia-breadcrumb__list {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    font-size: 13px;
-    white-space: nowrap;
+    font-size: 12px;
+    gap: 5px;
+    padding-top: var(--space-3);
+    row-gap: 2px;
   }
 
-  .gia-breadcrumb__list::-webkit-scrollbar {
-    display: none;
+  .gia-breadcrumb [aria-current='page'] {
+    display: inline-block;
+    max-width: 45vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
   }
 }

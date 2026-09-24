@@ -1066,3 +1066,28 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
     display: none;
   }
 }
+
+/* Resumen del producto: dos o tres líneas bajo el precio. El texto
+   completo vive en el acordeón «Descripción». */
+.gia-product__summary {
+  margin: 0;
+  font: 400 16px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+@media screen and (max-width: 749px) {
+  .gia-product__summary {
+    font-size: 15px;
+  }
+}
+
+/* Dentro del acordeón «Descripción» sobran el encabezado que el ERP mete
+   en el propio HTML (duplicaría el título del acordeón) y los bloques de
+   presentación/ingredientes, que ya tienen su acordeón con el dato
+   extraído. */
+.product__accordion .accordion__content .desc-comercial-titulo,
+.product__accordion .accordion__content .pdp-present {
+  display: none;
+}
