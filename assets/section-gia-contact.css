@@ -97,17 +97,10 @@
   padding: 0 32px;
   border: none;
   border-radius: var(--radius-pill);
-  background: var(--gia-turquoise);
-  color: var(--gia-white);
   font: 700 13px / 1 var(--font-secondary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-standard);
-}
-
-.gia-contact__submit:hover {
-  background: var(--gia-turquoise-600);
 }
 
 

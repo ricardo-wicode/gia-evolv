@@ -49,17 +49,10 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  color: rgb(var(--color-button-text));
-  background: rgb(var(--color-button));
   border: none;
   padding: 20px 34px;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-standard);
-}
-
-.gia-hero__cta:hover {
-  background: var(--gia-turquoise-600);
 }
 
 .gia-hero__media {

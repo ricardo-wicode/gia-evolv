@@ -96,15 +96,8 @@
   padding: 0 34px;
   border: none;
   border-radius: var(--radius-pill);
-  background: var(--gia-white);
-  color: var(--gia-turquoise-900);
   font: 700 14.5px / 1 var(--font-secondary);
   cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-standard);
-}
-
-.gia-nl__submit:hover {
-  background: var(--gia-turquoise-100);
 }
 
 .gia-nl__submit:focus-visible {

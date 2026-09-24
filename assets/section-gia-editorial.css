@@ -58,8 +58,6 @@
   font: 700 13px / 1 var(--font-secondary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgb(var(--color-button-text));
-  background: rgb(var(--color-button));
   padding: 18px 32px;
   border-radius: var(--radius-pill);
   text-decoration: none;

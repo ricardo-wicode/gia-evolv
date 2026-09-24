@@ -449,17 +449,10 @@
   height: 46px;
   border-radius: var(--radius-circle);
   border: none;
-  background: var(--gia-turquoise);
-  color: var(--gia-white);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-standard);
-}
-
-.gia-footer__submit:hover {
-  background: var(--gia-turquoise-600);
 }
 
 .gia-footer__ok,

@@ -909,3 +909,77 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
     font-size: 16px;
   }
 }
+
+/* ======================================================================
+   Botones — un solo sistema para todo el sitio
+   ----------------------------------------------------------------------
+   Fondo en el turquesa de marca y texto blanco. Al pasar el ratón sólo
+   cambia el fondo, a un turquesa más cerrado; el texto se queda blanco.
+   Los tres valores viven aquí para que cambiar el color de los botones
+   del sitio entero sea tocar una línea.
+   ====================================================================== */
+
+:root {
+  --gia-btn-bg: var(--gia-turquoise);
+  --gia-btn-bg-hover: var(--gia-turquoise-600);
+  --gia-btn-text: var(--gia-white);
+}
+
+/* Botones propios */
+.gia-hero__cta,
+.gia-editorial__cta,
+.gia-cta__button--primary,
+.gia-contact__submit,
+.gia-nl__submit,
+.gia-footer__submit,
+.gia-wishlist__cta,
+/* Botones de Dawn: ficha, carrito, formularios y retos de seguridad */
+.button--primary,
+.product-form__submit,
+.cart__checkout-button,
+.shopify-challenge__button,
+.customer button:not(.button--tertiary) {
+  background: var(--gia-btn-bg);
+  color: var(--gia-btn-text);
+  border-color: transparent;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.gia-hero__cta:hover,
+.gia-editorial__cta:hover,
+.gia-cta__button--primary:hover,
+.gia-contact__submit:hover,
+.gia-nl__submit:hover,
+.gia-footer__submit:hover,
+.gia-wishlist__cta:hover,
+.button--primary:hover,
+.product-form__submit:hover,
+.cart__checkout-button:hover,
+.shopify-challenge__button:hover,
+.customer button:not(.button--tertiary):hover {
+  background: var(--gia-btn-bg-hover);
+  /* El texto no cambia: sólo se cierra el fondo. */
+  color: var(--gia-btn-text);
+}
+
+/* Dawn dibuja el borde del botón con un ::after; aquí sobra, porque el
+   relleno ya define la forma. */
+.button--primary::after,
+.product-form__submit::after,
+.cart__checkout-button::after,
+.shopify-challenge__button::after {
+  box-shadow: none;
+  outline: none;
+}
+
+/* Deshabilitado: el mismo turquesa apagado, para que se lea como el
+   mismo botón sin invitar al clic. */
+.gia-contact__submit[disabled],
+.gia-nl__submit[disabled],
+.button--primary[disabled],
+.product-form__submit[disabled],
+.cart__checkout-button[disabled] {
+  background: var(--gia-turquoise-200);
+  color: var(--gia-white);
+  cursor: default;
+}
