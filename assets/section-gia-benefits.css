@@ -8,7 +8,7 @@
 .gia-benefits__inner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--gutter) var(--section-y);
+  padding: var(--section-y) var(--gutter);
   width: 100%;
   box-sizing: border-box;
 }

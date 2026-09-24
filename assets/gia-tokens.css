@@ -404,6 +404,12 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   border: 1px solid var(--gia-grey-200);
   border-radius: var(--radius-md);
   overflow: hidden;
+  margin-top: var(--space-6);
+}
+
+.product__info-container > .icon-with-text + .product__accordion,
+.product__info-container > * + .product__accordion:first-of-type {
+  margin-top: var(--space-5);
 }
 
 .product .icon-with-text__item {
@@ -415,11 +421,16 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   border-top: 1px solid var(--gia-grey-200);
 }
 
-/* Acordeón */
+/* Acordeón: título en peso medio y sin icono decorativo */
 .product__accordion .accordion__title,
 .product__accordion summary {
-  font: 700 15.5px / 1.3 var(--font-secondary);
+  font: 500 15.5px / 1.3 var(--font-secondary);
   color: var(--gia-ink);
+}
+
+.product__accordion .summary__title .svg-wrapper,
+.product__accordion .summary__title > svg {
+  display: none;
 }
 
 .product__accordion {
@@ -450,6 +461,15 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   grid-column: 1 / -1;
 }
 
+.product__info-container > .gia-product__pill {
+  justify-self: start;
+}
+
+/* Estrellas bajo el título */
+.gia-product__stars {
+  margin: calc(var(--space-2) * -1) 0 var(--space-2);
+}
+
 .product__info-container > .product-form__quantity {
   grid-column: 1;
   margin-bottom: 0;
@@ -468,11 +488,28 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
 
 .product__info-container > .product-form__quantity + * {
   grid-column: 2;
-  align-self: center;
+  /* La cantidad lleva "Cantidad" encima (20px + 6px de margen) y 15px de
+     margen propio: el formulario baja lo mismo para que el botón quede a
+     la altura del selector, no de la etiqueta. */
+  align-self: start;
+  margin-top: 16px;
+}
+
+.product__info-container > div:has(> .installment) {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .product-form__buttons {
   max-width: none;
+}
+
+/* El bloque de compra cae en la columna 2, pero Shop Pay y "más opciones"
+   deben cubrir el ancho completo: se descuelgan de la columna con margen
+   negativo igual a la columna de cantidad más el hueco. */
+.product__info-container > .product-form__quantity + * .shopify-payment-button {
+  margin-left: calc(-108px - var(--space-3));
+  width: calc(100% + 108px + var(--space-3));
 }
 
 .product-form__buttons .button,
@@ -494,12 +531,14 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   }
 
   .product .icon-with-text__item {
-    padding: 13px 14px;
+    padding: 12px 6px;
+    text-align: center;
   }
 
   .product .icon-with-text__item h3,
   .product .icon-with-text__item p {
-    font-size: 14px;
+    font-size: 12.5px;
+    line-height: 1.35;
   }
 }
 

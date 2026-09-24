@@ -22,8 +22,10 @@
           "settings": {}
         },
         "rating": {
-          "type": "rating",
-          "settings": {}
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"gia-product__stars\">{% render 'gia-stars', product: product %}</div>"
+          }
         },
         "price": {
           "type": "price",
@@ -49,18 +51,26 @@
         },
         "trust_pay": {
           "type": "icon-with-text",
-          "settings": {}
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "truck",
+            "heading_1": "Envío en menos de 3 días",
+            "icon_2": "lock",
+            "heading_2": "Pago seguro",
+            "icon_3": "return",
+            "heading_3": "Devolución sin vueltas"
+          }
         },
         "tab_1": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{%- liquid\n  # El ERP escribe la presentacion y los ingredientes con clases\n  # estables (pdp-present / present-title). Se extraen de ahi: es el\n  # dato real de cada producto, no un texto igual para todos.\n  assign pres = ''\n  assign ingr = ''\n  if product.description contains 'Presentación:</span>'\n    assign tmp = product.description | split: 'Presentación:</span>' | last\n    assign pres = tmp | split: '</div>' | first | strip_html | strip\n  endif\n  if product.description contains 'Ingredientes principales:</span>'\n    assign tmp2 = product.description | split: 'Ingredientes principales:</span>' | last\n    assign ingr = tmp2 | split: '</div>' | first | strip_html | strip\n  endif\n-%}\n<div class=\"product__accordion accordion quick-add-hidden\">\n  <details id=\"Details-presentacion-{{ section.id }}\">\n    <summary>\n      <div class=\"summary__title\">\n        {% render 'icon-accordion', icon: 'box' %}\n        <h2 class=\"h4 accordion__title inline-richtext\">Presentación</h2>\n      </div>\n      {{- 'icon-caret.svg' | inline_asset_content -}}\n    </summary>\n    <div class=\"accordion__content rte\">\n      {%- if pres != blank or ingr != blank -%}\n        {%- if pres != blank -%}<p><strong>Presentación:</strong> {{ pres }}</p>{%- endif -%}\n        {%- if ingr != blank -%}<p><strong>Ingredientes principales:</strong> {{ ingr }}</p>{%- endif -%}\n      {%- else -%}\n        <p>Consulta la presentación y el contenido neto en la etiqueta del producto.</p>\n      {%- endif -%}\n    </div>\n  </details>\n</div>"
+            "custom_liquid": "{%- liquid\n  # El ERP escribe la presentacion y los ingredientes con clases\n  # estables (pdp-present / present-title). Se extraen de ahi: es el\n  # dato real de cada producto, no un texto igual para todos.\n  assign pres = ''\n  assign ingr = ''\n  if product.description contains 'Presentación:</span>'\n    assign tmp = product.description | split: 'Presentación:</span>' | last\n    assign pres = tmp | split: '</div>' | first | strip_html | strip\n  endif\n  if product.description contains 'Ingredientes principales:</span>'\n    assign tmp2 = product.description | split: 'Ingredientes principales:</span>' | last\n    assign ingr = tmp2 | split: '</div>' | first | strip_html | strip\n  endif\n-%}\n<div class=\"product__accordion accordion quick-add-hidden\">\n  <details id=\"Details-presentacion-{{ section.id }}\">\n    <summary>\n      <div class=\"summary__title\">\n        <h2 class=\"h4 accordion__title inline-richtext\">Presentación</h2>\n      </div>\n      {{- 'icon-caret.svg' | inline_asset_content -}}\n    </summary>\n    <div class=\"accordion__content rte\">\n      {%- if pres != blank or ingr != blank -%}\n        {%- if pres != blank -%}<p><strong>Presentación:</strong> {{ pres }}</p>{%- endif -%}\n        {%- if ingr != blank -%}<p><strong>Ingredientes principales:</strong> {{ ingr }}</p>{%- endif -%}\n      {%- else -%}\n        <p>Consulta la presentación y el contenido neto en la etiqueta del producto.</p>\n      {%- endif -%}\n    </div>\n  </details>\n</div>"
           }
         },
         "acordeon_descripcion": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{%- if product.description != blank -%}\n  <div class=\"product__accordion accordion quick-add-hidden\">\n    <details id=\"Details-descripcion-{{ section.id }}\">\n      <summary>\n        <div class=\"summary__title\">\n          {% render 'icon-accordion', icon: 'clipboard' %}\n          <h2 class=\"h4 accordion__title inline-richtext\">Descripción</h2>\n        </div>\n        {{- 'icon-caret.svg' | inline_asset_content -}}\n      </summary>\n      <div class=\"accordion__content rte\" id=\"ProductAccordion-descripcion-{{ section.id }}\">\n        {{ product.description }}\n      </div>\n    </details>\n  </div>\n{%- endif -%}"
+            "custom_liquid": "{%- if product.description != blank -%}\n  <div class=\"product__accordion accordion quick-add-hidden\">\n    <details id=\"Details-descripcion-{{ section.id }}\">\n      <summary>\n        <div class=\"summary__title\">\n          <h2 class=\"h4 accordion__title inline-richtext\">Descripción</h2>\n        </div>\n        {{- 'icon-caret.svg' | inline_asset_content -}}\n      </summary>\n      <div class=\"accordion__content rte\" id=\"ProductAccordion-descripcion-{{ section.id }}\">\n        {{ product.description }}\n      </div>\n    </details>\n  </div>\n{%- endif -%}"
           }
         },
         "tab_2": {
@@ -68,7 +78,7 @@
           "settings": {
             "heading": "Información nutricional",
             "content": "<p>La tabla nutricional completa viene impresa en el envase. Si necesitas el detalle antes de comprar, escríbenos y te lo enviamos.</p>",
-            "icon": "heart"
+            "icon": "none"
           }
         },
         "tab_3": {
@@ -76,7 +86,7 @@
           "settings": {
             "heading": "Modo de uso",
             "content": "<p>Sigue la dosis indicada en la etiqueta. Nuestro equipo de nutrición puede ajustarla a tu caso sin costo.</p>",
-            "icon": "check_mark"
+            "icon": "none"
           }
         }
       },
@@ -108,7 +118,7 @@
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
-        "padding_bottom": 12
+        "padding_bottom": 40
       }
     },
     "gia_benefits": {
@@ -301,7 +311,7 @@
         "caption": "Dudas comunes",
         "heading": "Preguntas frecuentes",
         "heading_alignment": "center",
-        "layout": "section",
+        "layout": "none",
         "color_scheme": "scheme-5",
         "container_color_scheme": "scheme-1",
         "open_first_collapsible_row": false
@@ -320,7 +330,7 @@
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": true,
-        "columns_mobile": "2",
+        "columns_mobile": "1",
         "padding_top": 36,
         "padding_bottom": 28
       }
