@@ -609,7 +609,6 @@ details > * {
 .customer a,
 .inline-richtext a {
   text-underline-offset: 0.3rem;
-  text-decoration-thickness: 0.1rem;
   transition: text-decoration-thickness ease 100ms;
 }
 
@@ -630,6 +629,11 @@ details > * {
   text-decoration-thickness: 0.2rem;
 }
 
+.benefit .inline-richtext {
+  font-size: 12.5px;
+  line-height: 1.35;
+  text-align: center;
+}
 .icon-arrow {
   width: 1.5rem;
 }

@@ -151,6 +151,49 @@
   transform: rotate(-90deg);
 }
 
+/* En móvil la tarjeta es angosta y el texto envolvía tres o cuatro
+   líneas sobre la foto: se saca de la imagen y va debajo, en tinta. */
+@media screen and (max-width: 749px) {
+  .gia-goals__tile {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    border-radius: 0;
+    background: none;
+    overflow: visible;
+  }
+
+  .gia-goals__media {
+    position: relative;
+    inset: auto;
+    aspect-ratio: var(--gia-goal-ratio, 4 / 5);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .gia-goals__scrim {
+    display: none;
+  }
+
+  .gia-goals__text {
+    position: static;
+    padding: 10px 2px 0;
+  }
+
+  .gia-goals__label {
+    color: var(--gia-ink);
+    font-size: 15px;
+  }
+
+  .gia-goals__caption {
+    color: var(--gia-grey-500);
+  }
+
+  .gia-goals__item {
+    flex-basis: 172px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .gia-goals__rail {
     scroll-behavior: auto;

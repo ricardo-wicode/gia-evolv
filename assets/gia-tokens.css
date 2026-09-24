@@ -465,9 +465,14 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   justify-self: start;
 }
 
-/* Estrellas bajo el título */
-.gia-product__stars {
-  margin: calc(var(--space-2) * -1) 0 var(--space-2);
+/* Estrellas bajo el título: pegadas a él y alineadas a la izquierda
+   (en la tarjeta van centradas; aquí el bloque es una columna de texto). */
+.product__info-container > .gia-product__stars {
+  margin: -6px 0 0;
+}
+
+.gia-product__stars .gia-stars {
+  justify-content: flex-start;
 }
 
 .product__info-container > .product-form__quantity {

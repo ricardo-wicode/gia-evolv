@@ -78,39 +78,24 @@
   }
 }
 
-/* En móvil el panel de texto ocupaba 469px antes de que apareciera la
-   foto, así que el hero era texto y la imagen quedaba abajo del pliegue.
-   Aquí manda la imagen.
-
-   El titular no se elimina, se oculta a la vista: es el único h1 de la
-   portada y sigue haciendo falta para el esquema del documento, los
-   lectores de pantalla y los buscadores. El resto —descripción, remate y
-   botón— sí se retira, porque ese contenido se repite más abajo. */
+/* En móvil el panel turquesa se queda —es el titular de la portada—
+   pero compacto, para que la imagen siga a la vista sin bajar mucho. */
 @media screen and (max-width: 749px) {
-  .gia-hero__body,
-  .gia-hero__kicker,
-  .gia-hero__actions {
-    display: none;
-  }
-
   .gia-hero__text {
-    padding: 0;
+    padding: 36px 20px;
     min-height: 0;
+    gap: var(--space-4);
   }
 
   .gia-hero__heading {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
+    font-size: 30px;
+  }
+
+  .gia-hero__body {
+    font-size: 15px;
   }
 
   .gia-hero__media {
-    min-height: clamp(360px, 88vw, 480px);
+    min-height: clamp(300px, 78vw, 420px);
   }
 }
