@@ -285,7 +285,7 @@
 .gia-mega__product-media {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--gia-grey-50);
+  background: #fff;
   aspect-ratio: 1 / 1;
 }
 
