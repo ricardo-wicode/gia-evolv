@@ -36,13 +36,13 @@
 .gia-marquee__dot--cap {
   width: 11px;
   height: 18px;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  border-radius: 100%;
 }
 
 .gia-marquee__dot--round {
   width: 16px;
   height: 16px;
-  border-radius: var(--radius-circle);
+  border-radius: 100%;
 }
 
 @keyframes gia-marquee {

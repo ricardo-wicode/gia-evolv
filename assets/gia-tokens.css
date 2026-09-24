@@ -436,22 +436,30 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
    columnas, una tarjeta mide lo mismo tenga la colección 1 producto o 30.
    -------------------------------------------------------------------- */
 
-.collection .product-grid,
+/* `:not(.slider)` importa: cuando Dawn convierte la rejilla en carrusel
+   —swipe_on_mobile— hay que dejarle su flex, o el carril deja de
+   desplazarse. */
+.collection .product-grid:not(.slider),
 .gia-wishlist__grid {
   display: grid;
   gap: clamp(16px, 2vw, 28px);
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+/* Los .grid__item de Dawn llevan anchos en porcentaje pensados para su
+   flex. Dentro de un grid ese porcentaje se calcula contra la columna, no
+   contra el contenedor, y la tarjeta se quedaba a la mitad de su celda.
+   Va fuera de toda media query: el fallo se daba en todos los anchos. */
+.collection .product-grid:not(.slider) > li,
+.gia-wishlist__grid > li {
+  width: auto;
+  max-width: none;
+}
+
 @media screen and (min-width: 750px) {
-  .collection .product-grid,
+  .collection .product-grid:not(.slider),
   .gia-wishlist__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .collection .product-grid > li {
-    width: auto;
-    max-width: none;
   }
 }
 
@@ -982,4 +990,23 @@ h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4 {
   background: var(--gia-turquoise-200);
   color: var(--gia-white);
   cursor: default;
+}
+
+/* En tarjetas estrechas las insignias se apilaban y tapaban la foto.
+   Se limita el texto a una línea con puntos suspensivos: la categoría
+   completa sigue estando en la página de la colección. */
+@media screen and (max-width: 749px) {
+  .gia-card-badges {
+    max-width: calc(100% - 58px);
+    gap: 6px;
+  }
+
+  .gia-card-badge {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    padding: 6px 8px;
+  }
 }
