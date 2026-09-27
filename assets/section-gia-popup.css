@@ -21,12 +21,19 @@
   overflow: hidden; /* bloquea el scroll de fondo mientras está abierto */
 }
 
-.gia-popup__backdrop {
-  position: absolute;
+/* Velo fijo al viewport que oscurece y desenfoca la página para centrar
+   la atención. Selector compuesto (0,2,0) a propósito: Dawn oculta los
+   div vacíos con `div:empty { display:none }` (0,1,1), y este velo es un
+   div sin contenido; sin ganarle en especificidad no se mostraría. */
+.gia-popup .gia-popup__backdrop {
+  display: block;
+  position: fixed;
   inset: 0;
-  background: rgba(8, 24, 23, 0.66);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
+  width: 100vw;
+  height: 100dvh;
+  background: rgba(8, 22, 21, 0.74);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   animation: gia-popup-fade var(--duration-base, 0.25s) var(--ease-standard, ease) both;
 }
 
