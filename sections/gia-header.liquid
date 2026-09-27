@@ -172,6 +172,43 @@
       });
     });
   })();
+
+  // Cabecera transparente sobre el hero, blanca al hacer scroll.
+  // Sin este script la cabecera es sólida siempre (respaldo seguro).
+  (function () {
+    var wrapper = document.querySelector('.gia-header-wrapper');
+    if (!wrapper) return;
+
+    // Mantiene --gia-header-h con el alto real de la cabecera, para subir
+    // el hero justo lo necesario y dejarle su hueco al texto en móvil.
+    var setHeight = function () {
+      document.documentElement.style.setProperty('--gia-header-h', wrapper.offsetHeight + 'px');
+    };
+    setHeight();
+    window.addEventListener('resize', setHeight);
+
+    // La cabecera se renderiza antes que <main>, así que la detección del
+    // hero espera al DOM: si no, #MainContent aún no existe.
+    var initOverlay = function () {
+      var main = document.getElementById('MainContent');
+      var first = main && main.querySelector(':scope > .shopify-section');
+      if (!first || !first.querySelector('.gia-hero')) return;
+
+      document.body.classList.add('gia-overlay-header');
+
+      var onScroll = function () {
+        document.body.classList.toggle('gia-at-top', window.scrollY < 12);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initOverlay);
+    } else {
+      initOverlay();
+    }
+  })();
 </script>
 
 {% schema %}

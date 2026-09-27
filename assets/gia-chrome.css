@@ -104,6 +104,32 @@
   background: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
   border-bottom: 1px solid var(--gia-grey-200);
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
+}
+
+/* --- Cabecera transparente sobre el hero -----------------------------
+   En páginas cuya primera sección es el hero (body.gia-overlay-header, lo
+   marca el JS del header), el hero se sube bajo la cabecera y ésta se
+   pinta encima. Arriba del todo es transparente; al hacer scroll el JS
+   quita .gia-at-top y vuelve a su fondo blanco. En el resto de páginas
+   nada de esto aplica y la cabecera es sólida siempre.
+   -------------------------------------------------------------------- */
+body.gia-overlay-header .gia-hero-section {
+  margin-top: calc(-1 * var(--gia-header-h, 74px));
+}
+
+body.gia-overlay-header.gia-at-top .gia-header {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
+/* En móvil el texto del hero va arriba: se le deja sitio para que no
+   quede tapado por la cabecera superpuesta. */
+@media screen and (max-width: 749px) {
+  body.gia-overlay-header .gia-hero__overlay {
+    padding-top: calc(var(--gia-header-h, 74px) + 26px);
+  }
 }
 
 .gia-header__bar {

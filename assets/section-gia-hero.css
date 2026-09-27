@@ -39,6 +39,8 @@
 }
 
 .gia-hero__text {
+  position: relative;
+  z-index: 1;               /* por encima del velo (::before absoluto) */
   display: flex;
   flex-direction: column;
   gap: clamp(12px, 1.6vw, 20px);
