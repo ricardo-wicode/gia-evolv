@@ -1,101 +1,148 @@
-/* Gia · Hero — panel de texto + imagen a sangre, del prototipo de diseño. */
+/* Gia · Hero — imagen a sangre con el texto superpuesto.
+   Escritorio: imagen horizontal, texto a la izquierda (zona despejada).
+   Móvil: imagen vertical, texto arriba (zona despejada). */
 
 .gia-hero {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  position: relative;
   width: 100%;
-  border-bottom: 1px solid var(--gia-grey-200);
+  overflow: hidden;
+  background: rgb(var(--color-background));
+}
+
+/* --- Fondo --- */
+.gia-hero__bg {
+  position: relative;
+  width: 100%;
+}
+
+.gia-hero__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Una imagen por viewport: la visible marca la altura del bloque. */
+.gia-hero__img--mobile {
+  display: none;
+}
+
+/* --- Texto encima --- */
+.gia-hero__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;          /* centrado vertical en escritorio */
+  justify-content: flex-start;  /* pegado a la izquierda */
+  padding: 0 clamp(28px, 6vw, 104px);
+  box-sizing: border-box;
+  pointer-events: none;         /* la imagen no captura clics; el botón sí */
 }
 
 .gia-hero__text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: var(--space-5);
-  padding: clamp(44px, 6vw, 88px) clamp(28px, 5vw, 80px);
-  min-height: clamp(420px, 46vw, 620px);
-  box-sizing: border-box;
-  background: rgb(var(--color-background));
+  gap: clamp(12px, 1.6vw, 20px);
+  width: min(42%, 460px);
+  pointer-events: auto;
 }
 
-.gia-hero__heading {
-  margin: 0;
-  font: 700 clamp(38px, 4.6vw, 60px) / var(--leading-tight) var(--font-primary);
-  letter-spacing: -0.02em;
-  max-width: 17ch;
-  text-wrap: pretty;
-}
-
-.gia-hero__body {
-  margin: 0;
-  font: 400 17px / var(--leading-body) var(--font-secondary);
-  max-width: 40ch;
-  text-wrap: pretty;
-  opacity: 0.82;
+/* Velo suave solo bajo el texto, para asegurar contraste sobre la imagen. */
+.gia-hero--scrim .gia-hero__overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.28) 34%,
+    rgba(255, 255, 255, 0) 58%);
+  pointer-events: none;
 }
 
 .gia-hero__kicker {
   margin: 0;
-  font: 700 15px / var(--leading-snug) var(--font-secondary);
+  font: 700 clamp(12px, 1vw, 14px) / var(--leading-snug) var(--font-secondary);
+  letter-spacing: 0.02em;
+  color: var(--gia-turquoise-700);
+}
+
+.gia-hero__heading {
+  margin: 0;
+  font: 700 clamp(30px, 3.8vw, 54px) / 1.08 var(--font-primary);
+  letter-spacing: -0.02em;
+  color: var(--gia-ink);
+  text-wrap: balance;
+}
+
+.gia-hero__body {
+  margin: 0;
+  font: 400 clamp(14px, 1.15vw, 17px) / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+  max-width: 42ch;
 }
 
 .gia-hero__actions {
   display: flex;
-  margin-top: var(--space-3);
+  margin-top: clamp(4px, 0.8vw, 10px);
 }
 
 .gia-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font: 700 13px / 1 var(--font-secondary);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
+  color: var(--gia-btn-text);
+  background: var(--gia-btn-bg);
   border: none;
-  padding: 20px 34px;
-  border-radius: var(--radius-md);
+  padding: 16px 30px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard);
 }
 
-.gia-hero__media {
-  position: relative;
-  overflow: hidden;
-  background: var(--gia-white);
-  min-height: clamp(320px, 46vw, 620px);
+.gia-hero__cta:hover {
+  background: var(--gia-btn-bg-hover);
 }
 
-.gia-hero__image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* En pantallas de una sola columna el texto va primero. */
-@media screen and (max-width: 840px) {
-  .gia-hero__media {
-    min-height: clamp(280px, 60vw, 420px);
-  }
-}
-
-/* En móvil el panel turquesa se queda —es el titular de la portada—
-   pero compacto, para que la imagen siga a la vista sin bajar mucho. */
+/* --- Móvil: imagen vertical, texto arriba --- */
 @media screen and (max-width: 749px) {
-  .gia-hero__text {
-    padding: 36px 20px;
-    min-height: 0;
-    gap: var(--space-4);
+  .gia-hero__img--desktop {
+    display: none;
   }
 
-  .gia-hero__heading {
-    font-size: 30px;
+  .gia-hero__img--mobile {
+    display: block;
+  }
+
+  .gia-hero__overlay {
+    align-items: flex-start;      /* texto arriba */
+    justify-content: center;      /* centrado horizontal */
+    padding: clamp(26px, 8vw, 44px) 22px 0;
+    text-align: center;
+  }
+
+  .gia-hero__text {
+    width: 100%;
+    max-width: 30ch;
+    align-items: center;
+    gap: 10px;
   }
 
   .gia-hero__body {
-    font-size: 15px;
+    display: none;                /* la franja superior es corta: titular + botón */
   }
 
-  .gia-hero__media {
-    min-height: clamp(300px, 78vw, 420px);
+  .gia-hero--scrim .gia-hero__overlay::before {
+    background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.25) 46%,
+      rgba(255, 255, 255, 0) 70%);
+  }
+
+  .gia-hero__actions {
+    justify-content: center;
+    margin-top: 4px;
   }
 }
