@@ -397,17 +397,6 @@
         "color_scheme": "scheme-4"
       }
     },
-    "gia_blog": {
-      "type": "gia-blog",
-      "settings": {
-        "eyebrow": "Aprende con nosotros",
-        "heading": "Nuestro blog",
-        "blog": "noticias",
-        "post_limit": 3,
-        "link_label": "Ver todos los artículos",
-        "color_scheme": "scheme-1"
-      }
-    },
     "gia_faq": {
       "type": "collapsible-content",
       "blocks": {
@@ -480,7 +469,6 @@
     "gia_testimonials",
     "gia_stats",
     "gia_newsletter",
-    "gia_blog",
     "gia_faq"
   ]
 }
