@@ -10,10 +10,12 @@ Thumbs.db
 .shopify
 node_modules
 *.zip
-# Fuentes Nexa — versiones Trial, sin licencia de redistribución.
-# Se quedan en disco para `shopify theme push`, pero fuera de este repo
-# porque es público. Al comprar la licencia, quitar estas líneas.
+# Fuentes Nexa con licencia — se quedan en disco para `shopify theme push`
+# (uso legítimo de webfont en el CDN de la tienda), pero FUERA de este repo
+# porque es público: subir los binarios sería redistribuirlos sin licencia.
 assets/nexa-*.otf
+assets/nexa-*.ttf
+assets/nexa-*.woff2
 
 # Tokens de Theme Access: nunca deben versionarse (este repo es público).
 *.token

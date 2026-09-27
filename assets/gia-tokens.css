@@ -88,7 +88,7 @@
   --font-primary:"Nexa","Montserrat",system-ui,sans-serif; /* tipografía principal — corte Bold = semibold de marca */
   --font-secondary:"Montserrat",system-ui,sans-serif;                   /* complementaria: cuerpo y UI */
   --font-brand:"Nexa","Montserrat",system-ui,sans-serif;                /* lockups y eyebrows tipo imagotipo */
-  --font-text:"Nexa Text","Montserrat",system-ui,sans-serif;            /* corte de texto para documentos largos */
+  --font-text:"Nexa","Montserrat",system-ui,sans-serif;                 /* texto largo: Nexa Regular */
   --font-eyebrow:var(--font-secondary); /* @kind font */
   --font-mono:ui-monospace,SFMono-Regular,Menlo,monospace; /* dosis, SKU, numeración */
 
