@@ -178,11 +178,16 @@
         "color_scheme": "scheme-6",
         "legal_menu": "legal"
       }
+    },
+    "gia_popup": {
+      "type": "gia-popup",
+      "settings": {}
     }
   },
   "order": [
     "gia_community",
     "gia_marquee_display",
-    "gia_footer"
+    "gia_footer",
+    "gia_popup"
   ]
 }

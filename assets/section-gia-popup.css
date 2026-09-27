@@ -1,0 +1,249 @@
+/* Gia · Popup — suscripción con descuento de bienvenida.
+   Tarjeta centrada sobre un velo oscuro: foto a la izquierda en
+   escritorio, franja superior en móvil. */
+
+.gia-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 100; /* por encima de la cabecera (40) */
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* display:grid pisaría el [hidden] nativo: se repone a mano. */
+.gia-popup[hidden] {
+  display: none;
+}
+
+.gia-popup-open {
+  overflow: hidden; /* bloquea el scroll de fondo mientras está abierto */
+}
+
+.gia-popup__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 28, 27, 0.55);
+  animation: gia-popup-fade var(--duration-base, 0.25s) var(--ease-standard, ease) both;
+}
+
+.gia-popup__card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+  width: min(920px, 100%);
+  max-height: calc(100dvh - 40px);
+  background: var(--gia-white, #fff);
+  border-radius: var(--radius-2xl, 24px);
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.28);
+  animation: gia-popup-pop var(--duration-base, 0.25s) var(--ease-standard, ease) both;
+}
+
+@keyframes gia-popup-fade {
+  from { opacity: 0; }
+}
+
+@keyframes gia-popup-pop {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gia-popup__backdrop,
+  .gia-popup__card {
+    animation: none;
+  }
+}
+
+.gia-popup__x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-circle, 50%);
+  background: transparent;
+  color: var(--gia-ink);
+  cursor: pointer;
+}
+
+.gia-popup__x:hover {
+  background: var(--gia-grey-100);
+}
+
+/* --- Foto --- */
+
+.gia-popup__media {
+  min-height: 100%;
+}
+
+.gia-popup__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Contenido --- */
+
+.gia-popup__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 56px);
+  text-align: center;
+  overflow-y: auto;
+}
+
+.gia-popup__eyebrow {
+  margin: 0;
+  font: 700 12px / 1 var(--font-secondary);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-600);
+}
+
+.gia-popup__heading {
+  margin: 0;
+  font: 700 clamp(26px, 3vw, 38px) / 1.15 var(--font-primary);
+  letter-spacing: -0.02em;
+  color: var(--gia-ink);
+  text-wrap: balance;
+}
+
+.gia-popup__body {
+  font: 400 15px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+  max-width: 44ch;
+}
+
+.gia-popup__body p {
+  margin: 0;
+}
+
+/* --- Formulario --- */
+
+.gia-popup__form {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+  text-align: left;
+}
+
+.gia-popup__label {
+  font: 600 13px / 1 var(--font-secondary);
+  color: var(--gia-ink);
+}
+
+.gia-popup__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid var(--gia-grey-300);
+  border-radius: var(--radius-md);
+  font: 400 15px / 1.2 var(--font-secondary);
+  color: var(--gia-ink);
+  background: var(--gia-white);
+}
+
+.gia-popup__input::placeholder {
+  color: var(--gia-grey-400);
+}
+
+.gia-popup__submit {
+  margin-top: 10px;
+  width: 100%;
+  border: none;
+  padding: 17px 24px;
+  border-radius: var(--radius-pill);
+  background: var(--gia-btn-bg);
+  color: var(--gia-btn-text);
+  font: 700 15px / 1 var(--font-secondary);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.gia-popup__submit:hover {
+  background: var(--gia-btn-bg-hover);
+}
+
+.gia-popup__no {
+  border: none;
+  background: none;
+  padding: 4px;
+  margin-top: 2px;
+  font: 600 14px / 1.3 var(--font-secondary);
+  color: var(--gia-turquoise-600);
+  cursor: pointer;
+}
+
+.gia-popup__no:hover {
+  color: var(--gia-turquoise-700);
+}
+
+.gia-popup__ok {
+  margin: 6px 0 0;
+  font: 600 15px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-turquoise-700);
+  text-align: center;
+}
+
+.gia-popup__error {
+  margin: 0;
+  font: 400 13px / var(--leading-snug) var(--font-secondary);
+  color: #b3261e;
+}
+
+/* --- Móvil: foto como franja superior, tarjeta desplazable --- */
+
+@media screen and (max-width: 749px) {
+  .gia-popup {
+    padding: 14px;
+  }
+
+  .gia-popup__card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    max-height: calc(100dvh - 28px);
+  }
+
+  .gia-popup__media {
+    min-height: 0;
+    height: 148px;
+  }
+
+  .gia-popup__media img {
+    object-position: 50% 32%;
+  }
+
+  .gia-popup__content {
+    padding: 22px 20px 26px;
+    gap: 10px;
+  }
+
+  .gia-popup__heading {
+    font-size: 24px;
+  }
+
+  .gia-popup__body {
+    font-size: 14px;
+  }
+
+  .gia-popup__x {
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.85);
+  }
+}
