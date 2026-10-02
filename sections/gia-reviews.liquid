@@ -3,15 +3,16 @@
 {%- comment -%}
   Reseñas de Judge.me, con el lenguaje visual del sitio.
 
-  Se monta el contenedor oficial del widget (#judgeme_product_reviews con
-  la clase .jdgm-review-widget): el app embed de Judge.me lo hidrata con
-  la lista de reseñas, el resumen y el botón de "escribir reseña". Si el
-  producto ya tiene el widget cacheado en su metafield, se imprime de una
-  vez para que salga sin esperar al JS; si no, Judge.me lo rellena solo.
+  Dos modos, según el ajuste "Reseñas de ejemplo":
 
-  Requisito: tener activado el "App embed" de Judge.me en el editor de
-  temas (Apariencia → Personalizar → Insertos de aplicación). Sin eso el
-  JS no carga y el contenedor queda vacío.
+  · Ejemplo (mock): dibuja un set de reseñas estáticas con el diseño de
+    marca, para ver cómo se verá la sección antes de tener reseñas reales.
+    ⚠ Son de muestra: desactívalo antes de publicar, no son reales.
+
+  · Real: monta el contenedor oficial de Judge.me
+    (#judgeme_product_reviews). Su "App embed" lo hidrata con las reseñas,
+    el resumen y el botón de escribir reseña, e imprime el metafield
+    judgeme.widget si ya está cacheado. Requiere el App embed activado.
 {%- endcomment -%}
 
 <section
@@ -26,14 +27,195 @@
       align: section.settings.align %}
 
     <div class="gia-reviews__widget">
-      <div
-        id="judgeme_product_reviews"
-        class="jdgm-widget jdgm-review-widget"
-        data-product-title="{{ product.title | escape }}"
-        data-id="{{ product.id }}"
-      >
-        {{ product.metafields.judgeme.widget }}
-      </div>
+      {%- if section.settings.show_sample -%}
+        {%- comment -%} ----- RESEÑAS DE EJEMPLO (quitar antes de publicar) ----- {%- endcomment -%}
+        <div class="gia-rv">
+          <div class="gia-rv__summary">
+            <div class="gia-rv__score">
+              <span class="gia-rv__avg">4.8</span>
+              <div class="gia-rv__score-meta">
+                {% render 'gia-rv-stars', rating: 5 %}
+                <span class="gia-rv__count">Basado en 37 reseñas</span>
+              </div>
+            </div>
+
+            <ul class="gia-rv__histogram" aria-hidden="true">
+              <li><span class="gia-rv__hist-label">5</span><span class="gia-rv__hist-track"><span class="gia-rv__hist-fill" style="width:81%"></span></span><span class="gia-rv__hist-n">30</span></li>
+              <li><span class="gia-rv__hist-label">4</span><span class="gia-rv__hist-track"><span class="gia-rv__hist-fill" style="width:14%"></span></span><span class="gia-rv__hist-n">5</span></li>
+              <li><span class="gia-rv__hist-label">3</span><span class="gia-rv__hist-track"><span class="gia-rv__hist-fill" style="width:3%"></span></span><span class="gia-rv__hist-n">1</span></li>
+              <li><span class="gia-rv__hist-label">2</span><span class="gia-rv__hist-track"><span class="gia-rv__hist-fill" style="width:3%"></span></span><span class="gia-rv__hist-n">1</span></li>
+              <li><span class="gia-rv__hist-label">1</span><span class="gia-rv__hist-track"><span class="gia-rv__hist-fill" style="width:0%"></span></span><span class="gia-rv__hist-n">0</span></li>
+            </ul>
+
+            <a class="gia-rv__write" href="#reviews">Escribir una reseña</a>
+          </div>
+
+          <ul class="gia-rv__list">
+            <li class="gia-rv__card">
+              <div class="gia-rv__card-head">
+                {% render 'gia-rv-stars', rating: 5 %}
+                <span class="gia-rv__date">hace 2 semanas</span>
+              </div>
+              <h3 class="gia-rv__card-title">Volví a sentirme con energía</h3>
+              <p class="gia-rv__card-body">Llevo tres semanas tomándolo y de verdad noto la diferencia: sin bajones por la tarde. Repetiré sin duda.</p>
+              <div class="gia-rv__card-foot">
+                <span class="gia-rv__author">María Fernanda G.</span>
+                <span class="gia-rv__verified">Compra verificada</span>
+              </div>
+            </li>
+
+            <li class="gia-rv__card">
+              <div class="gia-rv__card-head">
+                {% render 'gia-rv-stars', rating: 5 %}
+                <span class="gia-rv__date">hace 1 mes</span>
+              </div>
+              <h3 class="gia-rv__card-title">Calidad que se nota</h3>
+              <p class="gia-rv__card-body">Me gusta que la etiqueta es transparente y la dosis es la real, no una fracción. Llegó rápido y muy bien empacado.</p>
+              <div class="gia-rv__card-foot">
+                <span class="gia-rv__author">Carlos Rentería</span>
+                <span class="gia-rv__verified">Compra verificada</span>
+              </div>
+            </li>
+
+            <li class="gia-rv__card">
+              <div class="gia-rv__card-head">
+                {% render 'gia-rv-stars', rating: 4 %}
+                <span class="gia-rv__date">hace 1 mes</span>
+              </div>
+              <h3 class="gia-rv__card-title">Mejoró mi descanso</h3>
+              <p class="gia-rv__card-body">Lo tomo en la noche y duermo mucho mejor. El sabor es neutro, cumple sin problema. Volveré a pedir.</p>
+              <div class="gia-rv__card-foot">
+                <span class="gia-rv__author">Ana Sofía M.</span>
+                <span class="gia-rv__verified">Compra verificada</span>
+              </div>
+            </li>
+
+            <li class="gia-rv__card">
+              <div class="gia-rv__card-head">
+                {% render 'gia-rv-stars', rating: 5 %}
+                <span class="gia-rv__date">hace 2 meses</span>
+              </div>
+              <h3 class="gia-rv__card-title">Recomendado por mi nutrióloga</h3>
+              <p class="gia-rv__card-body">Me lo sugirió mi nutrióloga y la verdad sentí el cambio en un par de semanas. El acompañamiento por WhatsApp es un plus.</p>
+              <div class="gia-rv__card-foot">
+                <span class="gia-rv__author">Jorge L.</span>
+                <span class="gia-rv__verified">Compra verificada</span>
+              </div>
+            </li>
+          </ul>
+
+          {%- comment -%} Modal del formulario (demo). En el widget real lo abre Judge.me. {%- endcomment -%}
+          <div class="gia-rvm" data-gia-rvm hidden>
+            <div class="gia-rvm__backdrop" data-gia-rvm-close></div>
+            <div class="gia-rvm__card" role="dialog" aria-modal="true" aria-labelledby="GiaRvmTitle-{{ section.id }}">
+              <button type="button" class="gia-rvm__x" data-gia-rvm-close aria-label="Cerrar">
+                {% render 'gia-icon', icon: 'x', size: 18 %}
+              </button>
+              <h3 class="gia-rvm__title" id="GiaRvmTitle-{{ section.id }}">Escribe tu reseña</h3>
+              <p class="gia-rvm__sub">Cuéntanos tu experiencia con {{ product.title }}.</p>
+
+              <form class="gia-rvm__form" data-gia-rvm-form novalidate>
+                <div class="gia-rvm__field">
+                  <span class="gia-rvm__label">Tu calificación</span>
+                  <div class="gia-rvm__rating" data-gia-rating role="radiogroup" aria-label="Calificación">
+                    {%- for i in (1..5) -%}
+                      <button type="button" class="gia-rvm__star" data-v="{{ i }}" aria-label="{{ i }} estrellas">&#9733;</button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+                <label class="gia-rvm__field">
+                  <span class="gia-rvm__label">Título</span>
+                  <input type="text" class="gia-rvm__input" placeholder="Resume tu experiencia">
+                </label>
+                <label class="gia-rvm__field">
+                  <span class="gia-rvm__label">Tu reseña</span>
+                  <textarea class="gia-rvm__input" rows="4" placeholder="¿Qué notaste? ¿Lo recomendarías?"></textarea>
+                </label>
+                <div class="gia-rvm__row">
+                  <label class="gia-rvm__field">
+                    <span class="gia-rvm__label">Nombre</span>
+                    <input type="text" class="gia-rvm__input" placeholder="Tu nombre">
+                  </label>
+                  <label class="gia-rvm__field">
+                    <span class="gia-rvm__label">Correo</span>
+                    <input type="email" class="gia-rvm__input" placeholder="tu@correo.com">
+                  </label>
+                </div>
+                <button type="submit" class="gia-rvm__submit">Enviar reseña</button>
+                <p class="gia-rvm__note">Vista de ejemplo — en producción lo gestiona Judge.me.</p>
+              </form>
+
+              <div class="gia-rvm__thanks" data-gia-rvm-thanks hidden>
+                <p class="gia-rvm__thanks-title">¡Gracias por tu reseña!</p>
+                <p class="gia-rvm__thanks-text">Esto es una demostración del diseño. Con Judge.me activo, tu reseña quedaría registrada.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            var root = document.currentScript.closest('.gia-reviews');
+            if (!root) return;
+            var modal = root.querySelector('[data-gia-rvm]');
+            var openBtn = root.querySelector('.gia-rv__write');
+            if (!modal || !openBtn) return;
+
+            var opener = null;
+            var open = function (e) {
+              if (e) e.preventDefault();
+              modal.hidden = false;
+              document.documentElement.classList.add('gia-popup-open');
+              opener = document.activeElement;
+              var x = modal.querySelector('.gia-rvm__x');
+              if (x) x.focus();
+            };
+            var close = function () {
+              modal.hidden = true;
+              document.documentElement.classList.remove('gia-popup-open');
+              if (opener && opener.focus) opener.focus();
+            };
+
+            openBtn.addEventListener('click', open);
+            modal.querySelectorAll('[data-gia-rvm-close]').forEach(function (el) {
+              el.addEventListener('click', close);
+            });
+            document.addEventListener('keydown', function (e) {
+              if (e.key === 'Escape' && !modal.hidden) close();
+            });
+
+            // Selector de estrellas
+            var rating = 0;
+            var stars = modal.querySelectorAll('.gia-rvm__star');
+            var paint = function (n) {
+              stars.forEach(function (s, i) {
+                s.classList.toggle('is-on', i < n);
+              });
+            };
+            stars.forEach(function (s) {
+              s.addEventListener('mouseenter', function () { paint(+s.dataset.v); });
+              s.addEventListener('click', function () { rating = +s.dataset.v; paint(rating); });
+            });
+            modal.querySelector('[data-gia-rating]').addEventListener('mouseleave', function () { paint(rating); });
+
+            // Envío (demo): muestra el agradecimiento
+            modal.querySelector('[data-gia-rvm-form]').addEventListener('submit', function (e) {
+              e.preventDefault();
+              this.hidden = true;
+              modal.querySelector('[data-gia-rvm-thanks]').hidden = false;
+            });
+          })();
+        </script>
+      {%- else -%}
+        <div
+          id="judgeme_product_reviews"
+          class="jdgm-widget jdgm-review-widget"
+          data-product-title="{{ product.title | escape }}"
+          data-id="{{ product.id }}"
+        >
+          {{ product.metafields.judgeme.widget }}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -69,6 +251,13 @@
         { "value": "center", "label": "Centro" }
       ],
       "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sample",
+      "label": "Reseñas de ejemplo (solo diseño)",
+      "info": "Muestra reseñas de muestra para ver el diseño. ⚠ No son reales: desactívalo antes de publicar para mostrar el widget real de Judge.me.",
+      "default": true
     },
     { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" },
     { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 },

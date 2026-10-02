@@ -191,3 +191,394 @@
     font-size: 34px !important;
   }
 }
+
+/* =====================================================================
+   Reseñas de EJEMPLO (mock de diseño). Marcado propio .gia-rv-*, para
+   ver el diseño sin depender de Judge.me. Refleja el mismo lenguaje con
+   que se reviste el widget real, para que al cambiar a reseñas reales se
+   vea igual.
+   ===================================================================== */
+
+.gia-rv-stars {
+  display: inline-flex;
+  gap: 2px;
+  font-size: 17px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.gia-rv-stars__s {
+  color: var(--gia-grey-300);
+}
+
+.gia-rv-stars__s--on {
+  color: var(--gia-turquoise);
+}
+
+/* --- Resumen --- */
+.gia-rv__summary {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  padding: clamp(22px, 3vw, 32px) clamp(24px, 4vw, 40px);
+  border: 1px solid var(--gia-grey-200);
+  border-radius: var(--radius-xl);
+  background: var(--gia-turquoise-50, var(--gia-grey-50));
+}
+
+.gia-rv__score {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.gia-rv__avg {
+  font: 700 46px / 1 var(--font-primary);
+  letter-spacing: -0.02em;
+  color: var(--gia-ink);
+}
+
+.gia-rv__score-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.gia-rv__count {
+  font: 400 13px / 1.3 var(--font-secondary);
+  color: var(--gia-grey-500);
+}
+
+/* Histograma */
+.gia-rv__histogram {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 180px;
+}
+
+.gia-rv__histogram li {
+  display: grid;
+  grid-template-columns: 14px 1fr 24px;
+  align-items: center;
+  gap: 10px;
+}
+
+.gia-rv__hist-label {
+  font: 600 12px / 1 var(--font-secondary);
+  color: var(--gia-grey-500);
+  text-align: right;
+}
+
+.gia-rv__hist-track {
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--gia-grey-100);
+  overflow: hidden;
+}
+
+.gia-rv__hist-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--gia-turquoise);
+}
+
+.gia-rv__hist-n {
+  font: 400 12px / 1 var(--font-secondary);
+  color: var(--gia-grey-500);
+  text-align: left;
+}
+
+/* Botón escribir reseña */
+.gia-rv__write {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  background: var(--gia-btn-bg);
+  color: var(--gia-btn-text);
+  border-radius: var(--radius-pill);
+  padding: 14px 26px;
+  font: 700 14px / 1 var(--font-secondary);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.gia-rv__write:hover {
+  background: var(--gia-btn-bg-hover);
+}
+
+/* --- Lista de reseñas --- */
+.gia-rv__list {
+  list-style: none;
+  margin: clamp(20px, 3vw, 32px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 22px);
+}
+
+.gia-rv__card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(20px, 2.4vw, 26px);
+  border: 1px solid var(--gia-grey-200);
+  border-radius: var(--radius-lg);
+  background: var(--gia-white);
+}
+
+.gia-rv__card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gia-rv__date {
+  font: 400 12.5px / 1 var(--font-secondary);
+  color: var(--gia-grey-400);
+}
+
+.gia-rv__card-title {
+  margin: 0;
+  font: 700 16px / 1.3 var(--font-primary);
+  color: var(--gia-ink);
+}
+
+.gia-rv__card-body {
+  margin: 0;
+  font: 400 14.5px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+}
+
+.gia-rv__card-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.gia-rv__author {
+  font: 600 13.5px / 1 var(--font-secondary);
+  color: var(--gia-ink);
+}
+
+.gia-rv__verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: 600 11px / 1 var(--font-secondary);
+  color: var(--gia-turquoise-700);
+  background: var(--gia-turquoise-100);
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+}
+
+.gia-rv__verified::before {
+  content: "\2713"; /* check */
+  font-size: 10px;
+}
+
+/* --- Móvil --- */
+@media screen and (max-width: 749px) {
+  .gia-rv__summary {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: left;
+  }
+
+  .gia-rv__write {
+    width: 100%;
+  }
+
+  .gia-rv__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Modal del formulario de reseña (demo del mock) ------------------ */
+.gia-rvm {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.gia-rvm[hidden] {
+  display: none;
+}
+
+/* Velo: compound selector para ganarle a Dawn `div:empty{display:none}`. */
+.gia-rvm .gia-rvm__backdrop {
+  display: block;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  background: rgba(245, 249, 248, 0.72);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.gia-rvm__card {
+  position: relative;
+  width: min(540px, 100%);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  background: var(--gia-white);
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.22);
+  padding: clamp(28px, 4vw, 40px);
+  box-sizing: border-box;
+}
+
+.gia-rvm__x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-circle);
+  background: transparent;
+  color: var(--gia-ink);
+  cursor: pointer;
+}
+
+.gia-rvm__x:hover {
+  background: var(--gia-grey-100);
+}
+
+.gia-rvm__title {
+  margin: 0;
+  font: 700 clamp(22px, 2.6vw, 28px) / 1.15 var(--font-primary);
+  letter-spacing: -0.02em;
+  color: var(--gia-ink);
+}
+
+.gia-rvm__sub {
+  margin: 6px 0 20px;
+  font: 400 14px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-grey-500);
+}
+
+.gia-rvm__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gia-rvm__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gia-rvm__label {
+  font: 600 13px / 1 var(--font-secondary);
+  color: var(--gia-ink);
+}
+
+.gia-rvm__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid var(--gia-grey-300);
+  border-radius: var(--radius-md);
+  font: 400 14.5px / 1.3 var(--font-secondary);
+  color: var(--gia-ink);
+  background: var(--gia-white);
+  resize: vertical;
+}
+
+.gia-rvm__input::placeholder {
+  color: var(--gia-grey-400);
+}
+
+.gia-rvm__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Selector de estrellas */
+.gia-rvm__rating {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.gia-rvm__star {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--gia-grey-300);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.gia-rvm__star.is-on {
+  color: var(--gia-turquoise);
+}
+
+.gia-rvm__submit {
+  margin-top: 4px;
+  width: 100%;
+  border: none;
+  padding: 16px 24px;
+  border-radius: var(--radius-pill);
+  background: var(--gia-btn-bg);
+  color: var(--gia-btn-text);
+  font: 700 15px / 1 var(--font-secondary);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.gia-rvm__submit:hover {
+  background: var(--gia-btn-bg-hover);
+}
+
+.gia-rvm__note {
+  margin: 0;
+  text-align: center;
+  font: 400 12px / 1.4 var(--font-secondary);
+  color: var(--gia-grey-400);
+}
+
+.gia-rvm__thanks {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.gia-rvm__thanks-title {
+  margin: 0 0 8px;
+  font: 700 20px / 1.2 var(--font-primary);
+  color: var(--gia-turquoise-700);
+}
+
+.gia-rvm__thanks-text {
+  margin: 0;
+  font: 400 14px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-700);
+}
+
+@media screen and (max-width: 749px) {
+  .gia-rvm__row {
+    grid-template-columns: 1fr;
+  }
+}

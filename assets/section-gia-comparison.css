@@ -36,10 +36,14 @@
 /* El desbordamiento se queda aquí dentro: la página nunca scrollea en
    horizontal. tabindex="0" hace la región alcanzable por teclado, que si
    no el contenido recortado queda inaccesible sin ratón. */
+/* La tabla es una tarjeta blanca sobre la sección oscura, para que
+   destaque y se diferencie del fondo. La columna "Gia Evolv" conserva el
+   turquesa como acento. */
 .gia-comparison__scroll {
   overflow-x: auto;
-  border: 1px solid var(--gia-grey-900);
+  border: 1px solid var(--gia-grey-200);
   border-radius: var(--radius-lg);
+  background: var(--gia-white);
 }
 
 
@@ -56,8 +60,8 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: center;
-  background: #1c1c1c;
-  color: var(--gia-grey-400);
+  background: var(--gia-grey-50);
+  color: var(--gia-grey-500);
 }
 
 .gia-comparison__th--criterion {
@@ -75,26 +79,26 @@
 .gia-comparison__us,
 .gia-comparison__them {
   padding: 18px 20px;
-  border-top: 1px solid var(--gia-grey-900);
+  border-top: 1px solid var(--gia-grey-200);
   vertical-align: top;
 }
 
 .gia-comparison__criterion {
   font: 600 14px / 1.4 var(--font-secondary);
-  color: var(--gia-white);
+  color: var(--gia-ink);
   text-align: left;
 }
 
 .gia-comparison__us {
-  background: rgba(0, 147, 137, 0.14);
+  background: var(--gia-turquoise-50);
   font: 400 13.5px / var(--leading-snug) var(--font-secondary);
-  color: #dff3f1;
+  color: var(--gia-turquoise-700);
   text-align: center;
 }
 
 .gia-comparison__them {
   font: 400 13.5px / var(--leading-snug) var(--font-secondary);
-  color: var(--gia-grey-400);
+  color: var(--gia-grey-500);
   text-align: center;
 }
 

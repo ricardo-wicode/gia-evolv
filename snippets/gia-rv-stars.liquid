@@ -1,0 +1,14 @@
+{%- comment -%}
+  Estrellas para las reseñas de ejemplo.
+  Uso: {% render 'gia-rv-stars', rating: 5 %}
+{%- endcomment -%}
+{%- assign r = rating | default: 5 | round -%}
+<span class="gia-rv-stars" role="img" aria-label="{{ r }} de 5 estrellas">
+  {%- for i in (1..5) -%}
+    {%- if i <= r -%}
+      <span class="gia-rv-stars__s gia-rv-stars__s--on" aria-hidden="true">&#9733;</span>
+    {%- else -%}
+      <span class="gia-rv-stars__s" aria-hidden="true">&#9733;</span>
+    {%- endif -%}
+  {%- endfor -%}
+</span>
