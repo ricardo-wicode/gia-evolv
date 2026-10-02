@@ -24,7 +24,7 @@
         "rating": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div class=\"gia-product__stars\">{% render 'gia-stars', product: product %}</div>"
+            "custom_liquid": "<a class=\"gia-product__stars\" href=\"#reviews\" aria-label=\"Ver reseñas\">{% render 'gia-stars', product: product %}</a>"
           }
         },
         "price": {
@@ -334,6 +334,18 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "gia_reviews": {
+      "type": "gia-reviews",
+      "settings": {
+        "eyebrow": "Opiniones reales",
+        "heading": "Lo que dicen quienes ya lo toman",
+        "description": "Reseñas verificadas de clientes de Gia Evolv.",
+        "align": "center",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     }
   },
   "order": [
@@ -342,6 +354,7 @@
     "gia_benefits",
     "disclosures",
     "gia_comparison",
+    "gia_reviews",
     "gia_faq",
     "related-products"
   ]

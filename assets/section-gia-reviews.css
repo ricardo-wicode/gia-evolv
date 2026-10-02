@@ -1,0 +1,193 @@
+/* Gia · Reseñas — reviste el widget de Judge.me con el lenguaje del sitio.
+   Judge.me inyecta su propio CSS desde su CDN con alta especificidad, así
+   que varias reglas usan !important a propósito para ganarle en color,
+   fondo, tipografía y radios. Todo va dentro de .gia-reviews para no
+   afectar otros widgets. */
+
+.gia-reviews__inner {
+  width: 100%;
+}
+
+.gia-reviews__widget {
+  margin-top: clamp(20px, 3vw, 36px);
+}
+
+/* --- Encabezado propio de Judge.me: se oculta, ya hay uno de la sección --- */
+.gia-reviews .jdgm-rev-widg__title {
+  display: none !important;
+}
+
+/* --- Tipografías --- */
+.gia-reviews .jdgm-widget,
+.gia-reviews .jdgm-widget * {
+  font-family: var(--font-secondary) !important;
+}
+
+.gia-reviews .jdgm-rev-widg__summary-average,
+.gia-reviews .jdgm-histogram__percentage,
+.gia-reviews .jdgm-rev__title {
+  font-family: var(--font-primary) !important;
+}
+
+/* --- Estrellas en el turquesa de marca --- */
+.gia-reviews .jdgm-star.jdgm--on,
+.gia-reviews .jdgm-star.jdgm--half {
+  color: var(--gia-turquoise) !important;
+}
+
+.gia-reviews .jdgm-star.jdgm--off {
+  color: var(--gia-grey-300) !important;
+}
+
+/* --- Resumen superior: nota media + estrellas + conteo --- */
+.gia-reviews .jdgm-rev-widg__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--gia-grey-200);
+}
+
+.gia-reviews .jdgm-rev-widg__summary-average {
+  font-size: 40px !important;
+  font-weight: 700 !important;
+  color: var(--gia-ink) !important;
+  letter-spacing: -0.02em;
+}
+
+.gia-reviews .jdgm-rev-widg__summary-text {
+  color: var(--gia-grey-500) !important;
+  font-size: 13.5px !important;
+}
+
+/* Barras del histograma en turquesa */
+.gia-reviews .jdgm-histogram__bar {
+  background: var(--gia-grey-100) !important;
+  border-radius: var(--radius-pill) !important;
+  overflow: hidden;
+}
+
+.gia-reviews .jdgm-histogram__bar-content {
+  background: var(--gia-turquoise) !important;
+}
+
+.gia-reviews .jdgm-histogram__row:hover .jdgm-histogram__bar-content {
+  background: var(--gia-turquoise-600) !important;
+}
+
+/* --- Botón "Escribir reseña": sistema de botones del sitio --- */
+.gia-reviews .jdgm-write-rev-link {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  background: var(--gia-btn-bg) !important;
+  color: var(--gia-btn-text) !important;
+  border: none !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 14px 28px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em;
+  text-transform: none !important;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.gia-reviews .jdgm-write-rev-link:hover {
+  background: var(--gia-btn-bg-hover) !important;
+}
+
+/* --- Tarjetas de reseña --- */
+.gia-reviews .jdgm-rev {
+  padding: clamp(20px, 2.4vw, 28px) !important;
+  border: 1px solid var(--gia-grey-200) !important;
+  border-radius: var(--radius-lg) !important;
+  background: var(--gia-white) !important;
+  margin-bottom: var(--space-4) !important;
+}
+
+.gia-reviews .jdgm-rev__title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--gia-ink) !important;
+  margin-top: 6px !important;
+}
+
+.gia-reviews .jdgm-rev__body {
+  color: var(--gia-grey-700) !important;
+  line-height: var(--leading-body) !important;
+}
+
+.gia-reviews .jdgm-rev__author,
+.gia-reviews .jdgm-rev__buyer-badge {
+  color: var(--gia-ink) !important;
+  font-weight: 600 !important;
+}
+
+.gia-reviews .jdgm-rev__timestamp,
+.gia-reviews .jdgm-rev__location {
+  color: var(--gia-grey-500) !important;
+  font-size: 12.5px !important;
+}
+
+/* Insignia de "compra verificada" en turquesa suave */
+.gia-reviews .jdgm-rev__icon {
+  background: var(--gia-turquoise) !important;
+}
+
+/* --- Paginación --- */
+.gia-reviews .jdgm-paginate__page {
+  border-radius: var(--radius-md) !important;
+  color: var(--gia-turquoise-700) !important;
+}
+
+.gia-reviews .jdgm-paginate__page.jdgm-curt {
+  background: var(--gia-turquoise) !important;
+  color: var(--gia-white) !important;
+  border-color: var(--gia-turquoise) !important;
+}
+
+/* --- Formulario de reseña (al pulsar "escribir reseña") --- */
+.gia-reviews .jdgm-form__title {
+  font-family: var(--font-primary) !important;
+  color: var(--gia-ink) !important;
+}
+
+.gia-reviews .jdgm-form input[type='text'],
+.gia-reviews .jdgm-form input[type='email'],
+.gia-reviews .jdgm-form textarea {
+  border: 1px solid var(--gia-grey-300) !important;
+  border-radius: var(--radius-md) !important;
+  font-family: var(--font-secondary) !important;
+}
+
+.gia-reviews .jdgm-form__submit-btn,
+.gia-reviews .jdgm-form input[type='submit'] {
+  background: var(--gia-btn-bg) !important;
+  color: var(--gia-btn-text) !important;
+  border: none !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 14px 28px !important;
+  font-weight: 700 !important;
+}
+
+.gia-reviews .jdgm-form__submit-btn:hover,
+.gia-reviews .jdgm-form input[type='submit']:hover {
+  background: var(--gia-btn-bg-hover) !important;
+}
+
+/* --- Estado vacío (sin reseñas aún) --- */
+.gia-reviews .jdgm-no-reviews-text {
+  color: var(--gia-grey-500) !important;
+  font-size: 15px !important;
+}
+
+/* --- Móvil --- */
+@media screen and (max-width: 749px) {
+  .gia-reviews .jdgm-rev-widg__header {
+    gap: var(--space-4);
+  }
+
+  .gia-reviews .jdgm-rev-widg__summary-average {
+    font-size: 34px !important;
+  }
+}

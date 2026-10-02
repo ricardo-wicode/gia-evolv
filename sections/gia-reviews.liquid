@@ -1,0 +1,79 @@
+{{ 'section-gia-reviews.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Reseñas de Judge.me, con el lenguaje visual del sitio.
+
+  Se monta el contenedor oficial del widget (#judgeme_product_reviews con
+  la clase .jdgm-review-widget): el app embed de Judge.me lo hidrata con
+  la lista de reseñas, el resumen y el botón de "escribir reseña". Si el
+  producto ya tiene el widget cacheado en su metafield, se imprime de una
+  vez para que salga sin esperar al JS; si no, Judge.me lo rellena solo.
+
+  Requisito: tener activado el "App embed" de Judge.me en el editor de
+  temas (Apariencia → Personalizar → Insertos de aplicación). Sin eso el
+  JS no carga y el contenedor queda vacío.
+{%- endcomment -%}
+
+<section
+  id="reviews"
+  class="gia-reviews color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding"
+>
+  <div class="gia-reviews__inner page-width">
+    {% render 'gia-section-heading',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.heading,
+      description: section.settings.description,
+      align: section.settings.align %}
+
+    <div class="gia-reviews__widget">
+      <div
+        id="judgeme_product_reviews"
+        class="jdgm-widget jdgm-review-widget"
+        data-product-title="{{ product.title | escape }}"
+        data-id="{{ product.id }}"
+      >
+        {{ product.metafields.judgeme.widget }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Gia · Reseñas",
+  "tag": "section",
+  "class": "gia-reviews-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Opiniones reales" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Lo que dicen quienes ya lo toman" },
+    { "type": "text", "id": "description", "label": "Descripción", "default": "Reseñas verificadas de clientes de Gia Evolv." },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alineación del encabezado",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" }
+      ],
+      "default": "center"
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "presets": [{ "name": "Gia · Reseñas" }]
+}
+{% endschema %}
