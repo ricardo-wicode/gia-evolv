@@ -92,3 +92,12 @@
     min-height: 0;
   }
 }
+
+/* Modo solo texto (sin imagen): una sola columna, centrada y legible. */
+.gia-editorial--no-media .gia-editorial__inner {
+  grid-template-columns: 1fr;
+}
+
+.gia-editorial--no-media .gia-editorial__text {
+  max-width: 68ch;
+}

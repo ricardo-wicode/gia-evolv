@@ -1,0 +1,21 @@
+/* Gia · Banner — banda de imagen a todo el ancho. */
+
+.gia-banner {
+  background: rgb(var(--color-background));
+}
+
+.gia-banner__frame {
+  position: relative;
+  width: 100%;
+  max-height: var(--gia-banner-max-h, 380px);
+  overflow: hidden;
+}
+
+.gia-banner__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: var(--gia-banner-max-h, 380px);
+  object-fit: cover;
+  object-position: center;
+}

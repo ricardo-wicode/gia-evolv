@@ -1,6 +1,12 @@
 {{ 'section-gia-editorial.css' | asset_url | stylesheet_tag }}
 
-<section class="gia-editorial gia-editorial--{{ section.settings.media_position }} color-{{ section.settings.color_scheme }}">
+{%- liquid
+  assign has_media = false
+  if section.settings.image != blank or section.settings.image_asset != blank
+    assign has_media = true
+  endif
+-%}
+<section class="gia-editorial gia-editorial--{{ section.settings.media_position }}{% unless has_media %} gia-editorial--no-media{% endunless %} color-{{ section.settings.color_scheme }}">
   <div class="gia-editorial__inner">
     <div class="gia-editorial__text">
       {%- if section.settings.eyebrow != blank -%}
@@ -30,21 +36,33 @@
       {%- endif -%}
     </div>
 
-    <div class="gia-editorial__media" style="--gia-editorial-ratio: {{ section.settings.ratio }};">
-      {%- if section.settings.image != blank -%}
-        {{
-          section.settings.image
-          | image_url: width: 1200
-          | image_tag:
-            loading: 'lazy',
-            widths: '400, 600, 800, 1000, 1200',
-            sizes: '(min-width: 990px) 50vw, 100vw',
-            alt: section.settings.image.alt | default: section.settings.heading
-        }}
-      {%- else -%}
-        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
-      {%- endif -%}
-    </div>
+    {%- if has_media -%}
+      <div class="gia-editorial__media" style="--gia-editorial-ratio: {{ section.settings.ratio }};">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              widths: '400, 600, 800, 1000, 1200',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              alt: section.settings.image.alt | default: section.settings.heading
+          }}
+        {%- else -%}
+          {%- comment -%} Respaldo: imagen incluida en el tema (assets/). {%- endcomment -%}
+          {%- comment -%}
+            width/height sólo evitan el salto de layout; el recorte real lo
+            fija el contenedor con --gia-editorial-ratio y object-fit.
+          {%- endcomment -%}
+          <img
+            src="{{ section.settings.image_asset | asset_url }}"
+            width="1024" height="807"
+            loading="lazy"
+            alt="{{ section.settings.image_alt | escape }}"
+          >
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -69,6 +87,8 @@
       "info": "Sólo una sección por página debería usar h1."
     },
     { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "text", "id": "image_asset", "label": "Imagen incluida (archivo del tema)", "info": "Nombre de un archivo en assets/ (p. ej. gia-nosotros-socios.jpg). Se usa si no eliges una imagen arriba. Vacío y sin imagen: la sección va a todo el ancho, solo texto." },
+    { "type": "text", "id": "image_alt", "label": "Texto alternativo de la imagen incluida", "default": "Equipo de Gia Evolv" },
     {
       "type": "select",
       "id": "media_position",

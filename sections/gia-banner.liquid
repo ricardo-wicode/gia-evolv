@@ -1,0 +1,57 @@
+{{ 'section-gia-banner.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Banner de imagen a todo el ancho. Acepta una imagen del editor o, si no,
+  un archivo incluido en el tema (assets/). Pensado para bandas anchas tipo
+  marca o portada de sección.
+{%- endcomment -%}
+
+{%- liquid
+  assign has_image = false
+  if section.settings.image != blank or section.settings.image_asset != blank
+    assign has_image = true
+  endif
+-%}
+
+{%- if has_image -%}
+  <section class="gia-banner color-{{ section.settings.color_scheme }}">
+    <div class="gia-banner__frame" style="--gia-banner-max-h: {{ section.settings.max_height }}px;">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 2000
+          | image_tag:
+            loading: 'lazy',
+            widths: '800, 1200, 1600, 2000',
+            sizes: '100vw',
+            class: 'gia-banner__img',
+            alt: section.settings.image.alt | default: section.settings.image_alt
+        }}
+      {%- else -%}
+        <img
+          src="{{ section.settings.image_asset | asset_url }}"
+          class="gia-banner__img"
+          width="1600" height="538"
+          loading="lazy"
+          alt="{{ section.settings.image_alt | escape }}"
+        >
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gia · Banner",
+  "tag": "section",
+  "class": "gia-banner-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "text", "id": "image_asset", "label": "Imagen incluida (archivo del tema)", "info": "Nombre de un archivo en assets/ (p. ej. gia-nosotros-fundador.jpg). Se usa si no eliges imagen arriba." },
+    { "type": "text", "id": "image_alt", "label": "Texto alternativo", "default": "Gia Evolv" },
+    { "type": "range", "id": "max_height", "label": "Altura máxima", "min": 160, "max": 560, "step": 20, "unit": "px", "default": 380 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "Gia · Banner" }]
+}
+{% endschema %}

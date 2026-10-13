@@ -1,141 +1,307 @@
 {
   "sections": {
-    "gia_editorial": {
+    "quienes_somos": {
       "type": "gia-editorial",
       "blocks": {
-        "paragraph-1": {
+        "p1": {
           "type": "paragraph",
           "settings": {
-            "text": "Nacimos en México en 2021, después de comparar decenas de etiquetas y encontrar dosis por debajo de lo que dicen los estudios."
+            "text": "En Gia Evolv somos más que una empresa: somos un proyecto de transformación humana, social y comercial."
           }
         },
-        "paragraph-2": {
+        "p2": {
           "type": "paragraph",
           "settings": {
-            "text": "Hoy somos un catálogo corto y revisado: si una fórmula no tiene respaldo suficiente, no la lanzamos."
+            "text": "Impulsamos los sueños y las capacidades de personas que buscan bienestar, crecimiento y propósito. Creemos en el poder del talento individual para construir comunidades más saludables, conscientes y prósperas."
+          }
+        },
+        "p3": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Desde un enfoque que une ciencia, responsabilidad social e innovación, creamos un círculo virtuoso: ayudamos a quienes más lo necesitan, fortalecemos nuestro entorno y elevamos la calidad de vida de quienes confían en nosotros."
+          }
+        },
+        "p4": {
+          "type": "paragraph",
+          "settings": {
+            "text": "Nuestro propósito es claro: transformar la salud y despertar el potencial humano como base de una vida plena, digna y en constante evolución."
           }
         }
       },
       "block_order": [
-        "paragraph-1",
-        "paragraph-2"
+        "p1",
+        "p2",
+        "p3",
+        "p4"
       ],
       "settings": {
-        "eyebrow": "Nosotros",
-        "heading": "Empezamos porque no confiábamos en las etiquetas que ya existían",
+        "eyebrow": "¿Quiénes somos?",
+        "heading": "Un proyecto de transformación humana, social y comercial",
         "heading_tag": "h1",
+        "image_asset": "gia-nosotros-socios.jpg",
+        "image_alt": "Los socios de Gia Evolv frente a sus instalaciones",
         "media_position": "right",
         "ratio": "4 / 3",
         "color_scheme": "scheme-1"
       }
     },
-    "gia_mvv": {
-      "type": "gia-columns",
+    "impacto": {
+      "type": "gia-stats",
       "blocks": {
-        "column-1": {
-          "type": "column",
+        "s1": {
+          "type": "stat",
           "settings": {
-            "eyebrow": "Misión",
-            "title": "Que la suplementación sea verificable",
-            "text": "Fórmulas con dosis reales y etiquetas completas, para que cualquiera pueda comprobar lo que está tomando."
+            "value": "1991",
+            "suffix": "",
+            "label": "Año de fundación"
           }
         },
-        "column-2": {
-          "type": "column",
+        "s2": {
+          "type": "stat",
           "settings": {
-            "eyebrow": "Visión",
-            "title": "Ser la referencia clínica en México",
-            "text": "Que un nutriólogo pueda recomendar Gia Evolv sin tener que advertir nada sobre la etiqueta."
+            "value": "+10,000",
+            "suffix": "",
+            "label": "Usuarios en México"
           }
         },
-        "column-3": {
-          "type": "column",
+        "s3": {
+          "type": "stat",
           "settings": {
-            "eyebrow": "Valores",
-            "title": "Evidencia, transparencia, cercanía",
-            "text": "Decimos lo que un producto hace y lo que no. Contestamos antes y después de la compra."
+            "value": "3 de 5",
+            "suffix": "",
+            "label": "Farmacéuticas líderes como clientes"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "value": "98",
+            "suffix": "%",
+            "label": "De asimilación de ProtenGia®"
           }
         }
       },
       "block_order": [
-        "column-1",
-        "column-2",
-        "column-3"
+        "s1",
+        "s2",
+        "s3",
+        "s4"
       ],
       "settings": {
-        "eyebrow": "",
-        "heading": "",
-        "description": "",
+        "color_scheme": "scheme-5"
+      }
+    },
+    "mision_vision": {
+      "type": "gia-columns",
+      "blocks": {
+        "mision": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Misión",
+            "title": "Nutrición honesta, efectiva y accesible",
+            "text": "Promovemos una mejor calidad de vida con productos nutricionales de la más alta calidad, en las cantidades justas de micro y macronutrientes. Nos guiamos por la ciencia, la tecnología y la evidencia para formular soluciones que de verdad funcionan y transforman la salud desde adentro."
+          }
+        },
+        "vision": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "Visión",
+            "title": "Liderazgo en ciencia y bienestar",
+            "text": "Aspiramos a ser una empresa global, rentable y eficiente, reconocida por su compromiso humano y su liderazgo en ciencia, biotecnología e innovación. Creamos experiencias extraordinarias para colaboradores, aliados y consumidores, con productos confiables y formulaciones basadas en evidencia."
+          }
+        }
+      },
+      "block_order": [
+        "mision",
+        "vision"
+      ],
+      "settings": {
+        "eyebrow": "Hacia dónde vamos",
+        "heading": "Misión y visión",
+        "align": "left",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "valores": {
+      "type": "gia-columns",
+      "blocks": {
+        "v1": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "",
+            "title": "Honradez",
+            "text": "Actuamos con integridad en cada decisión, priorizando la verdad, la ética y el bienestar de quienes confían en nosotros."
+          }
+        },
+        "v2": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "",
+            "title": "Responsabilidad",
+            "text": "Cumplimos nuestros compromisos con excelencia, conscientes del impacto que generamos en la vida de las personas y en nuestro entorno."
+          }
+        },
+        "v3": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "",
+            "title": "Respeto",
+            "text": "Valoramos a cada persona, sus ideas, su tiempo y su individualidad. Creemos en relaciones basadas en empatía, equidad y escucha activa."
+          }
+        },
+        "v4": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "",
+            "title": "Servicio",
+            "text": "Nos mueve ayudar con actitud positiva, atención cercana y soluciones que de verdad mejoren la vida de quienes nos rodean."
+          }
+        },
+        "v5": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "",
+            "title": "Lealtad",
+            "text": "Construimos vínculos duraderos con clientes, colaboradores y aliados, desde la confianza, el compromiso y la coherencia."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5"
+      ],
+      "settings": {
+        "eyebrow": "Lo que nos guía",
+        "heading": "Nuestros valores",
         "align": "left",
         "color_scheme": "scheme-5"
       }
     },
-    "gia_differentiators": {
-      "type": "gia-trust",
+    "fundador_banner": {
+      "type": "gia-banner",
+      "settings": {
+        "image_asset": "gia-nosotros-fundador.jpg",
+        "image_alt": "Ing. Edgar Arroyo González, fundador de GIA, en el laboratorio",
+        "max_height": 380,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "historia": {
+      "type": "gia-columns",
       "blocks": {
-        "pillar-1": {
-          "type": "pillar",
+        "formacion": {
+          "type": "column",
           "settings": {
-            "icon": "flask",
-            "title": "Formulamos con evidencia",
-            "text": "Cada fórmula parte de estudios publicados y de la dosis que usaron, no de lo que abarata el costo."
+            "eyebrow": "",
+            "title": "Formación",
+            "text": "Licenciatura en Bioquímica por el ITESM; posgrados en regeneración celular en la Universidad Pontificia de Comillas (Madrid) y en Stanford; investigación en el Instituto Rotterdam (Alemania) sobre síntesis de péptidos."
           }
         },
-        "pillar-2": {
-          "type": "pillar",
+        "trayectoria": {
+          "type": "column",
           "settings": {
-            "icon": "microscope",
-            "title": "Verificamos cada lote",
-            "text": "Certificado de análisis por lote: identidad, potencia, metales pesados y microbiología."
+            "eyebrow": "",
+            "title": "Trayectoria",
+            "text": "Co-fundador de Grupo Industrial Aguascalientes (GIA) en 1991 junto a Sara Aceves Giacinti. En menos de cuatro años, GIA se volvió proveedor de 3 de las 5 mayores farmacéuticas del mundo."
           }
         },
-        "pillar-3": {
-          "type": "pillar",
+        "innovacion": {
+          "type": "column",
           "settings": {
-            "icon": "chat",
-            "title": "Acompañamos después de la venta",
-            "text": "Nutriólogos que ajustan dosis y horarios por WhatsApp, sin costo extra."
+            "eyebrow": "",
+            "title": "Innovación",
+            "text": "Lideró el desarrollo de ProtenGia®, proteína de cadena corta patentada y altamente biodisponible, en colaboración con equipos como Stanford, el Instituto Nacional del Cáncer y la Dra. Rita Levi-Montalcini, Premio Nobel 1986."
           }
         },
-        "pillar-4": {
-          "type": "pillar",
+        "impacto": {
+          "type": "column",
           "settings": {
-            "icon": "document",
-            "title": "Publicamos todo",
-            "text": "Etiqueta completa, sin mezclas propietarias que escondan proporciones."
+            "eyebrow": "",
+            "title": "Impacto",
+            "text": "Sus formulaciones han beneficiado a más de 10,000 usuarios en México y se usan en proyectos de prevención de enfermedades crónico-degenerativas, además de iniciativas sociales como el ‘Proyecto Andy’."
           }
         }
       },
       "block_order": [
-        "pillar-1",
-        "pillar-2",
-        "pillar-3",
-        "pillar-4"
+        "formacion",
+        "trayectoria",
+        "innovacion",
+        "impacto"
       ],
       "settings": {
-        "eyebrow": "Diferenciadores",
-        "heading": "Lo que nos distingue",
-        "intro": "",
-        "show_figure": false,
+        "eyebrow": "Nuestra historia",
+        "heading": "La historia detrás del proyecto",
+        "description": "Fundada en 1991 por el Ing. Edgar Arroyo González —bioquímico originario de Pabellón de Arteaga, Aguascalientes— GIA desarrolló formulaciones químicas y bioquímicas. En menos de cuatro años se posicionó como proveedor de 3 de las 5 mayores farmacéuticas del mundo, y hoy acompaña a más de 10,000 usuarios en México.",
+        "align": "left",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "respaldo": {
+      "type": "gia-columns",
+      "blocks": {
+        "r1": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "",
+            "title": "Proteína de cadena corta",
+            "text": "100% hidrolizada mediante un proceso patentado, para una síntesis proteica eficiente con mínimo requerimiento de cofactores."
+          }
+        },
+        "r2": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "",
+            "title": "Síntesis en minutos",
+            "text": "Capaz de sintetizar proteínas en menos de 8 minutos, con hasta 98% de asimilación."
+          }
+        },
+        "r3": {
+          "type": "column",
+          "settings": {
+            "eyebrow": "",
+            "title": "Equilibrio integral",
+            "text": "Aporta moléculas bioactivas específicas en concentraciones funcionales, para favorecer la homeostasis del organismo."
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "eyebrow": "Nuestro respaldo",
+        "heading": "Ciencia detrás de cada fórmula",
+        "description": "Cada fórmula está respaldada por evidencia científica, procesos tecnológicos avanzados y una estructura bioquímica de alta precisión, con el respaldo de ProtenGia®.",
+        "align": "left",
         "color_scheme": "scheme-5"
       }
     },
-    "gia_cta": {
+    "cierre": {
       "type": "gia-cta",
       "settings": {
         "eyebrow": "Siguiente paso",
-        "heading": "¿Listo para evolucionar tu bienestar?",
-        "text": "Te ayudamos a elegir la fórmula según tu objetivo, sin costo y sin compromiso.",
-        "primary_label": "Explorar productos",
-        "secondary_label": "Hablemos",
+        "heading": "Evoluciona tu bienestar con nosotros",
+        "text": "Explora el catálogo o escríbenos: te ayudamos a elegir la fórmula según tu objetivo.",
+        "primary_label": "Ver catálogo",
+        "primary_link": "shopify://collections/all",
+        "secondary_label": "Contáctanos",
+        "secondary_link": "shopify://pages/contacto",
         "color_scheme": "scheme-4"
       }
     }
   },
   "order": [
-    "gia_editorial",
-    "gia_mvv",
-    "gia_differentiators",
-    "gia_cta"
+    "quienes_somos",
+    "impacto",
+    "mision_vision",
+    "valores",
+    "fundador_banner",
+    "historia",
+    "respaldo",
+    "cierre"
   ]
 }
