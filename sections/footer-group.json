@@ -2,74 +2,14 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
-    "gia_community": {
-      "type": "gia-community",
-      "blocks": {
-        "tile-1": {
-          "type": "tile",
-          "settings": {
-            "alt": "Comunidad Gia Evolv 1"
-          }
-        },
-        "tile-2": {
-          "type": "tile",
-          "settings": {
-            "alt": "Comunidad Gia Evolv 2"
-          }
-        },
-        "tile-3": {
-          "type": "tile",
-          "settings": {
-            "alt": "Comunidad Gia Evolv 3"
-          }
-        },
-        "tile-4": {
-          "type": "tile",
-          "settings": {
-            "alt": "Comunidad Gia Evolv 4"
-          }
-        },
-        "tile-5": {
-          "type": "tile",
-          "settings": {
-            "alt": "Comunidad Gia Evolv 5"
-          }
-        },
-        "tile-6": {
-          "type": "tile",
-          "settings": {
-            "alt": "Comunidad Gia Evolv 6"
-          }
-        },
-        "tile-7": {
-          "type": "tile",
-          "settings": {
-            "alt": "Comunidad Gia Evolv 7"
-          }
-        },
-        "tile-8": {
-          "type": "tile",
-          "settings": {
-            "alt": "Comunidad Gia Evolv 8"
-          }
-        }
-      },
-      "block_order": [
-        "tile-1",
-        "tile-2",
-        "tile-3",
-        "tile-4",
-        "tile-5",
-        "tile-6",
-        "tile-7",
-        "tile-8"
-      ],
+    "gia_instafeed": {
+      "type": "gia-instafeed",
       "settings": {
         "eyebrow": "Comunidad",
         "heading": "@giaevolv en Instagram",
+        "link": "https://www.instagram.com/giaevolution/",
         "link_label": "Seguir la cuenta",
         "link_new_tab": true,
-        "columns": 4,
         "color_scheme": "scheme-1"
       }
     },
@@ -185,7 +125,7 @@
     }
   },
   "order": [
-    "gia_community",
+    "gia_instafeed",
     "gia_marquee_display",
     "gia_footer",
     "gia_popup"

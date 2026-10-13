@@ -1,0 +1,62 @@
+{{ 'section-gia-instafeed.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Feed de Instagram servido por la app Instafeed (bloque de app de Shopify).
+
+  Esta sección sólo pone el encabezado y el contenedor. El feed real lo
+  agrega el cliente desde el editor de temas:
+    Personalizar → esta sección → Agregar bloque → Apps → Instafeed
+  y ahí configura la cuenta, el número de fotos, etc. Sin ese bloque, el
+  espacio queda vacío (con una nota visible sólo dentro del editor).
+{%- endcomment -%}
+
+<section class="gia-instafeed color-{{ section.settings.color_scheme }}">
+  <div class="gia-instafeed__inner">
+    <header class="gia-instafeed__header">
+      <div class="gia-instafeed__titles">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="gia-instafeed__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="gia-instafeed__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.link_label != blank and section.settings.link != blank -%}
+        <a href="{{ section.settings.link }}" class="gia-instafeed__link"
+           {% if section.settings.link_new_tab %}target="_blank" rel="noopener"{% endif %}>
+          {{ section.settings.link_label }} &rarr;
+        </a>
+      {%- endif -%}
+    </header>
+
+    <div class="gia-instafeed__app">
+      {%- for block in section.blocks -%}
+        {%- render block -%}
+      {%- endfor -%}
+
+      {%- if section.blocks.size == 0 and request.design_mode -%}
+        <p class="gia-instafeed__hint">
+          Agrega aquí el feed: «Agregar bloque → Apps → Instafeed» y configura la cuenta.
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gia · Instagram",
+  "tag": "section",
+  "class": "gia-instafeed-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Comunidad" },
+    { "type": "text", "id": "heading", "label": "Titular", "default": "@giaevolv en Instagram" },
+    { "type": "url", "id": "link", "label": "Enlace de la cuenta", "info": "https://www.instagram.com/giaevolution/" },
+    { "type": "text", "id": "link_label", "label": "Texto del enlace", "default": "Seguir la cuenta" },
+    { "type": "checkbox", "id": "link_new_tab", "label": "Abrir en pestaña nueva", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-1" }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Gia · Instagram" }]
+}
+{% endschema %}

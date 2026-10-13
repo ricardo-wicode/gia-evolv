@@ -1,0 +1,68 @@
+/* Gia · Instagram — contenedor del feed de Instafeed. */
+
+.gia-instafeed {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+}
+
+.gia-instafeed__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-y) var(--gutter);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gia-instafeed__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+.gia-instafeed__eyebrow {
+  font: 700 12px / 1 var(--font-secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gia-turquoise-600);
+}
+
+.gia-instafeed__heading {
+  margin: 6px 0 0;
+  font: 700 clamp(22px, 3vw, 32px) / 1.15 var(--font-primary);
+  letter-spacing: -0.01em;
+  color: var(--gia-ink);
+}
+
+.gia-instafeed__link {
+  flex: none;
+  font: 600 14px / 1 var(--font-secondary);
+  color: var(--gia-turquoise-700);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.gia-instafeed__link:hover {
+  color: var(--gia-turquoise);
+}
+
+/* Nota de ayuda, visible sólo en el editor cuando no hay feed todavía. */
+.gia-instafeed__hint {
+  margin: 0;
+  padding: clamp(28px, 5vw, 48px);
+  border: 1px dashed var(--gia-grey-300);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  font: 400 14px / var(--leading-body) var(--font-secondary);
+  color: var(--gia-grey-500);
+  background: var(--gia-grey-50);
+}
+
+@media screen and (max-width: 749px) {
+  .gia-instafeed__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
