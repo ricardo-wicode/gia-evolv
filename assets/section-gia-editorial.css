@@ -55,12 +55,47 @@
 }
 
 .gia-editorial__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font: 700 13px / 1 var(--font-secondary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 18px 32px;
   border-radius: var(--radius-pill);
   text-decoration: none;
+  color: var(--gia-btn-text);
+  background: var(--gia-btn-bg);
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.gia-editorial__cta:hover {
+  background: var(--gia-btn-bg-hover);
+}
+
+/* --- Variante hero: encabezado de página con más presencia. --- */
+.gia-editorial--hero .gia-editorial__inner {
+  padding-top: clamp(48px, 7vw, 96px);
+  padding-bottom: clamp(48px, 7vw, 96px);
+}
+
+.gia-editorial--hero .gia-editorial__eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+}
+
+.gia-editorial--hero .gia-editorial__heading {
+  font-size: clamp(36px, 5.2vw, 60px);
+  line-height: 1.06;
+}
+
+.gia-editorial--hero .gia-editorial__paragraph {
+  font-size: 17px;
+  max-width: 46ch;
+}
+
+.gia-editorial--hero .gia-editorial__media {
+  min-height: clamp(360px, 42vw, 520px);
 }
 
 .gia-editorial__media {

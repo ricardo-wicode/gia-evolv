@@ -6,7 +6,7 @@
     assign has_media = true
   endif
 -%}
-<section class="gia-editorial gia-editorial--{{ section.settings.media_position }}{% unless has_media %} gia-editorial--no-media{% endunless %} color-{{ section.settings.color_scheme }}">
+<section class="gia-editorial gia-editorial--{{ section.settings.media_position }}{% unless has_media %} gia-editorial--no-media{% endunless %}{% if section.settings.is_hero %} gia-editorial--hero{% endif %} color-{{ section.settings.color_scheme }}">
   <div class="gia-editorial__inner">
     <div class="gia-editorial__text">
       {%- if section.settings.eyebrow != blank -%}
@@ -73,6 +73,7 @@
   "class": "gia-editorial-section",
   "max_blocks": 4,
   "settings": [
+    { "type": "checkbox", "id": "is_hero", "label": "Estilo hero (encabezado de página)", "info": "Titular más grande, imagen más alta y más aire. Úsalo en la primera sección.", "default": false },
     { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Nosotros" },
     { "type": "text", "id": "heading", "label": "Titular" },
     {

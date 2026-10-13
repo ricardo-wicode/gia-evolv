@@ -6,43 +6,25 @@
         "p1": {
           "type": "paragraph",
           "settings": {
-            "text": "En Gia Evolv somos más que una empresa: somos un proyecto de transformación humana, social y comercial."
-          }
-        },
-        "p2": {
-          "type": "paragraph",
-          "settings": {
-            "text": "Impulsamos los sueños y las capacidades de personas que buscan bienestar, crecimiento y propósito. Creemos en el poder del talento individual para construir comunidades más saludables, conscientes y prósperas."
-          }
-        },
-        "p3": {
-          "type": "paragraph",
-          "settings": {
-            "text": "Desde un enfoque que une ciencia, responsabilidad social e innovación, creamos un círculo virtuoso: ayudamos a quienes más lo necesitan, fortalecemos nuestro entorno y elevamos la calidad de vida de quienes confían en nosotros."
-          }
-        },
-        "p4": {
-          "type": "paragraph",
-          "settings": {
-            "text": "Nuestro propósito es claro: transformar la salud y despertar el potencial humano como base de una vida plena, digna y en constante evolución."
+            "text": "Somos más que una empresa: un proyecto de transformación humana, social y comercial, que une ciencia, innovación y propósito para elevar la calidad de vida."
           }
         }
       },
       "block_order": [
-        "p1",
-        "p2",
-        "p3",
-        "p4"
+        "p1"
       ],
       "settings": {
         "eyebrow": "¿Quiénes somos?",
-        "heading": "Un proyecto de transformación humana, social y comercial",
+        "heading": "Transformamos la salud y despertamos el potencial humano",
         "heading_tag": "h1",
         "image_asset": "gia-nosotros-socios.jpg",
         "image_alt": "Los socios de Gia Evolv frente a sus instalaciones",
         "media_position": "right",
         "ratio": "4 / 3",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "is_hero": true,
+        "cta_label": "Ver catálogo",
+        "cta_link": "shopify://collections/all"
       }
     },
     "impacto": {
@@ -88,7 +70,7 @@
         "s4"
       ],
       "settings": {
-        "color_scheme": "scheme-5"
+        "color_scheme": "scheme-1"
       }
     },
     "mision_vision": {
@@ -306,10 +288,54 @@
         "secondary_link": "shopify://pages/contacto",
         "color_scheme": "scheme-4"
       }
+    },
+    "creencias": {
+      "type": "gia-columns",
+      "blocks": {
+        "c1": {
+          "type": "column",
+          "settings": {
+            "icon": "users",
+            "eyebrow": "",
+            "title": "Las personas, primero",
+            "text": "Impulsamos los sueños y las capacidades de quienes buscan bienestar, crecimiento y propósito. Creemos en el poder del talento individual para construir comunidades más sanas y prósperas."
+          }
+        },
+        "c2": {
+          "type": "column",
+          "settings": {
+            "icon": "activity",
+            "eyebrow": "",
+            "title": "Un círculo virtuoso",
+            "text": "Unimos ciencia, responsabilidad social e innovación: ayudamos a quienes más lo necesitan, fortalecemos nuestro entorno y mejoramos la vida de quienes confían en nosotros."
+          }
+        },
+        "c3": {
+          "type": "column",
+          "settings": {
+            "icon": "target",
+            "eyebrow": "",
+            "title": "Nuestro propósito",
+            "text": "Transformar la salud y despertar el potencial humano como base de una vida plena, digna y en constante evolución."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "eyebrow": "Nuestro propósito",
+        "heading": "En qué creemos",
+        "align": "center",
+        "color_scheme": "scheme-5"
+      }
     }
   },
   "order": [
     "quienes_somos",
+    "creencias",
     "impacto",
     "mision_vision",
     "valores",
