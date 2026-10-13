@@ -36,14 +36,35 @@
 /* El desbordamiento se queda aquí dentro: la página nunca scrollea en
    horizontal. tabindex="0" hace la región alcanzable por teclado, que si
    no el contenido recortado queda inaccesible sin ratón. */
-/* La tabla es una tarjeta blanca sobre la sección oscura, para que
-   destaque y se diferencie del fondo. La columna "Gia Evolv" conserva el
-   turquesa como acento. */
+/* La tabla es una tarjeta que se diferencia del fondo de la sección. Sus
+   colores se editan desde el tema:
+     --gia-ct-bg / --gia-ct-text  → fondo y texto de la tabla
+     --gia-ct-gia                 → columna Gia Evolv
+     --gia-ct-other               → columna de criterio y de comparación
+   El encabezado de cada columna va en su color sólido y las celdas de
+   abajo en ese mismo color con transparencia (color-mix contra
+   "transparent"). Cada propiedad lleva respaldo fijo por si el navegador
+   no soporta color-mix. */
+.gia-comparison {
+  --gia-ct-border: var(--gia-grey-200);
+  --gia-ct-border: color-mix(in srgb, var(--gia-ct-bg) 88%, var(--gia-ct-text));
+
+  /* Celdas: color de columna con transparencia (deja ver el fondo). */
+  --gia-ct-gia-cell: var(--gia-turquoise-50);
+  --gia-ct-gia-cell: color-mix(in srgb, var(--gia-ct-gia) 15%, transparent);
+  --gia-ct-other-cell: var(--gia-grey-50);
+  --gia-ct-other-cell: color-mix(in srgb, var(--gia-ct-other) 12%, transparent);
+
+  /* Texto de la columna Gia: su color, oscurecido para que contraste. */
+  --gia-ct-gia-text: var(--gia-turquoise-700);
+  --gia-ct-gia-text: color-mix(in srgb, var(--gia-ct-gia) 68%, #000);
+}
+
 .gia-comparison__scroll {
   overflow-x: auto;
-  border: 1px solid var(--gia-grey-200);
+  border: 1px solid var(--gia-ct-border);
   border-radius: var(--radius-lg);
-  background: var(--gia-white);
+  background: var(--gia-ct-bg, var(--gia-white));
 }
 
 
@@ -54,14 +75,15 @@
   text-align: left;
 }
 
+/* Encabezados: color de columna sólido, texto blanco. */
 .gia-comparison__th {
   padding: 16px 20px;
   font: 700 12px / 1.2 var(--font-secondary);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: center;
-  background: var(--gia-grey-50);
-  color: var(--gia-grey-500);
+  background: var(--gia-ct-other);
+  color: #fff;
 }
 
 .gia-comparison__th--criterion {
@@ -71,34 +93,38 @@
 }
 
 .gia-comparison__th--us {
-  background: var(--gia-turquoise);
-  color: var(--gia-white);
+  background: var(--gia-ct-gia);
+  color: #fff;
 }
 
 .gia-comparison__criterion,
 .gia-comparison__us,
 .gia-comparison__them {
   padding: 18px 20px;
-  border-top: 1px solid var(--gia-grey-200);
+  border-top: 1px solid var(--gia-ct-border);
   vertical-align: top;
 }
 
+/* Celdas de criterio y de comparación: color "otras" con transparencia. */
 .gia-comparison__criterion {
+  background: var(--gia-ct-other-cell);
   font: 600 14px / 1.4 var(--font-secondary);
-  color: var(--gia-ink);
+  color: var(--gia-ct-text, var(--gia-ink));
   text-align: left;
 }
 
-.gia-comparison__us {
-  background: var(--gia-turquoise-50);
+.gia-comparison__them {
+  background: var(--gia-ct-other-cell);
   font: 400 13.5px / var(--leading-snug) var(--font-secondary);
-  color: var(--gia-turquoise-700);
+  color: var(--gia-ct-text, var(--gia-ink));
   text-align: center;
 }
 
-.gia-comparison__them {
-  font: 400 13.5px / var(--leading-snug) var(--font-secondary);
-  color: var(--gia-grey-500);
+/* Celdas de la columna Gia: su color con transparencia + texto de marca. */
+.gia-comparison__us {
+  background: var(--gia-ct-gia-cell);
+  font: 600 13.5px / var(--leading-snug) var(--font-secondary);
+  color: var(--gia-ct-gia-text);
   text-align: center;
 }
 

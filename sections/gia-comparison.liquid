@@ -4,7 +4,10 @@
   assign rows = section.blocks | where: 'type', 'row'
 -%}
 
-<section class="gia-comparison color-{{ section.settings.color_scheme }}">
+<section
+  class="gia-comparison color-{{ section.settings.color_scheme }}"
+  style="--gia-ct-bg: {{ section.settings.table_bg | default: '#FFFFFF' }}; --gia-ct-text: {{ section.settings.table_text | default: '#141414' }}; --gia-ct-gia: {{ section.settings.gia_color | default: '#009389' }}; --gia-ct-other: {{ section.settings.other_color | default: '#5B6672' }};"
+>
   <div class="gia-comparison__inner">
     <div class="gia-comparison__header">
       {%- if section.settings.eyebrow != blank -%}
@@ -81,7 +84,35 @@
       "default": "Comparativa general frente a suplementos de venta masiva. No hace referencia a una marca específica."
     },
     { "type": "header", "content": "Apariencia" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color", "default": "scheme-6" }
+    { "type": "color_scheme", "id": "color_scheme", "label": "Esquema de color (fondo de la sección)", "default": "scheme-6" },
+    { "type": "header", "content": "Colores de la tabla" },
+    {
+      "type": "color",
+      "id": "table_bg",
+      "label": "Fondo de la tabla",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "table_text",
+      "label": "Texto de la tabla",
+      "info": "Tono oscuro si el fondo es claro, o claro si el fondo es oscuro.",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "gia_color",
+      "label": "Color columna Gia Evolv",
+      "info": "El encabezado va en este color sólido y las celdas en el mismo color con transparencia.",
+      "default": "#009389"
+    },
+    {
+      "type": "color",
+      "id": "other_color",
+      "label": "Color otras columnas",
+      "info": "Aplica a la columna de criterio y a la de comparación: encabezado sólido y celdas con transparencia.",
+      "default": "#5B6672"
+    }
   ],
   "blocks": [
     {
