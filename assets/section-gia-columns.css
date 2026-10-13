@@ -62,3 +62,56 @@
   color: var(--gia-grey-700);
   text-wrap: pretty;
 }
+
+/* --- Icono de la tarjeta --------------------------------------------
+   Chip turquesa con el icono de línea. Da un ancla visual a cada tarjeta
+   y hace la sección más llamativa sin recargarla. */
+.gia-cols__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 4px;
+  border-radius: var(--radius-md);
+  background: var(--gia-turquoise-100);
+  color: var(--gia-turquoise-700);
+  flex: none;
+}
+
+/* Las tarjetas con icono reaccionan al hover: se elevan y el chip se
+   invierte al turquesa pleno. Transición suave y respetuosa del movimiento
+   reducido. */
+.gia-cols__card--icon {
+  border: 1px solid var(--gia-grey-100);
+  transition: transform var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
+}
+
+.gia-cols__icon {
+  transition: background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .gia-cols__card--icon:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md, 0 18px 40px rgba(0, 0, 0, 0.08));
+    border-color: var(--gia-turquoise-200);
+  }
+
+  .gia-cols__card--icon:hover .gia-cols__icon {
+    background: var(--gia-turquoise);
+    color: var(--gia-white);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gia-cols__card--icon {
+    transition: none;
+  }
+  .gia-cols__card--icon:hover {
+    transform: none;
+  }
+}

@@ -16,7 +16,10 @@
       <ul class="gia-cols__grid" role="list" style="--gia-cols: {{ items.size }};">
         {%- for block in items -%}
           <li class="gia-cols__item" {{ block.shopify_attributes }}>
-            <article class="gia-cols__card">
+            <article class="gia-cols__card{% if block.settings.icon != blank and block.settings.icon != 'none' %} gia-cols__card--icon{% endif %}">
+              {%- if block.settings.icon != blank and block.settings.icon != 'none' -%}
+                <span class="gia-cols__icon">{% render 'gia-icon', icon: block.settings.icon, size: 24 %}</span>
+              {%- endif -%}
               {%- if block.settings.eyebrow != blank -%}
                 <span class="gia-cols__eyebrow">{{ block.settings.eyebrow }}</span>
               {%- endif -%}
@@ -61,6 +64,35 @@
       "type": "column",
       "name": "Columna",
       "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "Sin icono" },
+            { "value": "scale", "label": "Balanza" },
+            { "value": "shield", "label": "Escudo" },
+            { "value": "target", "label": "Diana" },
+            { "value": "users", "label": "Personas" },
+            { "value": "life-buoy", "label": "Salvavidas" },
+            { "value": "link", "label": "Vínculo" },
+            { "value": "heart", "label": "Corazón" },
+            { "value": "graduation-cap", "label": "Birrete" },
+            { "value": "award", "label": "Medalla" },
+            { "value": "lightbulb", "label": "Bombilla" },
+            { "value": "trending-up", "label": "Tendencia" },
+            { "value": "atom", "label": "Átomo" },
+            { "value": "zap", "label": "Rayo" },
+            { "value": "activity", "label": "Pulso" },
+            { "value": "sparkles", "label": "Destellos" },
+            { "value": "flask", "label": "Matraz" },
+            { "value": "microscope", "label": "Microscopio" },
+            { "value": "leaf", "label": "Hoja" },
+            { "value": "document", "label": "Documento" },
+            { "value": "chat", "label": "Chat" }
+          ]
+        },
         { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Misión" },
         { "type": "text", "id": "title", "label": "Título" },
         { "type": "textarea", "id": "text", "label": "Texto" }

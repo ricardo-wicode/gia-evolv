@@ -99,7 +99,8 @@
           "settings": {
             "eyebrow": "Misión",
             "title": "Nutrición honesta, efectiva y accesible",
-            "text": "Promovemos una mejor calidad de vida con productos nutricionales de la más alta calidad, en las cantidades justas de micro y macronutrientes. Nos guiamos por la ciencia, la tecnología y la evidencia para formular soluciones que de verdad funcionan y transforman la salud desde adentro."
+            "text": "Promovemos una mejor calidad de vida con productos nutricionales de la más alta calidad, en las cantidades justas de micro y macronutrientes. Nos guiamos por la ciencia, la tecnología y la evidencia para formular soluciones que de verdad funcionan y transforman la salud desde adentro.",
+            "icon": "leaf"
           }
         },
         "vision": {
@@ -107,7 +108,8 @@
           "settings": {
             "eyebrow": "Visión",
             "title": "Liderazgo en ciencia y bienestar",
-            "text": "Aspiramos a ser una empresa global, rentable y eficiente, reconocida por su compromiso humano y su liderazgo en ciencia, biotecnología e innovación. Creamos experiencias extraordinarias para colaboradores, aliados y consumidores, con productos confiables y formulaciones basadas en evidencia."
+            "text": "Aspiramos a ser una empresa global, rentable y eficiente, reconocida por su compromiso humano y su liderazgo en ciencia, biotecnología e innovación. Creamos experiencias extraordinarias para colaboradores, aliados y consumidores, con productos confiables y formulaciones basadas en evidencia.",
+            "icon": "sparkles"
           }
         }
       },
@@ -130,7 +132,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Honradez",
-            "text": "Actuamos con integridad en cada decisión, priorizando la verdad, la ética y el bienestar de quienes confían en nosotros."
+            "text": "Actuamos con integridad en cada decisión, priorizando la verdad, la ética y el bienestar de quienes confían en nosotros.",
+            "icon": "scale"
           }
         },
         "v2": {
@@ -138,7 +141,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Responsabilidad",
-            "text": "Cumplimos nuestros compromisos con excelencia, conscientes del impacto que generamos en la vida de las personas y en nuestro entorno."
+            "text": "Cumplimos nuestros compromisos con excelencia, conscientes del impacto que generamos en la vida de las personas y en nuestro entorno.",
+            "icon": "shield"
           }
         },
         "v3": {
@@ -146,7 +150,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Respeto",
-            "text": "Valoramos a cada persona, sus ideas, su tiempo y su individualidad. Creemos en relaciones basadas en empatía, equidad y escucha activa."
+            "text": "Valoramos a cada persona, sus ideas, su tiempo y su individualidad. Creemos en relaciones basadas en empatía, equidad y escucha activa.",
+            "icon": "users"
           }
         },
         "v4": {
@@ -154,7 +159,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Servicio",
-            "text": "Nos mueve ayudar con actitud positiva, atención cercana y soluciones que de verdad mejoren la vida de quienes nos rodean."
+            "text": "Nos mueve ayudar con actitud positiva, atención cercana y soluciones que de verdad mejoren la vida de quienes nos rodean.",
+            "icon": "life-buoy"
           }
         },
         "v5": {
@@ -162,7 +168,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Lealtad",
-            "text": "Construimos vínculos duraderos con clientes, colaboradores y aliados, desde la confianza, el compromiso y la coherencia."
+            "text": "Construimos vínculos duraderos con clientes, colaboradores y aliados, desde la confianza, el compromiso y la coherencia.",
+            "icon": "link"
           }
         }
       },
@@ -197,7 +204,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Formación",
-            "text": "Licenciatura en Bioquímica por el ITESM; posgrados en regeneración celular en la Universidad Pontificia de Comillas (Madrid) y en Stanford; investigación en el Instituto Rotterdam (Alemania) sobre síntesis de péptidos."
+            "text": "Licenciatura en Bioquímica por el ITESM; posgrados en regeneración celular en la Universidad Pontificia de Comillas (Madrid) y en Stanford; investigación en el Instituto Rotterdam (Alemania) sobre síntesis de péptidos.",
+            "icon": "graduation-cap"
           }
         },
         "trayectoria": {
@@ -205,7 +213,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Trayectoria",
-            "text": "Co-fundador de Grupo Industrial Aguascalientes (GIA) en 1991 junto a Sara Aceves Giacinti. En menos de cuatro años, GIA se volvió proveedor de 3 de las 5 mayores farmacéuticas del mundo."
+            "text": "Co-fundador de Grupo Industrial Aguascalientes (GIA) en 1991 junto a Sara Aceves Giacinti. En menos de cuatro años, GIA se volvió proveedor de 3 de las 5 mayores farmacéuticas del mundo.",
+            "icon": "award"
           }
         },
         "innovacion": {
@@ -213,7 +222,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Innovación",
-            "text": "Lideró el desarrollo de ProtenGia®, proteína de cadena corta patentada y altamente biodisponible, en colaboración con equipos como Stanford, el Instituto Nacional del Cáncer y la Dra. Rita Levi-Montalcini, Premio Nobel 1986."
+            "text": "Lideró el desarrollo de ProtenGia®, proteína de cadena corta patentada y altamente biodisponible, en colaboración con equipos como Stanford, el Instituto Nacional del Cáncer y la Dra. Rita Levi-Montalcini, Premio Nobel 1986.",
+            "icon": "lightbulb"
           }
         },
         "impacto": {
@@ -221,7 +231,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Impacto",
-            "text": "Sus formulaciones han beneficiado a más de 10,000 usuarios en México y se usan en proyectos de prevención de enfermedades crónico-degenerativas, además de iniciativas sociales como el ‘Proyecto Andy’."
+            "text": "Sus formulaciones han beneficiado a más de 10,000 usuarios en México y se usan en proyectos de prevención de enfermedades crónico-degenerativas, además de iniciativas sociales como el ‘Proyecto Andy’.",
+            "icon": "trending-up"
           }
         }
       },
@@ -247,7 +258,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Proteína de cadena corta",
-            "text": "100% hidrolizada mediante un proceso patentado, para una síntesis proteica eficiente con mínimo requerimiento de cofactores."
+            "text": "100% hidrolizada mediante un proceso patentado, para una síntesis proteica eficiente con mínimo requerimiento de cofactores.",
+            "icon": "atom"
           }
         },
         "r2": {
@@ -255,7 +267,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Síntesis en minutos",
-            "text": "Capaz de sintetizar proteínas en menos de 8 minutos, con hasta 98% de asimilación."
+            "text": "Capaz de sintetizar proteínas en menos de 8 minutos, con hasta 98% de asimilación.",
+            "icon": "zap"
           }
         },
         "r3": {
@@ -263,7 +276,8 @@
           "settings": {
             "eyebrow": "",
             "title": "Equilibrio integral",
-            "text": "Aporta moléculas bioactivas específicas en concentraciones funcionales, para favorecer la homeostasis del organismo."
+            "text": "Aporta moléculas bioactivas específicas en concentraciones funcionales, para favorecer la homeostasis del organismo.",
+            "icon": "activity"
           }
         }
       },
