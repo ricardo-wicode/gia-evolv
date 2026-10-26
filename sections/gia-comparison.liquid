@@ -1,7 +1,15 @@
 {{ 'section-gia-comparison.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign rows = section.blocks | where: 'type', 'row'
+  # Filas por producto desde metaobjects; si no hay, los bloques del tema.
+  assign mf = product.metafields.custom.product_comparison.value
+  assign use_mf = false
+  if mf != blank and mf.size > 0
+    assign use_mf = true
+    assign rows = mf
+  else
+    assign rows = section.blocks | where: 'type', 'row'
+  endif
 -%}
 
 <section
@@ -45,10 +53,21 @@
           </thead>
           <tbody>
             {%- for block in rows -%}
-              <tr {{ block.shopify_attributes }}>
-                <th scope="row" class="gia-comparison__criterion">{{ block.settings.criterion }}</th>
-                <td class="gia-comparison__us">{{ block.settings.us }}</td>
-                <td class="gia-comparison__them">{{ block.settings.them }}</td>
+              {%- liquid
+                if use_mf
+                  assign r_criterion = block.criterion.value
+                  assign r_us = block.us.value
+                  assign r_them = block.them.value
+                else
+                  assign r_criterion = block.settings.criterion
+                  assign r_us = block.settings.us
+                  assign r_them = block.settings.them
+                endif
+              -%}
+              <tr{% unless use_mf %} {{ block.shopify_attributes }}{% endunless %}>
+                <th scope="row" class="gia-comparison__criterion">{{ r_criterion }}</th>
+                <td class="gia-comparison__us">{{ r_us }}</td>
+                <td class="gia-comparison__them">{{ r_them }}</td>
               </tr>
             {%- endfor -%}
           </tbody>

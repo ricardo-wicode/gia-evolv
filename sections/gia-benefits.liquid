@@ -1,7 +1,16 @@
 {{ 'section-gia-benefits.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign items = section.blocks | where: 'type', 'benefit'
+  # Contenido por producto desde metaobjects; si el producto no tiene,
+  # se usan los bloques de la sección (contenido general del tema).
+  assign mf = product.metafields.custom.product_benefits.value
+  assign use_mf = false
+  if mf != blank and mf.size > 0
+    assign use_mf = true
+    assign items = mf
+  else
+    assign items = section.blocks | where: 'type', 'benefit'
+  endif
   assign half = items.size | plus: 1 | divided_by: 2
 -%}
 
@@ -35,16 +44,27 @@
                 endif
               -%}
               {%- if show -%}
-                <details class="gia-benefits__item" {{ block.shopify_attributes }}>
+                {%- liquid
+                  if use_mf
+                    assign b_icon = block.icon.value | default: 'leaf'
+                    assign b_title = block.title.value
+                    assign b_detail = block.detail.value
+                  else
+                    assign b_icon = block.settings.icon
+                    assign b_title = block.settings.title
+                    assign b_detail = block.settings.detail
+                  endif
+                -%}
+                <details class="gia-benefits__item"{% unless use_mf %} {{ block.shopify_attributes }}{% endunless %}>
                   <summary class="gia-benefits__trigger">
                     <span class="gia-benefits__icon">
-                      {% render 'gia-icon', icon: block.settings.icon, size: 21 %}
+                      {% render 'gia-icon', icon: b_icon, size: 21 %}
                     </span>
-                    <span class="gia-benefits__title">{{ block.settings.title }}</span>
+                    <span class="gia-benefits__title">{{ b_title }}</span>
                     <span class="gia-benefits__toggle" aria-hidden="true"></span>
                   </summary>
-                  {%- if block.settings.detail != blank -%}
-                    <div class="gia-benefits__detail">{{ block.settings.detail }}</div>
+                  {%- if b_detail != blank -%}
+                    <div class="gia-benefits__detail">{{ b_detail }}</div>
                   {%- endif -%}
                 </details>
               {%- endif -%}
