@@ -571,6 +571,31 @@ body.gia-overlay-header.gia-at-top .gia-header {
   opacity: 1;
 }
 
+.gia-footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gia-footer__contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font: 400 14px / 1.2 var(--font-secondary);
+  color: currentcolor;
+  opacity: 0.72;
+  text-decoration: none;
+}
+
+.gia-footer__contact-link:hover {
+  opacity: 1;
+}
+
+.gia-footer__contact-link svg {
+  flex: none;
+  color: var(--gia-turquoise-300);
+}
+
 .gia-footer__socials,
 .gia-footer__badges {
   display: flex;
@@ -861,4 +886,38 @@ body.gia-overlay-header.gia-at-top .gia-header {
   padding: 10px 12px;
   text-align: left;
   font-size: 14.5px;
+}
+
+/* --- Botón flotante de WhatsApp ------------------------------------- */
+.gia-wa {
+  position: fixed;
+  right: clamp(14px, 3vw, 26px);
+  bottom: clamp(14px, 3vw, 26px);
+  z-index: 60; /* sobre la cabecera (40), bajo popups/drawers (100) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-circle);
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+  transition: transform var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.gia-wa:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.26);
+}
+
+.gia-wa svg {
+  width: 30px;
+  height: 30px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gia-wa { transition: none; }
+  .gia-wa:hover { transform: none; }
 }

@@ -19,6 +19,7 @@
   data-gia-popup
   data-delay="{{ section.settings.delay }}"
   data-days="{{ section.settings.frequency }}"
+  data-exit="{{ section.settings.exit_intent }}"
   hidden
 >
   <div class="gia-popup__backdrop" data-gia-popup-close></div>
@@ -159,7 +160,29 @@
       return;
     }
 
-    setTimeout(open, delay);
+    // Se muestra una sola vez por lo que ocurra primero: el temporizador
+    // o la intención de salida (exit-intent).
+    var shown = false;
+    var trigger = function () {
+      if (shown) return;
+      shown = true;
+      open();
+    };
+
+    setTimeout(trigger, delay);
+
+    // Exit-intent: sólo en escritorio (puntero fino). Se dispara cuando el
+    // cursor abandona la ventana por el borde superior, como yendo a la
+    // barra del navegador para cerrar o cambiar de pestaña.
+    if (pop.dataset.exit === 'true' && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      var onLeave = function (e) {
+        if (e.clientY <= 0 && !e.relatedTarget) {
+          document.removeEventListener('mouseout', onLeave);
+          trigger();
+        }
+      };
+      document.addEventListener('mouseout', onLeave);
+    }
   })();
 </script>
 {%- endif -%}
@@ -182,6 +205,13 @@
       "label": "Días sin volver a salir",
       "info": "Tras cerrarse sin suscripción. Quien se suscribe no lo vuelve a ver.",
       "min": 1, "max": 90, "step": 1, "default": 30, "unit": "d"
+    },
+    {
+      "type": "checkbox",
+      "id": "exit_intent",
+      "label": "Mostrar también al intentar salir (escritorio)",
+      "info": "Aparece si el cursor sale por arriba de la ventana, antes de que se cumpla el tiempo.",
+      "default": true
     },
     {
       "type": "image_picker",

@@ -76,6 +76,27 @@
       {%- endfor -%}
 
       <div class="gia-footer__col gia-footer__col--meta">
+        {%- if section.settings.contact_phone != blank or section.settings.contact_email != blank -%}
+          <div class="gia-footer__contact">
+            {%- if section.settings.contact_title != blank -%}
+              <span class="gia-footer__col-title">{{ section.settings.contact_title }}</span>
+            {%- endif -%}
+            {%- if section.settings.contact_phone != blank -%}
+              {%- assign tel = section.settings.contact_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' -%}
+              <a href="tel:+52{{ tel }}" class="gia-footer__contact-link">
+                {% render 'gia-icon', icon: 'phone', size: 17 %}
+                <span>{{ section.settings.contact_phone }}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.contact_email != blank -%}
+              <a href="mailto:{{ section.settings.contact_email }}" class="gia-footer__contact-link">
+                {% render 'gia-icon', icon: 'mail', size: 17 %}
+                <span>{{ section.settings.contact_email }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
         {%- if socials.size > 0 -%}
           <ul class="gia-footer__socials" role="list">
             {%- for block in socials -%}
@@ -135,6 +156,10 @@
     { "type": "textarea", "id": "newsletter_text", "label": "Texto", "default": "Fórmulas nuevas, guías de dosis y avisos de stock. Sin spam." },
     { "type": "text", "id": "newsletter_placeholder", "label": "Marcador del campo", "default": "Tu correo" },
     { "type": "text", "id": "newsletter_success", "label": "Mensaje de éxito", "default": "Listo, te escribiremos pronto." },
+    { "type": "header", "content": "Contacto" },
+    { "type": "text", "id": "contact_title", "label": "Título", "default": "Contacto" },
+    { "type": "text", "id": "contact_phone", "label": "Teléfono", "default": "449 911 37 42", "info": "Se enlaza como tel: con lada de México (+52)." },
+    { "type": "text", "id": "contact_email", "label": "Correo", "default": "info@giaevolv.com" },
     { "type": "header", "content": "Lema y sello" },
     { "type": "text", "id": "claim", "label": "Lema", "default": "Para ti, que evolucionas" },
     {

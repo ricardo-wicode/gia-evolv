@@ -134,3 +134,53 @@
   color: var(--gia-grey-500);
   max-width: 60ch;
 }
+
+/* --- Scroll horizontal en móvil ---------------------------------------
+   La tabla se extiende más allá de la pantalla (se ve "cortada") y abajo
+   aparece una barra de desplazamiento visible, más una pista de texto. */
+.gia-comparison__scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gia-turquoise) var(--gia-grey-100);
+}
+
+.gia-comparison__scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.gia-comparison__scroll::-webkit-scrollbar-track {
+  background: var(--gia-grey-100);
+  border-radius: var(--radius-pill);
+}
+
+.gia-comparison__scroll::-webkit-scrollbar-thumb {
+  background: var(--gia-turquoise);
+  border-radius: var(--radius-pill);
+}
+
+.gia-comparison__hint {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  /* A sangre: la tabla llega al borde de la pantalla y la tercera columna
+     queda visiblemente cortada, invitando a deslizar. */
+  .gia-comparison__scroll {
+    margin-inline: calc(-1 * var(--gutter));
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .gia-comparison__table {
+    min-width: 580px;
+  }
+
+  .gia-comparison__hint {
+    display: block;
+    margin: 12px 0 0;
+    font: 600 12.5px / 1.3 var(--font-secondary);
+    letter-spacing: 0.02em;
+    color: var(--gia-turquoise-300);
+    text-align: center;
+  }
+}

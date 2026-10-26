@@ -582,3 +582,14 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* --- Solo lectura: se ocultan los controles para escribir reseña -------
+   El cliente quiere que las reseñas se soliciten por correo tras la compra
+   (Judge.me), no que se escriban desde la ficha. Se ocultan el botón y el
+   formulario del widget; las reseñas cargadas se siguen mostrando. */
+.gia-reviews .jdgm-write-rev-link,
+.gia-reviews .jdgm-form-wrapper,
+.gia-reviews .jdgm-write-review-button,
+.gia-reviews .jdgm-all-reviews__header .jdgm-write-rev-link {
+  display: none !important;
+}

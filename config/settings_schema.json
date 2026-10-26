@@ -1489,6 +1489,29 @@
         "id": "gia_wishlist_url",
         "label": "Página de favoritos",
         "info": "La página con la plantilla page.favoritos."
+      },
+      {
+        "type": "header",
+        "content": "WhatsApp flotante"
+      },
+      {
+        "type": "checkbox",
+        "id": "wa_enable",
+        "label": "Mostrar botón de WhatsApp",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "wa_number",
+        "label": "Número (con lada país, solo dígitos)",
+        "default": "524499113742",
+        "info": "México: 52 + 10 dígitos. Ej: 524499113742"
+      },
+      {
+        "type": "text",
+        "id": "wa_message",
+        "label": "Mensaje prellenado",
+        "default": "Hola, me gustaría más información sobre sus productos."
       }
     ]
   }

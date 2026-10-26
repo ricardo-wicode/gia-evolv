@@ -1,0 +1,16 @@
+{%- comment -%}
+  Botón flotante de WhatsApp. Número y mensaje se editan en los ajustes
+  del tema (Gia Evolv → WhatsApp flotante).
+{%- endcomment -%}
+{%- if settings.wa_enable and settings.wa_number != blank -%}
+  {%- assign wa_num = settings.wa_number | remove: ' ' | remove: '+' | remove: '(' | remove: ')' | remove: '-' -%}
+  <a
+    class="gia-wa"
+    href="https://wa.me/{{ wa_num }}{% if settings.wa_message != blank %}?text={{ settings.wa_message | url_encode }}{% endif %}"
+    target="_blank"
+    rel="noopener"
+    aria-label="Escríbenos por WhatsApp"
+  >
+    {% render 'gia-icon', icon: 'whatsapp', size: 30 %}
+  </a>
+{%- endif -%}
