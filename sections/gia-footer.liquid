@@ -50,6 +50,50 @@
         </div>
       {%- endif -%}
 
+      {%- if section.settings.care_title != blank -%}
+        {%- liquid
+          assign wa = section.settings.care_whatsapp | remove: ' ' | remove: '+' | remove: '(' | remove: ')' | remove: '-'
+          assign tel = section.settings.care_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-'
+        -%}
+        <div class="gia-footer__care">
+          <span class="gia-footer__care-title">{{ section.settings.care_title }}</span>
+
+          {%- if section.settings.care_hours_1 != blank or section.settings.care_hours_2 != blank -%}
+            <div class="gia-footer__care-hours">
+              {%- if section.settings.care_hours_1 != blank -%}<p>{{ section.settings.care_hours_1 }}</p>{%- endif -%}
+              {%- if section.settings.care_hours_2 != blank -%}<p>{{ section.settings.care_hours_2 }}</p>{%- endif -%}
+            </div>
+          {%- endif -%}
+
+          <div class="gia-footer__care-grid">
+            {%- if section.settings.care_whatsapp != blank -%}
+              <a class="gia-footer__care-item" href="https://wa.me/{{ wa }}" target="_blank" rel="noopener">
+                {% render 'gia-icon', icon: 'whatsapp', size: 22 %}
+                <span>{{ section.settings.care_whatsapp }}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.care_phone != blank -%}
+              <a class="gia-footer__care-item" href="tel:+52{{ tel }}">
+                {% render 'gia-icon', icon: 'phone', size: 22 %}
+                <span>{{ section.settings.care_phone }}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.care_email != blank -%}
+              <a class="gia-footer__care-item" href="mailto:{{ section.settings.care_email }}">
+                {% render 'gia-icon', icon: 'mail', size: 22 %}
+                <span>{{ section.settings.care_email }}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.care_contact_label != blank -%}
+              <a class="gia-footer__care-item" href="{{ section.settings.care_contact_url | default: '/pages/contacto' }}">
+                {% render 'gia-icon', icon: 'headset', size: 22 %}
+                <span>{{ section.settings.care_contact_label }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
       <div class="gia-footer__claim">
         {%- if section.settings.claim != blank -%}
           <span class="gia-footer__claim-text">{{ section.settings.claim }}</span>
@@ -76,27 +120,6 @@
       {%- endfor -%}
 
       <div class="gia-footer__col gia-footer__col--meta">
-        {%- if section.settings.contact_phone != blank or section.settings.contact_email != blank -%}
-          <div class="gia-footer__contact">
-            {%- if section.settings.contact_title != blank -%}
-              <span class="gia-footer__col-title">{{ section.settings.contact_title }}</span>
-            {%- endif -%}
-            {%- if section.settings.contact_phone != blank -%}
-              {%- assign tel = section.settings.contact_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' -%}
-              <a href="tel:+52{{ tel }}" class="gia-footer__contact-link">
-                {% render 'gia-icon', icon: 'phone', size: 17 %}
-                <span>{{ section.settings.contact_phone }}</span>
-              </a>
-            {%- endif -%}
-            {%- if section.settings.contact_email != blank -%}
-              <a href="mailto:{{ section.settings.contact_email }}" class="gia-footer__contact-link">
-                {% render 'gia-icon', icon: 'mail', size: 17 %}
-                <span>{{ section.settings.contact_email }}</span>
-              </a>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-
         {%- if socials.size > 0 -%}
           <ul class="gia-footer__socials" role="list">
             {%- for block in socials -%}
@@ -156,10 +179,15 @@
     { "type": "textarea", "id": "newsletter_text", "label": "Texto", "default": "Fórmulas nuevas, guías de dosis y avisos de stock. Sin spam." },
     { "type": "text", "id": "newsletter_placeholder", "label": "Marcador del campo", "default": "Tu correo" },
     { "type": "text", "id": "newsletter_success", "label": "Mensaje de éxito", "default": "Listo, te escribiremos pronto." },
-    { "type": "header", "content": "Contacto" },
-    { "type": "text", "id": "contact_title", "label": "Título", "default": "Contacto" },
-    { "type": "text", "id": "contact_phone", "label": "Teléfono", "default": "449 911 37 42", "info": "Se enlaza como tel: con lada de México (+52)." },
-    { "type": "text", "id": "contact_email", "label": "Correo", "default": "info@giaevolv.com" },
+    { "type": "header", "content": "Atención al cliente" },
+    { "type": "text", "id": "care_title", "label": "Título", "default": "Atención al cliente" },
+    { "type": "text", "id": "care_hours_1", "label": "Horario · línea 1", "default": "Lunes a Sábado: 9:00 a.m. a 9:00 p.m." },
+    { "type": "text", "id": "care_hours_2", "label": "Horario · línea 2", "default": "Domingo: 8:00 a.m. a 12:00 p.m." },
+    { "type": "text", "id": "care_whatsapp", "label": "WhatsApp", "default": "449 911 37 42", "info": "Se enlaza a wa.me con lada +52." },
+    { "type": "text", "id": "care_phone", "label": "Teléfono", "default": "449 911 37 42", "info": "Se enlaza como tel: con lada +52." },
+    { "type": "text", "id": "care_email", "label": "Correo", "default": "info@giaevolv.com" },
+    { "type": "text", "id": "care_contact_label", "label": "Texto del 4º acceso", "default": "Contacto" },
+    { "type": "url", "id": "care_contact_url", "label": "Enlace del 4º acceso", "info": "Por defecto, la página de contacto." },
     { "type": "header", "content": "Lema y sello" },
     { "type": "text", "id": "claim", "label": "Lema", "default": "Para ti, que evolucionas" },
     {

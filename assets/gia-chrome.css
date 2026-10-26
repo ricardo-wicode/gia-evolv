@@ -571,29 +571,68 @@ body.gia-overlay-header.gia-at-top .gia-header {
   opacity: 1;
 }
 
-.gia-footer__contact {
+/* --- Atención al cliente (columna central del top del footer) --- */
+.gia-footer__care {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.gia-footer__contact-link {
-  display: inline-flex;
   align-items: center;
-  gap: 9px;
-  font: 400 14px / 1.2 var(--font-secondary);
-  color: currentcolor;
-  opacity: 0.72;
-  text-decoration: none;
+  gap: 14px;
+  text-align: center;
 }
 
-.gia-footer__contact-link:hover {
+.gia-footer__care-title {
+  font: 700 15px / 1 var(--font-secondary);
+  letter-spacing: 0.02em;
+}
+
+.gia-footer__care-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font: 400 13.5px / 1.5 var(--font-secondary);
+  opacity: 0.78;
+}
+
+.gia-footer__care-hours p {
+  margin: 0;
+}
+
+.gia-footer__care-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  max-width: 360px;
+  margin-top: 6px;
+}
+
+.gia-footer__care-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  color: currentcolor;
+  text-decoration: none;
+  font: 600 13px / 1.2 var(--font-secondary);
+  opacity: 0.88;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.gia-footer__care-item svg {
+  color: var(--gia-turquoise-300);
+}
+
+.gia-footer__care-item:hover {
   opacity: 1;
 }
 
-.gia-footer__contact-link svg {
-  flex: none;
-  color: var(--gia-turquoise-300);
+/* Líneas divisorias internas de la rejilla 2×2. */
+.gia-footer__care-item:nth-child(odd) {
+  border-right: 1px solid var(--border-on-dark);
+}
+
+.gia-footer__care-item:nth-child(-n + 2) {
+  border-bottom: 1px solid var(--border-on-dark);
 }
 
 .gia-footer__socials,
