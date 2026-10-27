@@ -162,10 +162,17 @@
 }
 
 @media screen and (max-width: 749px) {
-  /* La tabla se queda dentro del contenedor, con su borde y esquinas
-     redondeadas visibles como en escritorio (padding a los lados que da
-     el --gutter del inner). La tercera columna queda cortada dentro de la
-     tarjeta e invita a deslizar sin que la página se desborde. */
+  /* A sangre solo por la derecha: conserva el padding, el borde y las
+     esquinas redondeadas del lado izquierdo (se ve que es una tarjeta),
+     pero llega al borde de la pantalla por la derecha, donde la tercera
+     columna queda cortada e invita a deslizar sin desbordar la página. */
+  .gia-comparison__scroll {
+    margin-right: calc(-1 * var(--gutter));
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
   .gia-comparison__table {
     min-width: 580px;
   }
