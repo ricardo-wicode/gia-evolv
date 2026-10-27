@@ -82,6 +82,13 @@
   display: none;
 }
 
+/* El JS añade .gia-comparison--scrollable cuando aún queda contenido por
+   deslizar a la derecha; al llegar al final (o si no hay desbordamiento)
+   se quita y el degradado desaparece. */
+.gia-comparison--scrollable .gia-comparison__viewport::after {
+  display: block;
+}
+
 .gia-comparison__scroll {
   overflow-x: auto;
   border: 1px solid var(--gia-ct-border);
@@ -188,10 +195,6 @@
      lados. Las columnas son más estrechas para que "otras marcas" siempre
      asome y quede cortada contra el borde derecho, donde el degradado y el
      scroll-snap dejan claro que se puede deslizar. */
-  .gia-comparison__viewport::after {
-    display: block;
-  }
-
   .gia-comparison__scroll {
     scroll-snap-type: x proximity;
   }
@@ -215,7 +218,8 @@
     scroll-snap-align: start;
   }
 
-  .gia-comparison__hint {
+  /* La pista solo se muestra si de verdad queda algo por deslizar. */
+  .gia-comparison--scrollable .gia-comparison__hint {
     display: block;
     margin: 12px 0 0;
     font: 600 12.5px / 1.3 var(--font-secondary);

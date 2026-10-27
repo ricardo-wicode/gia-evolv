@@ -26,6 +26,7 @@
 
 {%- if rows_count > 0 -%}
 <section
+  id="gia-comparison-{{ section.id }}"
   class="gia-comparison color-{{ section.settings.color_scheme }}"
   style="--gia-ct-bg: {{ section.settings.table_bg | default: '#FFFFFF' }}; --gia-ct-text: {{ section.settings.table_text | default: '#141414' }}; --gia-ct-gia: {{ section.settings.gia_color | default: '#009389' }}; --gia-ct-other: {{ section.settings.other_color | default: '#5B6672' }};"
 >
@@ -99,6 +100,29 @@
     {%- endif -%}
   </div>
 </section>
+
+<script>
+  (function () {
+    var root = document.getElementById('gia-comparison-{{ section.id }}');
+    if (!root) return;
+    var scroll = root.querySelector('.gia-comparison__scroll');
+    if (!scroll) return;
+
+    // Hay degradado/pista solo si queda contenido por deslizar a la
+    // derecha. Al llegar al final (o si la tabla cabe sin scroll) se quita.
+    var update = function () {
+      var more = scroll.scrollWidth - scroll.clientWidth - scroll.scrollLeft > 1;
+      root.classList.toggle('gia-comparison--scrollable', more);
+    };
+
+    scroll.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+    // Recalcula cuando acaben de cargar fuentes/imagen y se asiente el ancho.
+    window.addEventListener('load', update);
+    setTimeout(update, 300);
+  })();
+</script>
 {%- endif -%}
 
 {% schema %}
