@@ -1,13 +1,18 @@
 {{ 'section-gia-benefits.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  # Contenido por producto desde metaobjects; si el producto no tiene,
-  # se usan los bloques de la sección (contenido general del tema).
-  assign mf = product.metafields.custom.product_benefits.value
+  # En una ficha de producto manda el metacampo: se muestran solo los
+  # beneficios elegidos para ESE producto y, si no tiene ninguno, la
+  # sección no se muestra. Fuera de producto (uso general del tema) se
+  # usan los bloques de la sección.
   assign use_mf = false
-  if mf != blank and mf.size > 0
-    assign use_mf = true
-    assign items = mf
+  assign items = ''
+  if product != blank
+    assign mf = product.metafields.custom.product_benefits.value
+    if mf != blank and mf.size > 0
+      assign use_mf = true
+      assign items = mf
+    endif
   else
     assign items = section.blocks | where: 'type', 'benefit'
   endif

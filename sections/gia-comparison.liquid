@@ -1,17 +1,30 @@
 {{ 'section-gia-comparison.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  # Filas por producto desde metaobjects; si no hay, los bloques del tema.
-  assign mf = product.metafields.custom.product_comparison.value
+  # En una ficha de producto manda el metacampo: tres listas de texto de
+  # una línea (criterio, columna Gia y columna de comparación) que se
+  # emparejan por posición — el 1.er texto de cada lista es la 1.ª fila, y
+  # así sucesivamente. Si no hay criterios, la sección no se muestra.
+  # Fuera de producto (uso general del tema) se usan los bloques.
   assign use_mf = false
-  if mf != blank and mf.size > 0
-    assign use_mf = true
-    assign rows = mf
+  assign rows_count = 0
+  assign rows = ''
+
+  if product != blank
+    assign c_list = product.metafields.custom.comparison_criteria.value
+    assign g_list = product.metafields.custom.comparison_gia.value
+    assign o_list = product.metafields.custom.comparison_others.value
+    if c_list != blank and c_list.size > 0
+      assign use_mf = true
+      assign rows_count = c_list.size
+    endif
   else
     assign rows = section.blocks | where: 'type', 'row'
+    assign rows_count = rows.size
   endif
 -%}
 
+{%- if rows_count > 0 -%}
 <section
   class="gia-comparison color-{{ section.settings.color_scheme }}"
   style="--gia-ct-bg: {{ section.settings.table_bg | default: '#FFFFFF' }}; --gia-ct-text: {{ section.settings.table_text | default: '#141414' }}; --gia-ct-gia: {{ section.settings.gia_color | default: '#009389' }}; --gia-ct-other: {{ section.settings.other_color | default: '#5B6672' }};"
@@ -26,7 +39,6 @@
       {%- endif -%}
     </div>
 
-    {%- if rows.size > 0 -%}
       {%- comment -%}
         Tabla de datos real, no un grid de divs: la relación entre el
         criterio y cada columna tiene que sobrevivir a un lector de
@@ -52,35 +64,40 @@
             </tr>
           </thead>
           <tbody>
-            {%- for block in rows -%}
-              {%- liquid
-                if use_mf
-                  assign r_criterion = block.criterion.value
-                  assign r_us = block.us.value
-                  assign r_them = block.them.value
-                else
-                  assign r_criterion = block.settings.criterion
-                  assign r_us = block.settings.us
-                  assign r_them = block.settings.them
-                endif
-              -%}
-              <tr{% unless use_mf %} {{ block.shopify_attributes }}{% endunless %}>
-                <th scope="row" class="gia-comparison__criterion">{{ r_criterion }}</th>
-                <td class="gia-comparison__us">{{ r_us }}</td>
-                <td class="gia-comparison__them">{{ r_them }}</td>
-              </tr>
-            {%- endfor -%}
+            {%- if use_mf -%}
+              {%- for i in (1..rows_count) -%}
+                {%- liquid
+                  assign idx = forloop.index0
+                  assign r_criterion = c_list[idx]
+                  assign r_us = g_list[idx]
+                  assign r_them = o_list[idx]
+                -%}
+                <tr>
+                  <th scope="row" class="gia-comparison__criterion">{{ r_criterion }}</th>
+                  <td class="gia-comparison__us">{{ r_us }}</td>
+                  <td class="gia-comparison__them">{{ r_them }}</td>
+                </tr>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for block in rows -%}
+                <tr {{ block.shopify_attributes }}>
+                  <th scope="row" class="gia-comparison__criterion">{{ block.settings.criterion }}</th>
+                  <td class="gia-comparison__us">{{ block.settings.us }}</td>
+                  <td class="gia-comparison__them">{{ block.settings.them }}</td>
+                </tr>
+              {%- endfor -%}
+            {%- endif -%}
           </tbody>
         </table>
       </div>
       <p class="gia-comparison__hint" aria-hidden="true">Desliza para ver la comparación completa &rarr;</p>
-    {%- endif -%}
 
     {%- if section.settings.disclaimer != blank -%}
       <p class="gia-comparison__disclaimer">{{ section.settings.disclaimer }}</p>
     {%- endif -%}
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {

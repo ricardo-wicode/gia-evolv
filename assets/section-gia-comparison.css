@@ -162,15 +162,10 @@
 }
 
 @media screen and (max-width: 749px) {
-  /* A sangre: la tabla llega al borde de la pantalla y la tercera columna
-     queda visiblemente cortada, invitando a deslizar. */
-  .gia-comparison__scroll {
-    margin-inline: calc(-1 * var(--gutter));
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
-
+  /* La tabla se queda dentro del contenedor, con su borde y esquinas
+     redondeadas visibles como en escritorio (padding a los lados que da
+     el --gutter del inner). La tercera columna queda cortada dentro de la
+     tarjeta e invita a deslizar sin que la página se desborde. */
   .gia-comparison__table {
     min-width: 580px;
   }
