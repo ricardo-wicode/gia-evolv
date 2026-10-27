@@ -60,6 +60,26 @@
   --gia-ct-gia-text: color-mix(in srgb, var(--gia-ct-gia) 68%, #000);
 }
 
+.gia-comparison__viewport {
+  position: relative;
+}
+
+/* Degradado en el borde derecho (solo móvil): vela la 3.ª columna que
+   asoma para insinuar que hay más contenido al deslizar. Vive en el
+   viewport (fijo), no en el contenedor que scrollea. */
+.gia-comparison__viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 44px;
+  background: linear-gradient(to right, transparent, var(--gia-ct-bg, #fff));
+  pointer-events: none;
+  z-index: 2;
+  display: none;
+}
+
 .gia-comparison__scroll {
   overflow-x: auto;
   border: 1px solid var(--gia-ct-border);
@@ -162,19 +182,43 @@
 }
 
 @media screen and (max-width: 749px) {
-  /* A sangre solo por la derecha: conserva el padding, el borde y las
-     esquinas redondeadas del lado izquierdo (se ve que es una tarjeta),
-     pero llega al borde de la pantalla por la derecha, donde la tercera
-     columna queda cortada e invita a deslizar sin desbordar la página. */
-  .gia-comparison__scroll {
+  /* A sangre por la derecha: conserva padding, borde y esquina a la
+     izquierda (se ve la tarjeta) y llega al borde de la pantalla por la
+     derecha. Las columnas son más estrechas para que "otras marcas"
+     SIEMPRE asome, y el degradado + el scroll-snap dejan claro que se
+     puede deslizar. */
+  .gia-comparison__viewport {
     margin-right: calc(-1 * var(--gutter));
+  }
+
+  .gia-comparison__viewport::after {
+    display: block;
+  }
+
+  .gia-comparison__scroll {
     border-right: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    scroll-snap-type: x proximity;
   }
 
+  /* Columnas angostas: criterio + Gia llenan el ancho visible y la tercera
+     columna queda asomando. Suman más del 100 % del ancho => hay scroll. */
   .gia-comparison__table {
-    min-width: 580px;
+    min-width: 0;
+  }
+
+  .gia-comparison__th--criterion,
+  .gia-comparison__criterion {
+    width: 34vw;
+  }
+
+  .gia-comparison__th--us,
+  .gia-comparison__us,
+  .gia-comparison__th--them,
+  .gia-comparison__them {
+    width: 40vw;
+    scroll-snap-align: start;
   }
 
   .gia-comparison__hint {
@@ -185,4 +229,16 @@
     color: var(--gia-turquoise-300);
     text-align: center;
   }
+}
+
+/* La pista "Desliza →" se mueve ligeramente para reforzar el gesto. */
+@media (prefers-reduced-motion: no-preference) {
+  .gia-comparison__hint {
+    animation: gia-comparison-nudge 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes gia-comparison-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
 }

@@ -45,7 +45,8 @@
         pantalla. El scroll horizontal vive en el contenedor para que la
         página nunca se desborde.
       {%- endcomment -%}
-      <div class="gia-comparison__scroll" tabindex="0" role="region" aria-labelledby="gia-comparison-caption-{{ section.id }}">
+      <div class="gia-comparison__viewport">
+        <div class="gia-comparison__scroll" tabindex="0" role="region" aria-labelledby="gia-comparison-caption-{{ section.id }}">
         <table class="gia-comparison__table">
           <caption id="gia-comparison-caption-{{ section.id }}" class="visually-hidden">
             {{ section.settings.heading | default: 'Comparativa' }}
@@ -89,6 +90,7 @@
             {%- endif -%}
           </tbody>
         </table>
+        </div>
       </div>
       <p class="gia-comparison__hint" aria-hidden="true">Desliza para ver la comparación completa &rarr;</p>
 
