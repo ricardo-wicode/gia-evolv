@@ -70,11 +70,13 @@
 .gia-comparison__viewport::after {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  top: 1px;
+  bottom: 1px;
+  right: 1px;
   width: 44px;
   background: linear-gradient(to right, transparent, var(--gia-ct-bg, #fff));
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
   pointer-events: none;
   z-index: 2;
   display: none;
@@ -182,23 +184,15 @@
 }
 
 @media screen and (max-width: 749px) {
-  /* A sangre por la derecha: conserva padding, borde y esquina a la
-     izquierda (se ve la tarjeta) y llega al borde de la pantalla por la
-     derecha. Las columnas son más estrechas para que "otras marcas"
-     SIEMPRE asome, y el degradado + el scroll-snap dejan claro que se
-     puede deslizar. */
-  .gia-comparison__viewport {
-    margin-right: calc(-1 * var(--gutter));
-  }
-
+  /* Tarjeta contenida: padding, borde y esquinas redondeadas en AMBOS
+     lados. Las columnas son más estrechas para que "otras marcas" siempre
+     asome y quede cortada contra el borde derecho, donde el degradado y el
+     scroll-snap dejan claro que se puede deslizar. */
   .gia-comparison__viewport::after {
     display: block;
   }
 
   .gia-comparison__scroll {
-    border-right: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
     scroll-snap-type: x proximity;
   }
 
